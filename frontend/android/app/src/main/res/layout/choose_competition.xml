@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="80dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/bChooseCompetitionCreated"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:background="@color/theDarkShade" />
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Created"
+            android:textColor="@color/theLightShade"
+            android:textSize="32dp"
+            app:fontType="sansRegular" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_extra_right" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bChooseCompetitionParticipated"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:background="@color/theDarkShade" />
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Participated"
+            android:textColor="@color/theLightShade"
+            android:textSize="32dp"
+            app:fontType="sansRegular" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_extra_right" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bChooseCompetitionAll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:background="@color/theDarkShade" />
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="All"
+            android:textColor="@color/theLightShade"
+            android:textSize="32dp"
+            app:fontType="sansRegular" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_extra_right" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/mainTheme">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/mainDrawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/mainFrame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="left|center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="100dp"
+            android:paddingRight="120dp"
+            android:paddingTop="120dp">
+
+            <LinearLayout
+                android:id="@+id/bNavTimeline"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="32dp">
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_timeline"
+                    android:tint="@color/theLightShade" />
+
+                <com.suhel.photosphere.Views.Custom.UITextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="timeline"
+                    android:textColor="@color/theLightShade"
+                    android:textSize="16dp"
+                    app:fontType="sansRegular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bNavTrending"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="32dp">
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_trending"
+                    android:tint="@color/theLightShade" />
+
+                <com.suhel.photosphere.Views.Custom.UITextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="trending"
+                    android:textColor="@color/theLightShade"
+                    android:textSize="16dp"
+                    app:fontType="sansRegular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bNavProfile"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="32dp">
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_profile"
+                    android:tint="@color/theLightShade" />
+
+                <com.suhel.photosphere.Views.Custom.UITextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="profile"
+                    android:textColor="@color/theLightShade"
+                    android:textSize="16dp"
+                    app:fontType="sansRegular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bNavSupport"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="32dp">
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_competitions"
+                    android:tint="@color/theLightShade" />
+
+                <com.suhel.photosphere.Views.Custom.UITextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="support"
+                    android:textColor="@color/theLightShade"
+                    android:textSize="16dp"
+                    app:fontType="sansRegular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bNavLogout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="32dp">
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_logout"
+                    android:tint="@color/theLightShade" />
+
+                <com.suhel.photosphere.Views.Custom.UITextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="logout"
+                    android:textColor="@color/theLightShade"
+                    android:textSize="16dp"
+                    app:fontType="sansRegular" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.DrawerLayout>
+
+    <RelativeLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/bMainMenu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:padding="16dp"
+            android:src="@drawable/ic_menu"
+            android:tint="@color/theLightShade" />
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:id="@+id/lblMainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="74dp"
+            android:layout_marginTop="33dp"
+            android:text="timeline"
+            android:textColor="@color/theLightShade"
+            android:textSize="24dp"
+            app:fontType="sansRegular" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

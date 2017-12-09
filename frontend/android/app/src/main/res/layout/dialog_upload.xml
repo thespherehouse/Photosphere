@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/dialog_background"
+    android:minWidth="300dp"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true">
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:id="@+id/lblUploadTitle"
+            style="@style/AppTheme.Dialog.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="UPLOAD"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bUploadDismiss"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="23dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_cross"
+            android:tint="@color/colorPleasantDark"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.suhel.photosphere.Views.Custom.UIEditText
+            android:id="@+id/txtUploadImageTitle"
+            style="@style/AppTheme.Dialog.TextBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:hint="Title"
+            android:scrollbars="vertical"
+            android:text=""
+            app:fontType="sansRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblUploadTitle" />
+
+        <ImageView
+            android:id="@+id/imgUploadPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/colorBrightLight"
+            android:maxHeight="400dp"
+            android:minHeight="200dp"
+            android:scaleType="fitStart"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtUploadImageTitle" />
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:id="@+id/lblUploadPreviewTitle"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:gravity="center_horizontal|bottom"
+            android:shadowColor="@color/colorPleasantDark"
+            android:shadowDx="0"
+            android:shadowDy="1"
+            android:shadowRadius="5"
+            android:text="Title"
+            android:textColor="@color/colorBrightLight"
+            android:textSize="18dp"
+            app:fontType="sansAltBold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgUploadPreview"
+            app:layout_constraintLeft_toLeftOf="@+id/imgUploadPreview"
+            app:layout_constraintRight_toRightOf="@+id/imgUploadPreview" />
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:id="@+id/bUploadAction"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/green_button_background"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="Start Uploading"
+            android:textColor="@color/theLightShade"
+            android:textSize="18dp"
+            app:fontType="sansAltBold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgUploadPreview" />
+
+        <com.suhel.photosphere.Views.Custom.UIProgressBar
+            android:id="@+id/progUploadProgress"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:layout_margin="4dp"
+            android:alpha="0.2"
+            app:layout_constraintBottom_toBottomOf="@+id/bUploadAction"
+            app:layout_constraintLeft_toLeftOf="@+id/bUploadAction"
+            app:layout_constraintRight_toRightOf="@+id/bUploadAction"
+            app:max="100.0"
+            app:progress="0.0"
+            app:progressColor="@color/colorJetBlack" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

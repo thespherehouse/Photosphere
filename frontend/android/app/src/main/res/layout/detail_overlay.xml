@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.5"
+        android:background="@drawable/gradient_up" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/paneDetailLower"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:id="@+id/lblDetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lblDetailOwnerName"
+            android:layout_alignParentLeft="true"
+            android:text="Unnamed"
+            android:textColor="@color/colorBrightLight"
+            android:textSize="18dp"
+            app:fontType="sansMedium" />
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:id="@+id/lblDetailDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Loading"
+            android:textColor="@color/colorBrightLight"
+            android:textSize="12dp"
+            app:fontType="sansRegular" />
+
+        <com.suhel.photosphere.Views.Custom.UITextView
+            android:id="@+id/lblDetailOwnerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="right"
+            android:text="Loading"
+            android:textColor="@color/colorBrightLight"
+            android:textSize="12dp"
+            app:fontType="sansRegular" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/paneDetailLower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/bDetailEdit"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_edit"
+            android:tint="@color/theLightShade" />
+
+        <ImageButton
+            android:id="@+id/bDetailProfile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_profile"
+            android:tint="@color/theLightShade" />
+
+        <ImageButton
+            android:id="@+id/bDetailLike"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_like_outline"
+            android:tint="@color/theLightShade" />
+
+        <ImageButton
+            android:id="@+id/bDetailShare"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_fb_share"
+            android:tint="@color/theLightShade" />
+
+        <ImageButton
+            android:id="@+id/bDetailDelete"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_delete"
+            android:tint="@color/theLightShade" />
+
+    </LinearLayout>
+
+</RelativeLayout>

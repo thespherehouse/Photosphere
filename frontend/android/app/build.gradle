@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.suhel.photosphere"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 14
+        versionName "1.2.2"
+
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+def support = '26.+'
+def constraint = '1.0.2'
+def play = '11.0.0'
+def facebook = '4.26.0'
+def fresco = '1.5.0'
+def frescoImageViewer = '0.5.0'
+def rebound = '0.3.8'
+def fab = '1.6.4'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    // Android support
+    compile "com.android.support:design:${support}"
+    compile "com.android.support:appcompat-v7:${support}"
+    compile "com.android.support:recyclerview-v7:${support}"
+    compile "com.android.support:palette-v7:${support}"
+    compile "com.android.support.constraint:constraint-layout:${constraint}"
+
+    // Firebase
+    compile "com.google.firebase:firebase-auth:${play}"
+    compile "com.google.firebase:firebase-core:${play}"
+    compile "com.google.firebase:firebase-storage:${play}"
+    compile "com.google.firebase:firebase-database:${play}"
+    compile "com.google.android.gms:play-services-auth:${play}"
+
+    // Facebook
+    compile "com.facebook.android:facebook-android-sdk:${facebook}"
+
+    // Fresco - Image loading
+    compile "com.facebook.fresco:fresco:${fresco}"
+    compile "com.github.stfalcon:frescoimageviewer:${frescoImageViewer}"
+
+    // Rebound - Animation
+    compile "com.facebook.rebound:rebound:${rebound}"
+    compile "com.github.clans:fab:${fab}"
+}
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'com.google.gms.google-services'

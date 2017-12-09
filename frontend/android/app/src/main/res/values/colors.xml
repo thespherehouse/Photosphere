@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/mainTheme</color>
+    <color name="colorPrimaryDark">@color/mainTheme</color>
+    <color name="colorAccent">@color/mainTheme</color>
+
+    <color name="mainTheme">#212d33</color>
+    <color name="theLighterShade">#FFF6F6F6</color>
+    <color name="theLightShade">#FFFFFFFF</color>
+    <color name="theMediumShade">#FFABABAB</color>
+    <color name="theDarkerShade">#FF777777</color>
+    <color name="theEvenDarkerShade">#FF333333</color>
+    <color name="theDarkShade">#FF000000</color>
+    <color name="theRedShade">#d15a58</color>
+    <color name="theGreenShade">#9bd285</color>
+    <color name="theTranslucentLightShade">#55FFFFFF</color>
+    <color name="theTranslucentDarkShade">#55000000</color>
+    <color name="theVeryLightGray">#FFF5F5F5</color>
+
+    <color name="theMilkyTurbidColor">#AAFFFFFF</color>
+
+    <color name="theTitleColor">@color/theLightShade</color>
+
+    <color name="colorThemeCore">#f5f5f5</color>
+    <color name="colorThemeSecondary">#cccccc</color>
+    <color name="colorThemeAlternate">#205b71</color>
+
+    <color name="colorFacebookButton">#3B5998</color>
+
+    <color name="colorSoberRed">#E38888</color>
+    <color name="colorSoberGreen">#A0E388</color>
+    <color name="colorSoberBlue">#5682BF</color>
+
+    <color name="colorGoogleRed">#b73d3d</color>
+    <color name="colorFacebookBlue">#3a6fb9</color>
+    <color name="colorFabBlue">#B79AAB</color>
+    <color name="colorPleasantDark">#434343</color>
+    <color name="colorBrightLight">#FFFFFF</color>
+    <color name="colorJetBlack">#000000</color>
+    <color name="colorInvisibileGrey">#FAFAFA</color>
+    <color name="colorSubtleHint">#DEDEDE</color>
+
+    <color name="colorLoveRed">#D75A4A</color>
+
+</resources>

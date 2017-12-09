@@ -1,0 +1,54 @@
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppButton" parent="Widget.AppCompat.Button">
+
+        <item name="android:textSize">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+
+    </style>
+
+    <style name="AppTheme.Dialog.TextBox" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">18dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:inputType">textShortMessage</item>
+        <item name="android:background">@drawable/textbox_background</item>
+        <item name="android:textColor">@color/colorPleasantDark</item>
+        <item name="android:textColorHint">@color/colorSubtleHint</item>
+        <item name="fontType">sansRegular</item>
+    </style>
+
+    <style name="AppTheme.Dialog.Title">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/colorPleasantDark</item>
+        <item name="fontType">sansAltBold</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="@android:style/Theme.Dialog">
+        <!--<item name="android:windowFrame">@null</item>-->
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--<item name="android:windowTitleStyle">@null</item>-->
+        <!--<item name="android:colorBackgroundCacheHint">@null</item>-->
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>-->
+        <!--<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>-->
+        <!--<item name="android:gravity">center</item>-->
+    </style>
+
+</resources>

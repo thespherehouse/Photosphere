@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/theLightShade">
+
+    <com.suhel.photosphere.Views.Custom.UITextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Edit title"
+        android:textColor="@color/theDarkerShade"
+        android:textSize="16dp"
+        app:fontType="sansRegular" />
+
+    <com.suhel.photosphere.Views.Custom.UIEditText
+        android:id="@+id/txtDetailEditDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/theDarkShade"
+        android:textSize="16dp"
+        app:fontType="sansRegular" />
+
+</RelativeLayout>

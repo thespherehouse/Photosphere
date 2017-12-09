@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="fontType" format="enum">
+
+        <enum name="sansLight" value="0" />
+        <enum name="sansRegular" value="1" />
+        <enum name="sansMedium" value="2" />
+        <enum name="sansBold" value="3" />
+        <enum name="sansAltLight" value="4" />
+        <enum name="sansAltRegular" value="5" />
+        <enum name="sansAltBold" value="6" />
+
+    </attr>
+
+    <declare-styleable name="UITextView">
+        <attr name="fontType" />
+    </declare-styleable>
+
+    <declare-styleable name="UIButton">
+        <attr name="fontType" />
+    </declare-styleable>
+
+    <declare-styleable name="UIEditText">
+        <attr name="fontType" />
+    </declare-styleable>
+
+    <declare-styleable name="UIProgressBar">
+        <attr name="max" format="float" />
+        <attr name="progress" format="float" />
+        <attr name="progressColor" format="color" />
+    </declare-styleable>
+
+</resources>
