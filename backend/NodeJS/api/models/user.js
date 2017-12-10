@@ -1,14 +1,11 @@
-'use strict';
+import mongoose from 'mongoose'
+import { Utils } from '../helper'
 
-const Utils = require('../utils');
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-
-const schema = new Schema({
+const schema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    firebaseToken: String
+    fcm: String
 }, {
         toObject: {
             transform: function (doc, ret) {
@@ -75,10 +72,10 @@ schema.statics.updatePassword = function (userId, password, cb) {
         cb);
 }
 
-schema.statics.updateFirebaseToken = function (userId, firebaseToken, cb) {
+schema.statics.updateFCM = function (userId, fcm, cb) {
     return this.findByIdAndUpdate(userId,
         {
-            firebaseToken
+            fcm
         },
         {
             'new': true
@@ -90,4 +87,4 @@ schema.methods.checkPassword = function (password, cb) {
     Utils.checkPassword(password, this.password, cb);
 }
 
-module.exports = mongoose.model('User', schema);
+export default mongoose.model('User', schema);

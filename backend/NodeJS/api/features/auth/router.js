@@ -1,9 +1,12 @@
-'use strict';
+import { Router } from 'express'
+import Controller from './controller'
 
-const router = require('express').Router();
-const controller = require('./controller');
+const router = Router()
 
-router.post('/checkEmail', controller.checkEmail());
-router.post('/register', controller.register());
-router.put('/login', controller.login());
-router.put('/logout', controller.logout());
+router.post('/checkEmail', Controller.checkEmail())
+router.post('/register', Controller.register())
+router.put('/login', Controller.login())
+router.put('/logout', Controller.logout())
+router.put('/fcm', Controller.fcm)
+
+export default router

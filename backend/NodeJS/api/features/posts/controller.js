@@ -1,4 +1,4 @@
-import * as uuid from 'uuid/v1'
+import uuid from 'uuid/v1'
 
 export function createPost(req, res) {
     console.log(req.file.name)

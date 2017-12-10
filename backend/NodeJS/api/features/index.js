@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import * as Auth from './auth'
-import * as Posts from './posts'
+import auth from './auth'
+import posts from './posts'
 
 const router = Router()
 
-router.use('/auth', Auth.default)
-router.use('/posts', Posts.default)
+router.use('/auth', auth)
+router.use('/posts', posts)
 
 export default router

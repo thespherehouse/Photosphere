@@ -1,8 +1,8 @@
-import * as uuid from 'uuid/v1'
-import * as multer from 'multer'
-import * as multerS3 from 'multer-s3'
-import * as AWS from 'aws-sdk'
-import * as Response from '../response'
+import uuid from 'uuid/v1'
+import multer from 'multer'
+import multerS3 from 'multer-s3'
+import AWS from 'aws-sdk'
+import { Response } from '../helper'
 
 AWS.config.update({
     accessKeyId: ' AKIAIIDKJAN6AIORNXBQ',

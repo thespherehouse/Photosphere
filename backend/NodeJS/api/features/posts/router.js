@@ -1,17 +1,17 @@
 import Router from 'express'
-import * as Controllers from './controller'
-import * as multer from 'multer'
-import { uploader } from '../../utils/storage'
+import Controller from './controller'
+import multer from 'multer'
+import { Storage } from '../../helper'
 
 const router = Router()
 
-router.post('/', uploader, Controllers.createPost);
-router.get('/', Controllers.getAllPosts);
-router.get('/:postId', Controllers.getPost);
-router.get('/:postId/likes', Controllers.getLikes);
-router.put('/:postId', Controllers.editPost);
-router.put('/:postId/like', Controllers.likePost);
-router.put('/:postId/unlike', Controllers.unlikePost);
-router.delete('/:postId', Controllers.removePost);
+router.post('/', Storage.uploader, Controller.createPost);
+router.get('/', Controller.getAllPosts);
+router.get('/:postId', Controller.getPost);
+router.get('/:postId/likes', Controller.getLikes);
+router.put('/:postId', Controller.editPost);
+router.put('/:postId/like', Controller.likePost);
+router.put('/:postId/unlike', Controller.unlikePost);
+router.delete('/:postId', Controller.removePost);
 
 export default router

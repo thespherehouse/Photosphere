@@ -1,11 +1,8 @@
-'use strict';
-
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const Utils = require('../utils');
+import mongoose from 'mongoose'
+import { Utils } from '../helper'
 
 const schema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     deviceId: { type: String, required: true },
     token: { type: String, default: Utils.token() }
 }, {

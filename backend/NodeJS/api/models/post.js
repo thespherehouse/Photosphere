@@ -1,10 +1,7 @@
-'use strict';
+import mongoose from 'mongoose'
+import { Utils } from '../helper'
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const Utils = require('../utils');
-
-const schema = new Schema({
+const schema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     url: { type: String, required: true },
@@ -15,7 +12,7 @@ const schema = new Schema({
         createdAt: { type: Date, default: new Date() }
     }],
     likesCount: { type: Number, default: 0 },
-    owner: { type: Schema.ObjectId, ref: 'User', required: true },
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     ownerName: { type: String, required: true }
 }, {
         toObject: {

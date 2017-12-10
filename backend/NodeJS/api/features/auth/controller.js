@@ -1,209 +1,268 @@
-'use strict';
+import { User, Session } from '../../models'
+import { Response, Errors, Utils } from '../../helper'
 
-const Models = require('../../models');
-const User = Models.User;
-const Session = Models.Session;
-const Response = require('../../response');
-const Utils = require('../../utils');
+export function checkEmail(req, res) {
 
-module.exports.checkEmail = function () {
+    User.checkEmail(req.params.email, function (err, user) {
 
-    return function (req, res) {
+        if (err) {
+            console.log(err.message);
+            return Response.sendError(res, Response.Errors.Internal);
+        }
 
-        User.checkEmail(req.params.email, function (err, user) {
+        if (!user)
+            return Response.sendError(res, Response.Errors.NotFound);
 
-            if (err) {
-                console.log(err.message);
-                return Response.sendError(res, Response.Errors.Internal);
-            }
+        Response.send(res, user.toObject());
 
-            if (!user)
-                return Response.sendError(res, Response.Errors.NotFound);
-
-            Response.send(res, user.toObject());
-
-        });
-
-    }
+    });
 
 }
 
-module.exports.login = function () {
+export function register(req, res) {
 
-    return function (req, res) {
+    new Promise(function (resolve, reject) {
 
-        new Promise(function (resolve, reject) {
+        if (!req.body.name || !req.body.email || !req.body.password)
+            return reject(Response.Errors.Incomplete);
 
-            if (!req.body.email || !req.body.password)
-                return reject(Response.Errors.Incomplete);
+        resolve({ name: req.body.name, email: req.body.email, password: req.body.password });
 
-            resolve({ email: req.body.email, password: req.body.password });
+    }).then(function (obj) {
 
-        }).then(function (obj) {
+        return new Promise(function (resolve, reject) {
 
-            return new Promise(function (resolve, reject) {
+            User.checkEmail(obj.email, function (err, user) {
 
-                User.checkEmail(obj.email, function (err, user) {
+                if (err)
+                    return reject(Response.Errors.Internal);
 
-                    if (err) {
-                        console.log(err.message);
-                        return reject(Response.Errors.Internal);
-                    }
+                if (user)
+                    return reject(Response.Errors.EmailTaken);
 
-                    if (!user)
-                        return reject(Response.Errors.EmailUnregistered);
-
-                    resolve({ user, password: obj.password });
-
-                });
+                resolve(obj);
 
             });
 
-        }).then(function (obj) {
+        });
 
-            return new Promise(function (resolve, reject) {
+    }).then(function (obj) {
 
-                obj.user.checkPassword(obj.password, function (res) {
+        return new Promise(function (resolve, reject) {
 
-                    if (!res) {
-                        console.log('Password mismatch');
-                        return reject(Response.Errors.Password);
-                    }
+            User.register(obj.name, obj.email, obj.password, function (err, user) {
 
-                    resolve(obj.user);
+                if (err || !user) {
+                    console.log(err.message);
+                    return reject(Response.Errors.Internal);
+                }
 
-                });
+                resolve(user);
+            })
 
-            });
+        });
 
-        }).then(function (user) {
+    }).then(function (user) {
 
-            return new Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
 
-                Session.createSession(user._id, req.deviceId, function (err, session) {
+            Session.createSession(user._id, req.deviceId,
+                function (err, session) {
 
-                    if (err || !session) {
-                        console.log(err.message);
+                    if (err || !session)
                         return reject(Response.Errors.Internal);
-                    }
-
-                    if (!session.isNew)
-                        session.refreshToken();
 
                     resolve({ user, session });
 
                 });
 
-            });
-
-        }).then(function (obj) {
-
-            return new Promise(function (resolve, reject) {
-                Response.sendWithToken(res, obj.session.token, obj.user.toObject());
-                resolve();
-            });
-
-        }).catch(function (errorCode) {
-            Response.sendError(res, errorCode);
         });
 
-    }
+    }).then(function (obj) {
+
+        return new Promise(function (resolve, reject) {
+            Response.sendWithToken(res, obj.session.toObject().token, obj.user.toObject());
+            resolve();
+        });
+
+    }).catch(function (errorCode) {
+        Response.sendError(res, errorCode);
+    })
 
 }
 
-module.exports.register = function () {
+export function login(req, res) {
 
-    return function (req, res) {
+    new Promise(function (resolve, reject) {
 
-        new Promise(function (resolve, reject) {
+        if (!req.body.email || !req.body.password)
+            return reject(Response.Errors.Incomplete);
 
-            if (!req.body.name || !req.body.email || !req.body.password)
-                return reject(Response.Errors.Incomplete);
+        resolve({ email: req.body.email, password: req.body.password });
 
-            resolve({ name: req.body.name, email: req.body.email, password: req.body.password });
+    }).then(function (obj) {
 
-        }).then(function (obj) {
+        return new Promise(function (resolve, reject) {
 
-            return new Promise(function (resolve, reject) {
+            User.checkEmail(obj.email, function (err, user) {
 
-                User.checkEmail(obj.email, function (err, user) {
+                if (err) {
+                    console.log(err.message);
+                    return reject(Response.Errors.Internal);
+                }
 
-                    if (err)
-                        return reject(Response.Errors.Internal);
+                if (!user)
+                    return reject(Response.Errors.EmailUnregistered);
 
-                    if (user)
-                        return reject(Response.Errors.EmailTaken);
-
-                    resolve(obj);
-
-                });
+                resolve({ user, password: obj.password });
 
             });
 
-        }).then(function (obj) {
+        });
 
-            return new Promise(function (resolve, reject) {
+    }).then(function (obj) {
 
-                User.register(obj.name, obj.email, obj.password, function (err, user) {
+        return new Promise(function (resolve, reject) {
 
-                    if (err || !user) {
-                        console.log(err.message);
-                        return reject(Response.Errors.Internal);
-                    }
+            obj.user.checkPassword(obj.password, function (res) {
 
-                    resolve(user);
-                })
+                if (!res) {
+                    console.log('Password mismatch');
+                    return reject(Response.Errors.Password);
+                }
 
-            });
-
-        }).then(function (user) {
-
-            return new Promise(function (resolve, reject) {
-
-                Session.createSession(user._id, req.deviceId,
-                    function (err, session) {
-
-                        if (err || !session)
-                            return reject(Response.Errors.Internal);
-
-                        resolve({ user, session });
-
-                    });
+                resolve(obj.user);
 
             });
 
-        }).then(function (obj) {
+        });
 
-            return new Promise(function (resolve, reject) {
-                Response.sendWithToken(res, obj.session.toObject().token, obj.user.toObject());
+    }).then(function (user) {
+
+        return new Promise(function (resolve, reject) {
+
+            Session.createSession(user._id, req.deviceId, function (err, session) {
+
+                if (err || !session) {
+                    console.log(err.message);
+                    return reject(Response.Errors.Internal);
+                }
+
+                if (!session.isNew)
+                    session.refreshToken();
+
+                resolve({ user, session });
+
+            });
+
+        });
+
+    }).then(function (obj) {
+
+        return new Promise(function (resolve, reject) {
+            Response.sendWithToken(res, obj.session.token, obj.user.toObject());
+            resolve();
+        });
+
+    }).catch(function (errorCode) {
+        Response.sendError(res, errorCode);
+    });
+
+}
+
+export function forgotPassword(req, res) {
+
+    new Promise(function (resolve, reject) {
+
+        if (!req.body.email)
+            return reject(Response.Errors.Incomplete);
+
+        resolve(req.body.email);
+
+    }).then(function (email) {
+
+        return new Promise(function (resolve, reject) {
+
+            User.findOneAndUpdate({ email: email }, {
+                otp: Utils.genOtp()
+            }, { 'new': true }, function (err, user) {
+
+                if (err) {
+                    console.log(err.message);
+                    return reject(Response.Errors.Internal);
+                }
+
+                if (!user)
+                    return reject(Response.Errors.NotFound);
+
+                Utils.emailOtp(user.email, user.otp);
+
+                Response.send(res);
                 resolve();
+
             });
 
-        }).catch(function (errorCode) {
-            Response.sendError(res, errorCode);
-        })
+        });
 
-    }
+    }).catch(function (errorCode) {
+        Response.sendError(res, errorCode);
+    });
 
 }
 
-module.exports.forgotPassword = function () {
+export function checkOtp(req, res) {
 
-    return function (req, res) {
+    new Promise(function (resolve, reject) {
 
-        new Promise(function (resolve, reject) {
+        if (!req.body.email || !req.body.otp || isNan(req.body.otp))
+            return reject(Response.Errors.Incomplete);
 
-            if (!req.body.email)
-                return reject(Response.Errors.Incomplete);
+        resolve({ email: req.body.email, otp: parseInt(req.body.otp) });
 
-            resolve(req.body.email);
+    }).then(function (obj) {
 
-        }).then(function (email) {
+        return new Promise(function (resolve, reject) {
 
-            return new Promise(function (resolve, reject) {
+            User.findOne({ email: obj.email, otp: obj.otp }, function (err, user) {
 
-                User.findOneAndUpdate({ email: email }, {
-                    otp: Utils.genOtp()
+                if (err) {
+                    console.log(err.message);
+                    return reject(Response.Errors.Internal);
+                }
+
+                if (!user)
+                    return reject(Response.Errors.NotFound);
+
+                Response.send(res);
+                resolve();
+
+            });
+
+        });
+
+    }).catch(function (errorCode) {
+        Response.sendError(res, errorCode);
+    })
+
+}
+
+export function resetPassword(req, res) {
+
+    new Promise(function (resolve, reject) {
+
+        if (!req.body.email)
+            return reject(Response.Errors.Incomplete);
+
+        resolve(req.body.email);
+
+    }).then(function (email) {
+
+        return new Promise(function (resolve, reject) {
+
+            User.findOneAndUpdate({ email: req.body.email },
+                {
+                    password: req.body.password,
+                    otp: 0
                 }, { 'new': true }, function (err, user) {
 
                     if (err) {
@@ -214,152 +273,78 @@ module.exports.forgotPassword = function () {
                     if (!user)
                         return reject(Response.Errors.NotFound);
 
-                    Utils.emailOtp(user.email, user.otp);
-
                     Response.send(res);
                     resolve();
 
                 });
 
-            });
-
-        }).catch(function (errorCode) {
-            Response.sendError(res, errorCode);
         });
 
-    }
+    }).catch(function (errorCode) {
+        Response.sendError(res, errorCode);
+    });
 
 }
 
-module.exports.checkOtp = function () {
+export function silentLogin(req, res) {
 
-    return function (req, res) {
+    Session.findOne({
+        user: req.user._id,
+        deviceId: req.deviceId
+    }, function (err, session) {
 
-        new Promise(function (resolve, reject) {
+        if (err) {
+            console.log(err.message);
+            return Response.sendError(res, Response.Errors.Internal);
+        }
 
-            if (!req.body.email || !req.body.otp || isNan(req.body.otp))
-                return reject(Response.Errors.Incomplete);
+        if (!session)
+            return Response.sendError(res, Response.Errors.NotFound);
 
-            resolve({ email: req.body.email, otp: parseInt(req.body.otp) });
+        Response.send(res);
 
-        }).then(function (obj) {
+    });
 
-            return new Promise(function (resolve, reject) {
+}
 
-                User.findOne({ email: obj.email, otp: obj.otp }, function (err, user) {
+export function logout(req, res) {
 
-                    if (err) {
-                        console.log(err.message);
-                        return reject(Response.Errors.Internal);
-                    }
+    Session.findOneAndRemove({
+        user: req.user._id,
+        deviceId: req.deviceId
+    }, function (err, session) {
 
-                    if (!user)
-                        return reject(Response.Errors.NotFound);
+        if (err) {
+            console.log(err.message);
+            return Response.sendError(res, Response.Errors.Internal);
+        }
 
-                    Response.send(res);
-                    resolve();
+        if (!session)
+            return Response.sendError(res, Response.Errors.NotFound);
 
-                });
+        Response.send(res);
 
-            });
+    });
 
-        }).catch(function (errorCode) {
-            Response.sendError(res, errorCode);
+}
+
+export function fcm(req, res) {
+
+    if (!req.body.fcm) {
+        Response.sendError(Errors.Incomplete)
+    } else {
+
+        User.updateFCM(req.user._id, req.body.fcm, function (err, user) {
+
+            if (err || !user) {
+                if (err)
+                    console.log(err.message)
+                return Response.sendError(res, Errors.Internal);
+            }
+
+            Response.send(res)
+
         })
-
-    }
-
-}
-
-module.exports.resetPassword = function () {
-
-    return function (req, res) {
-
-        new Promise(function (resolve, reject) {
-
-            if (!req.body.email)
-                return reject(Response.Errors.Incomplete);
-
-            resolve(req.body.email);
-
-        }).then(function (email) {
-
-            return new Promise(function (resolve, reject) {
-
-                User.findOneAndUpdate({ email: req.body.email },
-                    {
-                        password: req.body.password,
-                        otp: 0
-                    }, { 'new': true }, function (err, user) {
-
-                        if (err) {
-                            console.log(err.message);
-                            return reject(Response.Errors.Internal);
-                        }
-
-                        if (!user)
-                            return reject(Response.Errors.NotFound);
-
-                        Response.send(res);
-                        resolve();
-
-                    });
-
-            });
-
-        }).catch(function (errorCode) {
-            Response.sendError(res, errorCode);
-        });
-
-    }
-
-}
-
-module.exports.silentLogin = function () {
-
-    return function (req, res) {
-
-        Session.findOne({
-            user: req.user._id,
-            deviceId: req.deviceId
-        }, function (err, session) {
-
-            if (err) {
-                console.log(err.message);
-                return Response.sendError(res, Response.Errors.Internal);
-            }
-
-            if (!session)
-                return Response.sendError(res, Response.Errors.NotFound);
-
-            Response.send(res);
-
-        });
-
-    }
-
-}
-
-module.exports.logout = function () {
-
-    return function (req, res) {
-
-        Session.findOneAndRemove({
-            user: req.user._id,
-            deviceId: req.deviceId
-        }, function (err, session) {
-
-            if (err) {
-                console.log(err.message);
-                return Response.sendError(res, Response.Errors.Internal);
-            }
-
-            if (!session)
-                return Response.sendError(res, Response.Errors.NotFound);
-
-            Response.send(res);
-
-        });
 
     }
 

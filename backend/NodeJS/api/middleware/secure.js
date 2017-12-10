@@ -4,11 +4,9 @@ import { Response, Errors } from '../helper'
 export default function (req, res, next) {
 
     new Promise(function (resolve, reject) {
-
         if (!req.headers['token']) {
-            return reject(Response.Errors.Incomplete);
+            return reject(Errors.Incomplete);
         }
-
         resolve(req.headers['token']);
 
     }).then(function (token) {
@@ -22,9 +20,8 @@ export default function (req, res, next) {
                 },
 
                 function (user) {
-
                     if (!user)
-                        return reject(Response.Errors.Session);
+                        return reject(Errors.Session);
 
                     resolve(user);
                 })
