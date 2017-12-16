@@ -2,9 +2,19 @@ import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 import rn from 'random-number'
 import sendGrid from '@sendgrid/mail'
+import AWS from 'aws-sdk'
+import * as Config from '../../config'
 
 const algorithm = 'aes-256-ctr'
 const password = 'd6F3Efeq'
+
+AWS.config.update({
+    accessKeyId: Config.AWS_ACCESS_KEY_ID,
+    secretAccessKey: Config.AWS_SECRET_ACCESS_KEY,
+    region: Config.AWS_REGION
+})
+
+const s3 = new AWS.S3()
 
 export function encrypt(text) {
     let cipher = crypto.createCipher(algorithm, password)
@@ -56,4 +66,13 @@ export function emailOtp(email, otp) {
         subject: 'Here is your OTP',
         html: `<strong>${otp}</strong>`
     })
+}
+
+export function deleteObjectS3(bucket, key, cb) {
+
+    s3.deleteObject({
+        Bucket: bucket,
+        Key: key
+    }, cb)
+
 }

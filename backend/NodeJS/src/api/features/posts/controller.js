@@ -1,6 +1,7 @@
 import uuid from 'uuid/v1'
 import { Response, Errors } from '../../helper'
 import { Post } from '../../models'
+import { Utils } from '../../helper'
 
 export function createPost() {
 
@@ -317,20 +318,42 @@ export function deleteComment() {
 
     return (req, res) => {
 
-        Post.deleteComment(req.user._id, req.params.postId, req.params.commentId, (err, post) => {
+        new Promise((resolve, reject) => {
 
-            if (err) {
-                console.log(err.message)
-                return Response.sendError(res, Errors.Internal)
-            }
+            Post.deleteComment(req.user._id, req.params.postId, req.params.commentId, (err, post) => {
 
-            if (!post)
-                return Response.sendError(res, Errors.NotFound)
+                if (err) {
+                    console.log(err.message)
+                    return reject(Errors.Internal)
+                }
 
+                if (!post)
+                    return reject(Errors.NotFound)
+
+                console.log(post)
+                resolve(post)
+
+            })
+
+
+        }).then((post) => {
+
+            Utils.deleteObjectS3('thespherehouse', post.url, (err, data) => {
+
+                if (err) {
+                    console.log(err.message)
+                    return reject(Errors.Internal)
+                }
+
+                resolve()
+
+            })
+
+        }).then(() => {
             Response.send(res)
-
+        }).catch((errorCode) => {
+            Response.sendError(res, errorCode)
         })
-
     }
 
 }
