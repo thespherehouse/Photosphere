@@ -8,8 +8,10 @@ export function createPost() {
     return (req, res) => {
         new Promise((resolve, reject) => {
 
-            if (!req.body.title || !req.body.description)
+            if (!req.body.title || !req.body.description) {
+                console.log(req.body)
                 return reject(Errors.Incomplete)
+            }
 
             resolve({ title: req.body.title, desc: req.body.description })
 
