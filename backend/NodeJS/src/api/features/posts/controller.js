@@ -71,6 +71,33 @@ export function getAllPosts() {
 
 }
 
+export function getAllPostsByUser() {
+
+    return (req, res) => {
+
+        let skip = 0, limit = 10
+
+        if (req.query.skip)
+            skip = Math.max(0, req.query.skip)
+
+        if (req.query.limit)
+            limit = Math.min(Math.max(1, req.query.limit), 10)
+
+        Post.getAllPosts(req.user._id, skip, limit, (err, posts) => {
+
+            if (err) {
+                console.log(err.message)
+                return Response.sendError(res, Errors.Internal)
+            }
+
+            Response.send(res, posts)
+
+        })
+
+    }
+
+}
+
 export function getPost() {
 
     return (req, res) => {
@@ -82,7 +109,7 @@ export function getPost() {
                 return Response.sendError(res, Errors.Internal)
             }
 
-            Response.send(res, post.toObject())
+            Response.send(res, post)
 
         })
 

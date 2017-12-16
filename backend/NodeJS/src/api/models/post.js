@@ -109,6 +109,40 @@ schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit
     ], cb)
 }
 
+schema.statics.getAllPostsByUser = function (userId, skip, limit, cb) {
+    return this.aggregate([
+        {
+            $match: {
+                _id: mongoose.Types.ObjectId(userId)
+            }
+        },
+        {
+            '$skip': skip
+        },
+        {
+            '$limit': limit
+        },
+        {
+            '$project': {
+                owner: 1,
+                ownerName: 1,
+                title: 1,
+                url: 1,
+                likesCount: 1,
+                commentsCount: 1,
+                createdAt: 1,
+                updatedAt: 1,
+                isLikedByMe: {
+                    $in: [userId, '$likes.user']
+                },
+                isCommentedByMe: {
+                    $in: [userId, '$comments.user']
+                }
+            }
+        }
+    ], cb)
+}
+
 schema.statics.getPost = function (userId, postId, cb) {
     return this.aggregate([
         {
