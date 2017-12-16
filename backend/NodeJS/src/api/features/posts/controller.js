@@ -60,7 +60,7 @@ export function getAllPosts() {
             userId = req.query.user
 
         if (!userId) {
-            Post.getAllPosts(skip, limit, (err, posts) => {
+            Post.getAllPosts(req.user._id, skip, limit, (err, posts) => {
 
                 if (err) {
                     console.log(err.message)
@@ -74,7 +74,7 @@ export function getAllPosts() {
 
             })
         } else {
-            Post.getAllPostsByUser(userId, skip, limit, (err, posts) => {
+            Post.getAllPostsByUser(req.user._id, userId, skip, limit, (err, posts) => {
 
                 if (err) {
                     console.log(err.message)
@@ -128,6 +128,8 @@ export function getPost() {
 
         if (postId.length !== 24)
             return Response.send(res)
+
+        console.log(postId)
 
         Post.getPost(req.user._id, postId, (err, posts) => {
 

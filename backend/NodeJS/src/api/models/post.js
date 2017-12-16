@@ -109,11 +109,11 @@ schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit
     ], cb)
 }
 
-schema.statics.getAllPostsByUser = function (userId, skip, limit, cb) {
+schema.statics.getAllPostsByUser = function (userId, targetUserId, skip, limit, cb) {
     return this.aggregate([
         {
             $match: {
-                _id: mongoose.Types.ObjectId(userId)
+                _id: mongoose.Types.ObjectId(targetUserId)
             }
         },
         {
