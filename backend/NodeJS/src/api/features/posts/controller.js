@@ -48,7 +48,7 @@ export function getAllPosts() {
 
     return (req, res) => {
 
-        let skip = 0, limit = 10
+        let userId = null, skip = 0, limit = 10
 
         if (req.query.skip)
             skip = Math.max(0, req.query.skip)
@@ -56,22 +56,44 @@ export function getAllPosts() {
         if (req.query.limit)
             limit = Math.min(Math.max(1, req.query.limit), 10)
 
-        Post.getAllPosts(req.user._id, skip, limit, (err, posts) => {
+        if (req.query.user && req.query.user.length === 24)
+            userId = req.query.user
 
-            if (err) {
-                console.log(err.message)
-                return Response.sendError(res, Errors.Internal)
-            }
+        if (user) {
+            Post.getAllPosts(skip, limit, (err, posts) => {
 
-            Response.send(res, posts)
+                if (err) {
+                    console.log(err.message)
+                    return Response.sendError(res, Errors.Internal)
+                }
 
-        })
+                if (!posts)
+                    return Response.sendError(res, Errors.NotFound)
+
+                Response.send(res, posts)
+
+            })
+        } else {
+            Post.getAllPostsByUser(userId, skip, limit, (err, posts) => {
+
+                if (err) {
+                    console.log(err.message)
+                    return Response.sendError(res, Errors.Internal)
+                }
+
+                if (!posts)
+                    return Response.sendError(res, Errors.NotFound)
+
+                Response.send(res, posts)
+
+            })
+        }
 
     }
 
 }
 
-export function getAllPostsByUser() {
+export function getAllPostsByMe() {
 
     return (req, res) => {
 
@@ -102,7 +124,12 @@ export function getPost() {
 
     return (req, res) => {
 
-        Post.getPost(req.user._id, req.params.postId, (err, posts) => {
+        let postId = req.params.postId
+
+        if (postId.length !== 24)
+            return Response.send(res)
+
+        Post.getPost(req.user._id, postId, (err, posts) => {
 
             if (err) {
                 console.log(err.message)

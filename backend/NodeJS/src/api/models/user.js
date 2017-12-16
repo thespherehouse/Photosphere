@@ -4,8 +4,10 @@ import { Utils } from '../helper'
 const schema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    fcm: { type: String }
+    password: { type: String },
+    fcm: { type: String },
+    loginType: { type: Number, default: 0 },
+    socialId: { type: String }
 },
     {
         toObject: {
@@ -29,6 +31,23 @@ schema.statics.createUser = function (name, email, password, cb) {
         email,
         password: Utils.hashPasswordSync(password)
     }, cb)
+}
+
+schema.statics.createSocialUser = function (name, email, socialId, loginType, cb) {
+    return this.findOneAndUpdate(
+        {
+            socialId
+        },
+        {
+            name,
+            email,
+            socialId,
+            loginType
+        },
+        {
+            upsert: true,
+            new: true
+        }, cb)
 }
 
 schema.statics.getUserByEmail = function (email, cb) {

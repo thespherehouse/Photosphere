@@ -79,7 +79,7 @@ schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit
     return this.aggregate([
         {
             $match: {
-                category: categoryId
+                category: mongoose.Types.ObjectId(categoryId)
             }
         },
         {
@@ -113,7 +113,7 @@ schema.statics.getAllPostsByUser = function (userId, skip, limit, cb) {
     return this.aggregate([
         {
             $match: {
-                _id: userId
+                _id: mongoose.Types.ObjectId(userId)
             }
         },
         {
@@ -146,7 +146,9 @@ schema.statics.getAllPostsByUser = function (userId, skip, limit, cb) {
 schema.statics.getPost = function (userId, postId, cb) {
     return this.aggregate([
         {
-            $match: { _id: postId }
+            $match: {
+                _id: mongoose.Types.ObjectId(postId)
+            }
         },
         {
             $limit: 1

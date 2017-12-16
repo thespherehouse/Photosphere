@@ -90,6 +90,58 @@ export function register() {
     }
 }
 
+export function registerSocial() {
+
+    return (req, res) => {
+        new Promise((resolve, reject) => {
+
+            if (!req.body.name || !req.body.email || !req.body.socialId || !req.body.loginType)
+                return reject(Errors.Incomplete)
+
+            resolve({ name: req.body.name, email: req.body.email, socialId: req.body.socialId, loginType: req.body.loginType })
+
+        }).then(function (obj) {
+
+            return new Promise((resolve, reject) => {
+
+                User.createSocialUser(obj.name, obj.email, obj.socialId, obj.loginType, function (err, user) {
+
+                    if (err || !user) {
+                        if (err)
+                            console.log(err.message)
+                        return reject(Errors.Internal)
+                    }
+
+                    resolve(user)
+                })
+
+            })
+
+        }).then(function (user) {
+
+            return new Promise((resolve, reject) => {
+
+                Session.createSession(user._id, req.deviceId,
+                    function (err, session) {
+
+                        if (err || !session)
+                            return reject(Errors.Internal)
+
+                        resolve({ user, session })
+
+                    })
+
+            })
+
+        }).then(function (obj) {
+            Response.sendWithToken(res, obj.session.toObject().token, obj.user.toObject())
+        }).catch(function (errorCode) {
+            Response.sendError(res, errorCode)
+        })
+    }
+
+}
+
 export function login() {
 
     return (req, res) => {
