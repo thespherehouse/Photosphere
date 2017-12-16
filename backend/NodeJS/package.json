@@ -10,8 +10,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d build",
     "watch": "nodemon app.js",
-    "start": "node app.js"
+    "start": "babel src -d build && node build/app.js"
   },
   "keywords": [
     "social",
@@ -23,7 +24,6 @@
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^6.1.4",
-    "async": "^2.6.0",
     "aws-sdk": "^2.167.0",
     "bcrypt": "^1.0.3",
     "bluebird": "^3.5.1",
@@ -35,6 +35,7 @@
     "multer-s3": "^2.7.0",
     "random-number": "0.0.9",
     "socket.io": "^2.0.4",
+    "uniqid": "^4.1.1",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

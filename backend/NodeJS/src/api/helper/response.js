@@ -10,7 +10,7 @@ export function send(res, data) {
 
     res.status(200)
         .send({
-            error: this.Errors.None,
+            error: Errors.None,
             data: data
         });
 
@@ -27,7 +27,7 @@ export function sendWithToken(res, token, data) {
     res.setHeader('Token', token);
     res.status(200)
         .send({
-            error: this.Errors.None,
+            error: Errors.None,
             data: data
         });
 

@@ -3,8 +3,8 @@ export default {
     //Generic
     None: { code: 0, message: 'No errors' },
     Internal: { code: 1, message: 'Internal error' },
-    Token: { code: 2, message: 'Token invalid or absent' },
-    Header: { code: 3, message: 'Device ID & type absent' },
+    Token: { code: 2, message: 'Token absent' },
+    Header: { code: 3, message: 'Device ID absent' },
     Incomplete: { code: 4, message: 'Incomplete request parameters' },
     Session: { code: 5, message: 'Invalid session' },
     NotFound: { code: 6, message: 'No data found' },
@@ -16,4 +16,5 @@ export default {
     // Login
     EmailUnregistered: { code: 9, message: 'Email not registered' },
     Password: { code: 10, message: 'Password invalid' }
+
 };

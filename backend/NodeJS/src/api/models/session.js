@@ -1,23 +1,23 @@
 import mongoose from 'mongoose'
 import { Utils } from '../helper'
 
-const schema = new Schema({
+const schema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     deviceId: { type: String, required: true },
-    token: { type: String, default: Utils.token() }
+    token: { type: String, required: true }
 }, {
         toObject: {
             transform: function (doc, ret) {
-                delete ret.__v;
+                delete ret.__v
             }
         },
         toJSON: {
             transform: function (doc, ret) {
-                delete ret.__v;
+                delete ret.__v
             }
         }
     }
-);
+)
 
 schema.statics.createSession = function (userId, deviceId, cb) {
     return this.findOneAndUpdate(
@@ -32,33 +32,31 @@ schema.statics.createSession = function (userId, deviceId, cb) {
         },
         {
             upsert: true,
-            'new': true
-        }, cb);
-};
+            new: true
+        }, cb)
+}
 
-schema.statics.getUserByToken = function (token, deviceId, cb) {
+schema.statics.getSession = function (deviceId, token, cb) {
     return this.findOne(
         {
-            user: userId,
+            deviceId,
             token
         })
         .populate('user')
-        .exec(function (err, session) {
-
-            if (err || !session) {
-                if (err)
-                    console.log(err.message);
-                cb(null);
-            } else {
-                cb(session.user);
-            }
-
-        });
+        .exec(cb)
 }
 
-schema.methods.refreshToken = function () {
-    this.token = Utils.token();
-    this.save();
+// schema.methods.refreshToken = function () {
+//     this.token = Utils.token()
+//     this.save()
+// }
+
+schema.statics.deleteSession = function (deviceId, token, cb) {
+    return this.findOneAndRemove(
+        {
+            deviceId,
+            token
+        }, cb)
 }
 
-module.exports = mongoose.model('Session', schema);
+export default mongoose.model('Session', schema)
