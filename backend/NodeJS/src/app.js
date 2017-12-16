@@ -15,7 +15,7 @@ mongoose.connect(Config.MongoURI, { useMongoClient: true }, () => {
 const app = express()
 const server = http.createServer(app)
 
-API.init(app)
+API.init(app, 'photosphere')
 
 server.listen(Config.PORT, () => {
     console.log('Server started at ' + Config.PORT)
