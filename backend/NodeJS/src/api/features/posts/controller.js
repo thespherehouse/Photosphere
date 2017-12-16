@@ -102,14 +102,15 @@ export function getPost() {
 
     return (req, res) => {
 
-        Post.getPost(req.user._id, req.params.postId, (err, post) => {
+        Post.getPost(req.user._id, req.params.postId, (err, posts) => {
 
             if (err) {
                 console.log(err.message)
                 return Response.sendError(res, Errors.Internal)
             }
 
-            Response.send(res, post)
+            if (posts.length > 0)
+                Response.send(res, posts[0])
 
         })
 
