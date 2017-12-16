@@ -152,7 +152,7 @@ export function deletePost() {
             if (!post)
                 return Response.sendError(res, Errors.NotFound)
 
-            Response.send(res, post.toObject())
+            Response.send(res)
 
         })
 
