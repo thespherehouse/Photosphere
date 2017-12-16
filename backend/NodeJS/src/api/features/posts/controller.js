@@ -59,7 +59,7 @@ export function getAllPosts() {
         if (req.query.user && req.query.user.length === 24)
             userId = req.query.user
 
-        if (user) {
+        if (!user) {
             Post.getAllPosts(skip, limit, (err, posts) => {
 
                 if (err) {
