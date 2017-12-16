@@ -172,7 +172,7 @@ schema.statics.editPostDescription = function (userId, postId, description, cb) 
 }
 
 schema.statics.deletePost = function (userId, postId, cb) {
-    return this.findOneAndRemove({ _id: postId, user: userId }, cb)
+    return this.findOneAndRemove({ _id: postId, owner: userId }, cb)
 }
 
 schema.statics.getLikes = function (postId, skip, limit, cb) {
