@@ -68,7 +68,7 @@ export function emailOtp(email, otp) {
     })
 }
 
-export function deleteObjectS3(key, cb) {
+export function deleteObjectsS3(key, cb) {
 
     s3.deleteObjects({
         Bucket: Config.Image.BUCKET,

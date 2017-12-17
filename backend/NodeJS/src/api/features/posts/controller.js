@@ -201,19 +201,41 @@ export function deletePost() {
 
     return (req, res) => {
 
-        Post.deletePost(req.user._id, req.params.postId, (err, post) => {
+        new Promise((resolve, reject) => {
 
-            if (err) {
-                console.log(err.message)
-                return Response.sendError(res, Errors.Internal)
-            }
+            Post.deletePost(req.user._id, req.params.postId, (err, post) => {
 
-            if (!post)
-                return Response.sendError(res, Errors.NotFound)
+                if (err) {
+                    console.log(err.message)
+                    return reject(Errors.Internal)
+                }
 
-            Response.send(res)
+                if (!post)
+                    return reject(Errors.NotFound)
 
+
+                resolve(post.url)
+
+            })
+
+        }).then((key) => {
+
+            Utils.deleteObjectsS3(key, (err, data) => {
+
+                if (err) {
+                    console.log(err.message)
+                    return reject(Errors.Internal)
+                }
+
+                Response.send(res)
+                resolve()
+
+            })
+
+        }).catch((errorCode) => {
+            Response.sendError(res, errorCode)
         })
+
 
     }
 
@@ -377,42 +399,20 @@ export function deleteComment() {
 
     return (req, res) => {
 
-        new Promise((resolve, reject) => {
+        Post.deleteComment(req.user._id, req.params.postId, req.params.commentId, (err, post) => {
 
-            Post.deleteComment(req.user._id, req.params.postId, req.params.commentId, (err, post) => {
+            if (err) {
+                console.log(err.message)
+                return Response.sendError(res, Errors.Internal)
+            }
 
-                if (err) {
-                    console.log(err.message)
-                    return reject(Errors.Internal)
-                }
+            if (!post)
+                return Response.sendError(res, Errors.NotFound)
 
-                if (!post)
-                    return reject(Errors.NotFound)
-
-                console.log(post)
-                resolve(post)
-
-            })
-
-
-        }).then((post) => {
-
-            Utils.deleteObjectS3('thespherehouse', post.url, (err, data) => {
-
-                if (err) {
-                    console.log(err.message)
-                    return reject(Errors.Internal)
-                }
-
-                resolve()
-
-            })
-
-        }).then(() => {
             Response.send(res)
-        }).catch((errorCode) => {
-            Response.sendError(res, errorCode)
+
         })
+
     }
 
 }
