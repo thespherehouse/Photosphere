@@ -37,6 +37,7 @@ export default function () {
                 s3,
                 bucket: Config.Image.BUCKET,
                 acl: 'public-read',
+                contentType: multerS3.AUTO_CONTENT_TYPE,
                 shouldTransform: (req, file, cb) => {
                     cb(null, true)
                 },
