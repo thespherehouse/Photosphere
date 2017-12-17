@@ -1,9 +1,10 @@
 import uniqId from 'uniqid'
 import multer from 'multer'
-import multerS3 from 'multer-s3'
+import multerS3 from 'multer-s3-transform'
 import AWS from 'aws-sdk'
 import { Response, Errors } from '../helper'
 import * as Config from '../../config'
+import sharp from 'sharp'
 
 AWS.config.update({
     accessKeyId: Config.AWS_ACCESS_KEY_ID,
@@ -16,6 +17,7 @@ const s3 = new AWS.S3()
 export default function () {
 
     return (req, res, next) => {
+        const id = uniqId()
         const userId = req.user._id
         const upload = multer({
             fileFilter: (req, file, cb) => {
@@ -33,12 +35,30 @@ export default function () {
             },
             storage: multerS3({
                 s3,
-                bucket: 'thespherehouse',
+                bucket: Config.Image.BUCKET,
                 acl: 'public-read',
-                contentType: multerS3.AUTO_CONTENT_TYPE,
-                key: (req, file, cb) => {
-                    cb(null, `${userId}/${uniqId('image-')}`)
-                }
+                shouldTransform: (req, file, cb) => {
+                    cb(null, true)
+                },
+                transforms: [{
+                    id: 'original',
+                    key: (req, file, cb) => {
+                        cb(null, `${userId}/${id}/${Config.Image.ORIG_NAME}`)
+                    },
+                    transform: (req, file, cb) => {
+                        cb(null, sharp().resize(Config.Image.MAX_SIZE, Config.Image.MAX_SIZE)
+                            .max().toFormat(Config.Image.ORIG_FORMAT))
+                    }
+                }, {
+                    id: 'thumbnail',
+                    key: (req, file, cb) => {
+                        cb(null, `${userId}/${id}/${Config.Image.THUMB_NAME}`)
+                    },
+                    transform: (req, file, cb) => {
+                        cb(null, sharp().resize(Config.Image.THUMB_SIZE, Config.Image.THUMB_SIZE)
+                            .max().toFormat(Config.Image.THUMB_FORMAT))
+                    }
+                }]
             })
         })
         upload.single('photo')(req, res, function (err) {
@@ -46,6 +66,7 @@ export default function () {
             if (err)
                 return Response.sendError(res, Errors.Incomplete)
 
+            req.file.key = `${userId}/${id}`
             next()
         })
     }
