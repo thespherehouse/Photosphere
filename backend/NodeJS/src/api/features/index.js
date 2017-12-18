@@ -4,7 +4,6 @@ import { Router } from 'express'
 
 const router = Router()
 
-router.use('/auth', Auth.router)
-router.use('/secure/posts', Posts.router)
+router.use('/', Auth.router, Posts.router)
 
 export { router }

@@ -9,19 +9,22 @@ import Middleware from '../../middleware'
 
 const router = Router()
 
-router.post('/', Middleware.storage(), createPost());
-router.post('/:postId/comments', createComment())
-router.get('/', getAllPosts());
-router.get('/profile', getAllPostsByMe());
-router.get('/:postId', getPost());
-router.get('/:postId/likes', getLikes());
-router.get('/:postId/comments', getComments())
-router.put('/:postId/title', editPostTitle());
-router.put('/:postId/description', editPostDescription());
-router.put('/:postId/like', likePost());
-router.put('/:postId/unlike', unlikePost());
-router.put('/:postId/comments/:commentId', editComment())
-router.delete('/:postId', deletePost())
-router.delete('/:postId/comments/:commentId', deleteComment())
+router.post('/secure/posts', Middleware.storage(), createPost())
+router.post('/secure/posts/:postId/comments', createComment())
+router.post('/secure/posts/:postId/like', likePost())
+
+router.get('/secure/posts', getAllPosts())
+router.get('/secure/posts/profile', getAllPostsByMe())
+router.get('/secure/posts/:postId', getPost())
+router.get('/secure/posts/:postId/likes', getLikes())
+router.get('/secure/posts/:postId/comments', getComments())
+
+router.put('/secure/posts/:postId/title', editPostTitle())
+router.put('/secure/posts/:postId/description', editPostDescription())
+router.put('/secure/posts/:postId/comments/:commentId', editComment())
+
+router.delete('/secure/posts/:postId', deletePost())
+router.delete('/secure/posts/:postId/unlike', unlikePost())
+router.delete('/secure/posts/:postId/comments/:commentId', deleteComment())
 
 export { router }

@@ -1,13 +1,16 @@
 import { Router } from 'express'
-import { checkEmail, register, login, logout, fcm, registerSocial } from './controller'
+import { checkEmail, register, login, logout, fcm, registerSocial, silentLogin } from './controller'
 
 const router = Router()
 
-router.post('/checkEmail', checkEmail())
-router.post('/register', register())
-router.post('/registerSocial', registerSocial())
-router.put('/login', login())
-router.put('/logout', logout())
-router.put('/fcm', fcm())
+router.post('/auth/checkEmail', checkEmail())
+router.post('/auth/register', register())
+router.post('/auth/registerSocial', registerSocial())
+
+router.get('/secure/auth/silentLogin', silentLogin())
+
+router.put('/auth/login', login())
+router.put('/secure/auth/logout', logout())
+router.put('/secure/auth/fcm', fcm())
 
 export { router }
