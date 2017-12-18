@@ -21,7 +21,7 @@ export const Validator = {
 
     checkOtp() {
         return (req, res, next) => {
-            if (!req.body.email || !req.body.otp || isNan(req.body.otp))
+            if (!req.body.email || !req.body.otp || isNaN(req.body.otp))
                 return Response.sendError(res, Errors.Incomplete)
             next()
         }
@@ -47,7 +47,7 @@ export const Validator = {
         return (req, res, next) => {
             if (!req.body.name || !req.body.email || !req.body.socialId || !req.body.loginType)
                 return Response.sendError(res, Errors.Incomplete)
-            if (isNan(req.body.loginType) || parseInt(req.body.loginType) < 0 || parseInt(req.body.loginType) > 2)
+            if (isNaN(req.body.loginType) || parseInt(req.body.loginType) < 0 || parseInt(req.body.loginType) > 2)
                 return Response.sendError(res, Errors.InvalidLoginType)
             next()
         }
