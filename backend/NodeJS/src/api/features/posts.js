@@ -6,13 +6,21 @@ export const Validator = {
 
     createPost() {
         return (req, res, next) => {
-            if (!req.body.title)
+            console.log(req.body)
+            if (!req.body.title) {
+                Utils.deleteObjectsS3(req.file.key, (err, data) => {
+                    console.log(data)
+                })
                 return Response.sendError(res, Errors.NoTitle)
+            }
 
-            if (!req.body.description)
+            if (!req.body.description) {
+                Utils.deleteObjectsS3(req.file.key, (err, data) => {
+                    console.log(data)
+                })
                 return Response.sendError(res, Errors.NoDescription)
+            }
 
-            console.log(req)
             next()
         }
     },

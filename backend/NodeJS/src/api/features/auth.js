@@ -202,20 +202,17 @@ export const Endpoint = {
                     if (!user)
                         return reject(Errors.EmailUnregistered)
 
-                    resolve({ user, password: obj.password })
+                    resolve(user)
 
                 })
-            }).then((obj) => {
-
+            }).then((user) => {
                 return new Promise((resolve, reject) => {
-                    obj.user.matchPasswordSync(obj.password, (result) => {
+                    user.matchPasswordSync(req.body.password, (result) => {
 
-                        if (!result) {
-                            console.log('Password mismatch')
+                        if (!result)
                             return reject(Errors.Password)
-                        }
 
-                        resolve(obj.user)
+                        resolve(user)
                     })
 
                 })
