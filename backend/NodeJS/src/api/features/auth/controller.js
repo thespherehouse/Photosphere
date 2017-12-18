@@ -76,14 +76,14 @@ export function register() {
                         if (err || !session)
                             return reject(Errors.Internal)
 
-                        resolve({ user, session })
+                        resolve(session)
 
                     })
 
             })
 
-        }).then(function (obj) {
-            Response.sendWithToken(res, obj.session.toObject().token, obj.user.toObject())
+        }).then(function (session) {
+            Response.sendWithToken(res, session.toObject().token)
         }).catch(function (errorCode) {
             Response.sendError(res, errorCode)
         })
@@ -127,14 +127,14 @@ export function registerSocial() {
                         if (err || !session)
                             return reject(Errors.Internal)
 
-                        resolve({ user, session })
+                        resolve(session)
 
                     })
 
             })
 
-        }).then(function (obj) {
-            Response.sendWithToken(res, obj.session.toObject().token, obj.user.toObject())
+        }).then(function (session) {
+            Response.sendWithToken(res, session.toObject().token)
         }).catch(function (errorCode) {
             Response.sendError(res, errorCode)
         })
@@ -202,16 +202,16 @@ export function login() {
 
                     console.log(session)
 
-                    resolve({ user, session })
+                    resolve(session)
 
                 })
 
             })
 
-        }).then(function (obj) {
+        }).then(function (session) {
 
             return new Promise((resolve, reject) => {
-                Response.sendWithToken(res, obj.session.token, obj.user.toObject())
+                Response.sendWithToken(res, session.token)
                 resolve()
             })
 
@@ -346,7 +346,7 @@ export function resetPassword() {
 
 export function silentLogin() {
     return (req, res) => {
-        Response.send(res, Errors.None)
+        Response.send(res)
     }
 }
 

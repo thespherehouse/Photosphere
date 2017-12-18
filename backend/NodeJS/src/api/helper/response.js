@@ -16,19 +16,16 @@ export function send(res, data) {
 
 };
 
-export function sendWithToken(res, token, data) {
+export function sendWithToken(res, token) {
 
     if (!res || !token)
         return;
-
-    if (data !== null && data.password)
-        delete data.password;
 
     res.setHeader('Token', token);
     res.status(200)
         .send({
             error: Errors.None,
-            data: data
+            data: null
         });
 
 };
