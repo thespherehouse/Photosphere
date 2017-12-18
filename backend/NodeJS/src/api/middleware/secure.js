@@ -1,20 +1,20 @@
 import { Session } from '../models'
 import { Response, Errors } from '../helper'
 
-export default function () {
+export default () => {
 
     return (req, res, next) => {
-        new Promise(function (resolve, reject) {
+        new Promise((resolve, reject) => {
             if (!req.headers['token']) {
                 return reject(Errors.Token)
             }
             resolve(req.headers['token'])
 
-        }).then(function (token) {
+        }).then((token) => {
 
-            return new Promise(function (resolve, reject) {
+            return new Promise((resolve, reject) => {
 
-                Session.getSession(req.deviceId, token, function (err, session) {
+                Session.getSession(req.deviceId, token, (err, session) => {
 
                     if (err) {
                         console.log(err.message)
@@ -28,10 +28,10 @@ export default function () {
                 })
             })
 
-        }).then(function (user) {
+        }).then((user) => {
             req.user = user
             next()
-        }).catch(function (errorCode) {
+        }).catch((errorCode) => {
             Response.sendError(res, errorCode)
         })
     }

@@ -8,14 +8,14 @@ import * as Config from './config'
 global.Promise = bluebird
 mongoose.Promise = global.Promise
 
-mongoose.connect(Config.MongoURI, { useMongoClient: true }, () => {
+mongoose.connect(Config.MONGO_URI, { useMongoClient: true }, () => {
     console.log('MongoDB connected')
 })
 
 const app = express()
 const server = http.createServer(app)
 
-API.init(app, 'photosphere')
+API.init(app, Config.APP_NAME)
 
 server.listen(Config.PORT, () => {
     console.log('Server started at ' + Config.PORT)

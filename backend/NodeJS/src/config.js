@@ -1,4 +1,5 @@
-const MongoURI = 'mongodb://127.0.0.1:27017/photosphere'
+const APP_NAME = 'photosphere'
+const MONGO_URI = `mongodb://127.0.0.1:27017/${APP_NAME}`
 const PORT = process.env.PORT || 3000
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID
 const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY
@@ -14,4 +15,4 @@ const Image = {
     THUMB_NAME: 'thumbnail.jpg'
 }
 
-export { MongoURI, PORT, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, Image }
+export { APP_NAME, MONGO_URI, PORT, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, Image }

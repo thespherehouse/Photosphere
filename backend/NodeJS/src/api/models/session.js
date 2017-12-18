@@ -46,11 +46,6 @@ schema.statics.getSession = function (deviceId, token, cb) {
         .exec(cb)
 }
 
-// schema.methods.refreshToken = function () {
-//     this.token = Utils.token()
-//     this.save()
-// }
-
 schema.statics.deleteSession = function (deviceId, token, cb) {
     return this.findOneAndRemove(
         {

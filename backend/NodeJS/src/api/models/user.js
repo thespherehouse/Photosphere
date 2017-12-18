@@ -29,11 +29,12 @@ schema.statics.createUser = function (name, email, password, cb) {
     return this.create({
         name,
         email,
-        password: Utils.hashPasswordSync(password)
+        password: Utils.hashPasswordSync(password),
+        loginType: 0
     }, cb)
 }
 
-schema.statics.createSocialUser = function (name, email, socialId, loginType, cb) {
+schema.statics.updateSocialUser = function (name, email, socialId, loginType, cb) {
     return this.findOneAndUpdate(
         {
             socialId
