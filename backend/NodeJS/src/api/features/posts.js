@@ -9,6 +9,8 @@ export const Validator = {
             console.log(req.body)
             if (!req.body.title) {
                 Utils.deleteObjectsS3(req.file.key, (err, data) => {
+                    if (err)
+                        console.log(err.message)
                     console.log(data)
                 })
                 return Response.sendError(res, Errors.NoTitle)
@@ -16,6 +18,8 @@ export const Validator = {
 
             if (!req.body.description) {
                 Utils.deleteObjectsS3(req.file.key, (err, data) => {
+                    if (err)
+                        console.log(err.message)
                     console.log(data)
                 })
                 return Response.sendError(res, Errors.NoDescription)
@@ -143,16 +147,20 @@ export const Endpoint = {
 
     createPost() {
         return (req, res) => {
-            Post.createPost(req.user._id, req.user.name, req.title, req.description, req.file.key, (err, post) => {
+            Post.createPost(req.user._id, req.user.name, req.body.title, req.body.description, req.file.key, (err, post) => {
 
                 if (err || !post) {
                     if (err)
                         console.log(err.message)
+                    Utils.deleteObjectsS3(req.file.key, (err, data) => {
+                        if (err)
+                            console.log(err.message)
+                        console.log(data)
+                    })
                     return Response.sendError(res, Errors.Internal)
                 }
 
                 Response.send(res)
-
             })
         }
     },
