@@ -6,7 +6,7 @@ const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY
 const AWS_REGION = process.env.AWS_REGION
 
 const Image = {
-    BUCKET: 'photosphere',
+    BUCKET: 'thespherehouse',
     MAX_SIZE: 4000,
     THUMB_SIZE: 600,
     ORIG_FORMAT: 'jpeg',
