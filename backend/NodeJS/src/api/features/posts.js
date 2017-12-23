@@ -6,7 +6,6 @@ export const Validator = {
 
     createPost() {
         return (req, res, next) => {
-            console.log(req.body)
             if (!req.body.title) {
                 Utils.deleteObjectsS3(req.file.key, (err, data) => {
                     if (err)
@@ -147,7 +146,7 @@ export const Endpoint = {
 
     createPost() {
         return (req, res) => {
-            Post.createPost(req.user._id, req.user.name, req.body.title, req.body.description, req.file.key, (err, post) => {
+            Post.createPost(req.user._id, req.user.name, req.body.title, req.body.description, req.imageAspectRatio, req.file.key, (err, post) => {
 
                 if (err || !post) {
                     if (err)
@@ -160,7 +159,7 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.Internal)
                 }
 
-                Response.send(res)
+                Response.send(res, post)
             })
         }
     },

@@ -4,6 +4,7 @@ import rn from 'random-number'
 import sendGrid from '@sendgrid/mail'
 import AWS from 'aws-sdk'
 import * as Config from '../../config'
+import { Session } from '../models'
 
 const algorithm = 'aes-256-ctr'
 const password = 'd6F3Efeq'
@@ -80,4 +81,13 @@ export function deleteObjectsS3(key, cb) {
         }
     }, cb)
 
+}
+
+export const checkSessionByToken = (token, cb) => {
+    Session.getSessionByToken(query.token, (err, session) => {
+        if (err || !session)
+            return cb(false)
+
+        cb(true, session.toObject())
+    })
 }

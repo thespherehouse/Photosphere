@@ -17,7 +17,7 @@ router.put('/auth/logout', Middleware.secure(), Auth.Endpoint.logout())
 router.put('/auth/fcm', Middleware.secure(), Auth.Validator.fcm(), Auth.Endpoint.fcm())
 
 // Posts
-router.post('/posts', Middleware.secure(), Middleware.storage(), Posts.Validator.createPost(), Posts.Endpoint.createPost())
+router.post('/posts', Middleware.secure(), Middleware.storage('photo'), Posts.Validator.createPost(), Posts.Endpoint.createPost())
 router.post('/posts/:postId/comments', Middleware.secure(), Posts.Validator.createComment(), Posts.Endpoint.createComment())
 router.post('/posts/:postId/like', Middleware.secure(), Posts.Endpoint.likePost())
 

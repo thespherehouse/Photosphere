@@ -7,6 +7,7 @@ const schema = new mongoose.Schema({
     ownerName: { type: String, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
+    aspectRatio: { type: Number, required: true },
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
     createdAt: { type: Date, default: new Date() },
     updatedAt: { type: Date, default: new Date() },
@@ -36,12 +37,13 @@ const schema = new mongoose.Schema({
     }
 )
 
-schema.statics.createPost = function (userId, name, title, description, url, cb) {
+schema.statics.createPost = function (userId, name, title, description, aspectRatio, url, cb) {
     return this.create({
         owner: userId,
         ownerName: name,
         title,
         description,
+        aspectRatio,
         url
     }, cb)
 }

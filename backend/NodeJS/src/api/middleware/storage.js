@@ -14,13 +14,14 @@ AWS.config.update({
 
 const s3 = new AWS.S3()
 
-export default function () {
+export default (field) => {
 
     return (req, res, next) => {
         const id = uniqId()
         const userId = req.user._id
         const upload = multer({
             fileFilter: (req, file, cb) => {
+                console.log('Hello' + JSON.stringify(req.body))
                 let allow = true
 
                 // Dont allow if file is not PNG or JPEG
@@ -47,8 +48,13 @@ export default function () {
                         cb(null, `${userId}/${id}/${Config.Image.ORIG_NAME}`)
                     },
                     transform: (req, file, cb) => {
-                        cb(null, sharp().resize(Config.Image.MAX_SIZE, Config.Image.MAX_SIZE)
-                            .max().toFormat(Config.Image.ORIG_FORMAT))
+                        const sharpStream = sharp()
+                        const resizeStream = sharpStream.clone().resize(Config.Image.MAX_SIZE, Config.Image.MAX_SIZE).max().toFormat(Config.Image.ORIG_FORMAT)
+                        const metadataStream = sharpStream.clone().metadata().then((metadata) => {
+                            req.imageAspectRatio = metadata.width / metadata.height
+                        })
+
+                        cb(null, sharpStream)
                     }
                 }, {
                     id: 'thumbnail',
@@ -62,7 +68,7 @@ export default function () {
                 }]
             })
         })
-        upload.single('photo')(req, res, function (err) {
+        upload.single(field)(req, res, function (err) {
 
             if (err)
                 return Response.sendError(res, Errors.Incomplete)
