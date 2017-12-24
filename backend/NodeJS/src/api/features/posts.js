@@ -38,7 +38,7 @@ export const Validator = {
 
     getAllPosts() {
         return (req, res, next) => {
-            let skip = 0, limit = 10
+            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
 
             if (req.query.skip)
                 skip = Math.max(0, req.query.skip)
@@ -46,15 +46,35 @@ export const Validator = {
             if (req.query.limit)
                 limit = Math.min(Math.max(1, req.query.limit), 10)
 
+            let tempOrderBy = req.query.orderBy
+            let tempSortOrder = req.query.sortOrder
+
+            if (tempSortOrder === 'asc')
+                tempSortOrder = 1
+            else
+                tempSortOrder = -1
+
+            if (tempOrderBy === 'createdAt' || tempOrderBy === 'updateAt') {
+                // Custom created or updated date ordering. Only descending allowed as it is indexed so
+                orderBy = tempOrderBy
+                sortOrder = -1
+            } else if (tempOrderBy === 'likesCount' || tempOrderBy === 'commentsCount') {
+                // Custom, supports ascending and descending ordering
+                orderBy = tempOrderBy
+                sortOrder = tempSortOrder
+            }
+
             req.query.skip = skip
             req.query.limit = limit
+            req.query.orderBy = orderBy
+            req.query.sortOrder = sortOrder
             next()
         }
     },
 
     getAllPostsByUser() {
         return (req, res, next) => {
-            let skip = 0, limit = 10
+            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
 
             if (req.query.skip)
                 skip = Math.max(0, req.query.skip)
@@ -62,15 +82,35 @@ export const Validator = {
             if (req.query.limit)
                 limit = Math.min(Math.max(1, req.query.limit), 10)
 
+            let tempOrderBy = req.query.orderBy
+            let tempSortOrder = req.query.sortOrder
+
+            if (tempSortOrder === 'asc')
+                tempSortOrder = 1
+            else
+                tempSortOrder = -1
+
+            if (tempOrderBy === 'createdAt' || tempOrderBy === 'updateAt') {
+                // Custom created or updated date ordering. Only descending allowed as it is indexed so
+                orderBy = tempOrderBy
+                sortOrder = -1
+            } else if (tempOrderBy === 'likesCount' || tempOrderBy === 'commentsCount') {
+                // Custom, supports ascending and descending ordering
+                orderBy = tempOrderBy
+                sortOrder = tempSortOrder
+            }
+
             req.query.skip = skip
             req.query.limit = limit
+            req.query.orderBy = orderBy
+            req.query.sortOrder = sortOrder
             next()
         }
     },
 
     getMyPosts() {
         return (req, res, next) => {
-            let skip = 0, limit = 10
+            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
 
             if (req.query.skip)
                 skip = Math.max(0, req.query.skip)
@@ -78,8 +118,28 @@ export const Validator = {
             if (req.query.limit)
                 limit = Math.min(Math.max(1, req.query.limit), 10)
 
+            let tempOrderBy = req.query.orderBy
+            let tempSortOrder = req.query.sortOrder
+
+            if (tempSortOrder === 'asc')
+                tempSortOrder = 1
+            else
+                tempSortOrder = -1
+
+            if (tempOrderBy === 'createdAt' || tempOrderBy === 'updateAt') {
+                // Custom created or updated date ordering. Only descending allowed as it is indexed so
+                orderBy = tempOrderBy
+                sortOrder = -1
+            } else if (tempOrderBy === 'likesCount' || tempOrderBy === 'commentsCount') {
+                // Custom, supports ascending and descending ordering
+                orderBy = tempOrderBy
+                sortOrder = tempSortOrder
+            }
+
             req.query.skip = skip
             req.query.limit = limit
+            req.query.orderBy = orderBy
+            req.query.sortOrder = sortOrder
             next()
         }
     },
@@ -202,7 +262,7 @@ export const Endpoint = {
 
     getAllPosts() {
         return (req, res) => {
-            Post.getAllPosts(req.user._id, req.query.skip, req.query.limit, (err, posts) => {
+            Post.getAllPosts(req.user._id, req.query.skip, req.query.limit, req.query.orderBy, req.query.sortOrder, (err, posts) => {
 
                 if (err) {
                     console.log(err.message)
@@ -212,14 +272,14 @@ export const Endpoint = {
                 if (!posts)
                     return Response.sendError(res, Errors.NotFound)
 
-                Response.send(res, posts)
+                Response.sendArray(res, posts)
             })
         }
     },
 
     getAllPostsByUser() {
         return (req, res) => {
-            Post.getAllPostsByUser(req.user._id, req.query.userId, skip, limit, (err, posts) => {
+            Post.getAllPostsByUser(req.user._id, req.query.userId, req.query.skip, req.query.limit, req.query.orderBy, req.query.sortOrder, (err, posts) => {
 
                 if (err) {
                     console.log(err.message)
@@ -229,21 +289,21 @@ export const Endpoint = {
                 if (!posts)
                     return Response.sendError(res, Errors.NotFound)
 
-                Response.send(res, posts)
+                Response.sendArray(res, posts)
             })
         }
     },
 
     getMyPosts() {
         return (req, res) => {
-            Post.getAllPosts(req.user._id, req.query.skip, req.query.limit, (err, posts) => {
+            Post.getAllPosts(req.user._id, req.user._id, req.query.skip, req.query.limit, req.query.orderBy, req.query.sortOrder, (err, posts) => {
 
                 if (err) {
                     console.log(err.message)
                     return Response.sendError(res, Errors.Internal)
                 }
 
-                Response.send(res, posts)
+                Response.sendArray(res, posts)
             })
         }
     },

@@ -23,7 +23,7 @@ router.post('/posts/:postId/like', Middleware.secure(), Posts.Endpoint.likePost(
 
 router.get('/posts', Middleware.secure(), Posts.Validator.getAllPosts(), Posts.Endpoint.getAllPosts())
 router.get('/posts/profile', Middleware.secure(), Posts.Validator.getMyPosts(), Posts.Endpoint.getMyPosts())
-router.get('/posts/by/:userId', Middleware.secure(), Posts.Validator.getAllPostsByUser(), Posts.Endpoint.getAllPostsByUser())
+router.get('/posts/user/:userId', Middleware.secure(), Posts.Validator.getAllPostsByUser(), Posts.Endpoint.getAllPostsByUser())
 router.get('/posts/:postId', Middleware.secure(), Posts.Endpoint.getPost())
 router.get('/posts/:postId/likes', Middleware.secure(), Posts.Validator.getLikes(), Posts.Endpoint.getLikes())
 router.get('/posts/:postId/comments', Middleware.secure(), Posts.Validator.getComments(), Posts.Endpoint.getComments())

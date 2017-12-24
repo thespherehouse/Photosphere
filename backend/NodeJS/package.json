@@ -1,15 +1,14 @@
 {
-  "name": "storiesphere",
+  "name": "photosphere",
   "version": "0.0.1",
   "private": true,
-  "description": "Sharing of stories",
+  "description": "An Infinite Photo Timeline",
   "repository": {
     "type": "git",
-    "url": "https://suhelc@bitbucket.org/suhelc/storiesphere-backend.git"
+    "url": "https://github.com/thespherehouse/Photosphere"
   },
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d build",
     "watch": "nodemon app.js",
     "start": "babel src -d build && node build/app.js"

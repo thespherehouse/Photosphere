@@ -15,14 +15,14 @@ const schema = new mongoose.Schema({
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
         createdAt: { type: Date, default: new Date() }
     }],
-    likesCount: { type: Number, default: 0 },
+    likesCount: { type: Number, default: 0, index: true },
     comments: [{
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
         createdAt: { type: Date, default: new Date() },
         updatedAt: { type: Date, default: new Date() },
         comment: { type: String, required: true }
     }],
-    commentsCount: { type: Number, default: 0 }
+    commentsCount: { type: Number, default: 0, index: true }
 }, {
         toObject: {
             transform: function (doc, ret) {
@@ -37,6 +37,11 @@ const schema = new mongoose.Schema({
     }
 )
 
+schema.index({ createdAt: -1 })
+schema.index({ updatedAt: -1 })
+schema.index({ 'likes.createdAt': -1 })
+schema.index({ 'comments.createdAt': -1 })
+
 schema.statics.createPost = function (userId, name, title, description, aspectRatio, url, cb) {
     return this.create({
         owner: userId,
@@ -48,16 +53,19 @@ schema.statics.createPost = function (userId, name, title, description, aspectRa
     }, cb)
 }
 
-schema.statics.getAllPosts = function (userId, skip, limit, cb) {
+schema.statics.getAllPosts = function (userId, skip, limit, orderBy, sortOrder, cb) {
     return this.aggregate([
         {
-            '$skip': skip
+            $sort: { orderBy: sortOrder }
         },
         {
-            '$limit': limit
+            $skip: skip
         },
         {
-            '$project': {
+            $limit: limit
+        },
+        {
+            $project: {
                 owner: 1,
                 ownerName: 1,
                 title: 1,
@@ -79,7 +87,7 @@ schema.statics.getAllPosts = function (userId, skip, limit, cb) {
     ], cb)
 }
 
-schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit, cb) {
+schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit, orderBy, sortOrder, cb) {
     return this.aggregate([
         {
             $match: {
@@ -87,13 +95,16 @@ schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit
             }
         },
         {
-            '$skip': skip
+            $sort: { orderBy: sortOrder }
         },
         {
-            '$limit': limit
+            $skip: skip
         },
         {
-            '$project': {
+            $limit: limit
+        },
+        {
+            $project: {
                 owner: 1,
                 ownerName: 1,
                 title: 1,
@@ -115,21 +126,24 @@ schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit
     ], cb)
 }
 
-schema.statics.getAllPostsByUser = function (userId, targetUserId, skip, limit, cb) {
+schema.statics.getAllPostsByUser = function (userId, targetUserId, skip, limit, orderBy, sortOrder, cb) {
     return this.aggregate([
         {
             $match: {
-                _id: mongoose.Types.ObjectId(targetUserId)
+                owner: mongoose.Types.ObjectId(targetUserId)
             }
         },
         {
-            '$skip': skip
+            $sort: { orderBy: sortOrder }
         },
         {
-            '$limit': limit
+            $skip: skip
         },
         {
-            '$project': {
+            $limit: limit
+        },
+        {
+            $project: {
                 owner: 1,
                 ownerName: 1,
                 title: 1,
