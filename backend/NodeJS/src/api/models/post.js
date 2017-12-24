@@ -56,6 +56,7 @@ schema.statics.createPost = function (userId, name, title, description, aspectRa
 schema.statics.getAllPosts = function (userId, skip, limit, orderBy, sortOrder, cb) {
     let sorter = {}
     sorter[orderBy] = sortOrder
+    console.log(sorter)
     return this.aggregate([
         {
             $sort: sorter
