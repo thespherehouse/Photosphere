@@ -54,9 +54,11 @@ schema.statics.createPost = function (userId, name, title, description, aspectRa
 }
 
 schema.statics.getAllPosts = function (userId, skip, limit, orderBy, sortOrder, cb) {
+    let sorter = {}
+    sorter[orderBy] = sortOrder
     return this.aggregate([
         {
-            $sort: { orderBy: sortOrder }
+            $sort: sorter
         },
         {
             $skip: skip
@@ -88,6 +90,8 @@ schema.statics.getAllPosts = function (userId, skip, limit, orderBy, sortOrder, 
 }
 
 schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit, orderBy, sortOrder, cb) {
+    let sorter = {}
+    sorter[orderBy] = sortOrder
     return this.aggregate([
         {
             $match: {
@@ -95,7 +99,7 @@ schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit
             }
         },
         {
-            $sort: { orderBy: sortOrder }
+            $sort: sorter
         },
         {
             $skip: skip
@@ -127,6 +131,8 @@ schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit
 }
 
 schema.statics.getAllPostsByUser = function (userId, targetUserId, skip, limit, orderBy, sortOrder, cb) {
+    let sorter = {}
+    sorter[orderBy] = sortOrder
     return this.aggregate([
         {
             $match: {
@@ -134,7 +140,7 @@ schema.statics.getAllPostsByUser = function (userId, targetUserId, skip, limit, 
             }
         },
         {
-            $sort: { orderBy: sortOrder }
+            $sort: sorter
         },
         {
             $skip: skip

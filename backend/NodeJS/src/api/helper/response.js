@@ -16,29 +16,6 @@ export function send(res, data) {
 
 };
 
-export function sendArray(res, array) {
-
-    if (!res)
-        return;
-
-    let data
-
-    if (!array || typeof array !== 'array')
-        data = null;
-    else
-        data = {
-            count: array.length,
-            items: array
-        }
-
-    res.status(200)
-        .send({
-            error: Errors.None,
-            data
-        });
-
-};
-
 export function sendWithToken(res, token) {
 
     if (!res || !token)
