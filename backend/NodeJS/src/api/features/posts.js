@@ -74,7 +74,7 @@ export const Validator = {
 
     getAllPostsByUser() {
         return (req, res, next) => {
-            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = 1
+            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
 
             if (req.query.skip)
                 skip = Math.max(0, req.query.skip)
@@ -86,14 +86,14 @@ export const Validator = {
             let tempSortOrder = req.query.sortOrder
 
             if (tempSortOrder === 'asc')
-                tempSortOrder = -1
-            else
                 tempSortOrder = 1
+            else
+                tempSortOrder = -1
 
             if (tempOrderBy === 'createdAt' || tempOrderBy === 'updateAt') {
                 // Custom created or updated date ordering. Only descending allowed as it is indexed so
                 orderBy = tempOrderBy
-                sortOrder = 1
+                sortOrder = -1
             } else if (tempOrderBy === 'likesCount' || tempOrderBy === 'commentsCount') {
                 // Custom, supports ascending and descending ordering
                 orderBy = tempOrderBy
@@ -110,7 +110,7 @@ export const Validator = {
 
     getMyPosts() {
         return (req, res, next) => {
-            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = 1
+            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
 
             if (req.query.skip)
                 skip = Math.max(0, req.query.skip)
@@ -122,14 +122,14 @@ export const Validator = {
             let tempSortOrder = req.query.sortOrder
 
             if (tempSortOrder === 'asc')
-                tempSortOrder = -1
-            else
                 tempSortOrder = 1
+            else
+                tempSortOrder = -1
 
             if (tempOrderBy === 'createdAt' || tempOrderBy === 'updateAt') {
                 // Custom created or updated date ordering. Only descending allowed as it is indexed so
                 orderBy = tempOrderBy
-                sortOrder = 1
+                sortOrder = -1
             } else if (tempOrderBy === 'likesCount' || tempOrderBy === 'commentsCount') {
                 // Custom, supports ascending and descending ordering
                 orderBy = tempOrderBy
