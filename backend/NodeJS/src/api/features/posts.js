@@ -236,7 +236,7 @@ export const Endpoint = {
                 if (!post)
                     return Response.sendError(res, Errors.NotFound)
 
-                Response.send(res)
+                Response.send(res, post.comments[0])
 
             })
         }
@@ -343,7 +343,7 @@ export const Endpoint = {
 
     getComments() {
         return (req, res) => {
-            Post.getComments(req.params.postId, req.query.skip, req.query.skip, limit, (err, comments) => {
+            Post.getComments(req.params.postId, req.query.skip, req.query.limit, (err, comments) => {
 
                 if (err) {
                     console.log(err.message)

@@ -291,11 +291,19 @@ schema.statics.createComment = function (userId, postId, comment, cb) {
             _id: postId
         },
         {
-            $push: { comments: { user: userId, comment } },
+            $push: {
+                comments: {
+                    $each: [{ user: userId, comment }],
+                    $position: 0
+                }
+            },
             $inc: { commentsCount: 1 }
         },
         {
-            new: true
+            new: true,
+            fields: {
+                'comments': { $slice: 1 }
+            }
         },
         cb)
 }
