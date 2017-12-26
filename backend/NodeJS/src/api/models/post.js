@@ -9,17 +9,17 @@ const schema = new mongoose.Schema({
     description: { type: String, required: true },
     aspectRatio: { type: Number, required: true },
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
-    createdAt: { type: Date, default: new Date() },
-    updatedAt: { type: Date, default: new Date() },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
     likes: [{
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-        createdAt: { type: Date, default: new Date() }
+        createdAt: { type: Date, default: Date.now }
     }],
     likesCount: { type: Number, default: 0, index: true },
     comments: [{
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-        createdAt: { type: Date, default: new Date() },
-        updatedAt: { type: Date, default: new Date() },
+        createdAt: { type: Date, default: Date.now },
+        updatedAt: { type: Date, default: Date.now },
         comment: { type: String, required: true }
     }],
     commentsCount: { type: Number, default: 0, index: true }

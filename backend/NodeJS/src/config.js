@@ -7,8 +7,8 @@ const AWS_REGION = process.env.AWS_REGION
 
 const Image = {
     BUCKET: 'thespherehouse',
-    MAX_SIZE: 4000,
-    THUMB_SIZE: 600,
+    MAX_SIZE: 6000,
+    THUMB_SIZE: 800,
     ORIG_FORMAT: 'jpeg',
     THUMB_FORMAT: 'jpeg',
     ORIG_NAME: 'original.jpg',
