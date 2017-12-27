@@ -1,9 +1,0 @@
-#Automatically generated header file. Editing this file may cause problems.
-#Mon Jan 30 23:32:37 IST 2017
-serverVersion=2.5.9
-dexState=NO_CHANGE
-package=com.suhel.photosphere
-version=2
-serverVersionCode=70
-dexManagerName=ExtractFromApkDexManager
-appTheme=@style/AppTheme

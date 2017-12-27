@@ -2,33 +2,31 @@
 <resources>
 
     <attr name="fontType" format="enum">
-
-        <enum name="sansLight" value="0" />
-        <enum name="sansRegular" value="1" />
-        <enum name="sansMedium" value="2" />
-        <enum name="sansBold" value="3" />
-        <enum name="sansAltLight" value="4" />
-        <enum name="sansAltRegular" value="5" />
-        <enum name="sansAltBold" value="6" />
-
+        <enum name="light" value="0" />
+        <enum name="regular" value="1" />
+        <enum name="medium" value="2" />
+        <enum name="bold" value="3" />
     </attr>
 
-    <declare-styleable name="UITextView">
+    <declare-styleable name="SimpleTextView">
         <attr name="fontType" />
     </declare-styleable>
 
-    <declare-styleable name="UIButton">
+    <declare-styleable name="SimpleEditText">
         <attr name="fontType" />
     </declare-styleable>
 
-    <declare-styleable name="UIEditText">
+    <declare-styleable name="SimpleButton">
         <attr name="fontType" />
     </declare-styleable>
 
-    <declare-styleable name="UIProgressBar">
-        <attr name="max" format="float" />
-        <attr name="progress" format="float" />
-        <attr name="progressColor" format="color" />
+    <declare-styleable name="ShadowLayout">
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="colorInner" format="color" />
+        <attr name="colorShadow" format="color" />
+        <attr name="shadowSpread" format="dimension" />
+        <attr name="shadowDX" format="dimension" />
+        <attr name="shadowDY" format="dimension" />
     </declare-styleable>
 
 </resources>

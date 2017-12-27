@@ -1,14 +1,3 @@
 <resources>
-
-    <string name="app_name">Photosphere BETA</string>
-
-    <string name="placeholder_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae augue finibus nisl aliquam blandit. Donec et commodo nunc. Aliquam a efficitur neque. Mauris consequat eros vel libero laoreet, auctor molestie purus auctor. Phasellus eget mi lacinia dolor tincidunt rutrum. Curabitur condimentum sem in lorem varius ultrices a a elit. Phasellus convallis massa sed tincidunt eleifend. Nulla malesuada quam non facilisis aliquam. Nullam ornare odio dictum porttitor ornare. Ut pellentesque justo quis nunc efficitur, eget tristique nunc convallis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque libero lectus, mattis nec varius a, feugiat nec lectus. Praesent pulvinar vehicula ex vitae tincidunt.</string>
-
-    <string name="google_web_client_id">633642362311-n4gt2hhfr70m4u5stoth9cd20ul1b0qp.apps.googleusercontent.com</string>
-
-    <string name="facebook_app_id">1121872957908057</string>
-
-    <string name="fb_login_protocol_scheme">fb1121872957908057</string>
-
-
+    <string name="app_name">Photosphere</string>
 </resources>

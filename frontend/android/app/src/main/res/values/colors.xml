@@ -1,45 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/mainTheme</color>
-    <color name="colorPrimaryDark">@color/mainTheme</color>
-    <color name="colorAccent">@color/mainTheme</color>
+    <color name="colorPrimary">@color/colorWhite</color>
+    <color name="colorPrimaryDark">@color/colorTransparent</color>
+    <color name="colorAccent">@color/colorBlue</color>
 
-    <color name="mainTheme">#212d33</color>
-    <color name="theLighterShade">#FFF6F6F6</color>
-    <color name="theLightShade">#FFFFFFFF</color>
-    <color name="theMediumShade">#FFABABAB</color>
-    <color name="theDarkerShade">#FF777777</color>
-    <color name="theEvenDarkerShade">#FF333333</color>
-    <color name="theDarkShade">#FF000000</color>
-    <color name="theRedShade">#d15a58</color>
-    <color name="theGreenShade">#9bd285</color>
-    <color name="theTranslucentLightShade">#55FFFFFF</color>
-    <color name="theTranslucentDarkShade">#55000000</color>
-    <color name="theVeryLightGray">#FFF5F5F5</color>
+    <!--Colors-->
+    <color name="colorRed">#FF5A29</color>
+    <color name="colorGreen">#68D39F</color>
+    <color name="colorBlue">#2196F3</color>
 
-    <color name="theMilkyTurbidColor">#AAFFFFFF</color>
+    <!--Grayscale-->
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorLight">#EFEFEF</color>
+    <color name="colorMedium">#BEBEBE</color>
+    <color name="colorDark">#333333</color>
+    <color name="colorBlack">#000000</color>
 
-    <color name="theTitleColor">@color/theLightShade</color>
+    <!--Semi-Transparent-->
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorOverlayLight">#55FFFFFF</color>
+    <color name="colorOverlayDark">#33000000</color>
+    <color name="colorShadow">#33000000</color>
 
-    <color name="colorThemeCore">#f5f5f5</color>
-    <color name="colorThemeSecondary">#cccccc</color>
-    <color name="colorThemeAlternate">#205b71</color>
-
-    <color name="colorFacebookButton">#3B5998</color>
-
-    <color name="colorSoberRed">#E38888</color>
-    <color name="colorSoberGreen">#A0E388</color>
-    <color name="colorSoberBlue">#5682BF</color>
-
-    <color name="colorGoogleRed">#b73d3d</color>
-    <color name="colorFacebookBlue">#3a6fb9</color>
-    <color name="colorFabBlue">#B79AAB</color>
-    <color name="colorPleasantDark">#434343</color>
-    <color name="colorBrightLight">#FFFFFF</color>
-    <color name="colorJetBlack">#000000</color>
-    <color name="colorInvisibileGrey">#FAFAFA</color>
-    <color name="colorSubtleHint">#DEDEDE</color>
-
-    <color name="colorLoveRed">#D75A4A</color>
+    <!--UI Elements-->
+    <color name="colorTitle">@color/colorDark</color>
+    <color name="colorContent">@color/colorDark</color>
+    <color name="colorDateTime">@color/colorMedium</color>
+    <color name="colorUser">@color/colorGreen</color>
+    <color name="colorUnselected">@color/colorDark</color>
+    <color name="colorSelected">@color/colorAccent</color>
 
 </resources>

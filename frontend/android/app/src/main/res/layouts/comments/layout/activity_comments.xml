@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorLight"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="@color/colorWhite"
+                android:fitsSystemWindows="true">
+
+                <com.suhel.photosphere.custom.view.SimpleTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Discussion"
+                    android:textColor="@color/colorDark"
+                    android:textSize="32dp"
+                    app:fontType="bold" />
+
+            </LinearLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <com.suhel.photosphere.custom.view.SimpleTextView
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:gravity="center"
+            android:text="Be the first one to say something!"
+            android:textColor="@color/colorMedium"
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstComments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="48dp"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+            <com.suhel.photosphere.custom.view.SimpleEditText
+                android:id="@+id/txtComment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_comment"
+                android:hint="Say something"
+                android:inputType="textCapSentences|textMultiLine|textNoSuggestions"
+                android:maxLines="4"
+                android:paddingBottom="4dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/colorDark"
+                android:textColorHint="@color/colorMedium"
+                android:textSize="14dp" />
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:animateLayoutChanges="true">
+
+                <ProgressBar
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indeterminate="true"
+                    android:indeterminateOnly="true"
+                    android:indeterminateTint="@color/colorDark"
+                    android:padding="8dp"
+                    android:visibility="gone" />
+
+                <ImageButton
+                    android:id="@+id/btnSend"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_write"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_write" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="48dp"
+            android:background="@color/colorMedium" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorBottomNavBackground">@color/colorWhite</color>
+    <color name="colorCardBackground">@color/colorWhite</color>
+    <color name="colorMenuUnselected">@color/colorMedium</color>
+    <color name="colorMenuSelected">@color/colorAccent</color>
+
+    <color name="colorDivider">@color/colorLight</color>
+
+</resources>

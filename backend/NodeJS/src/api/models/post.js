@@ -40,7 +40,8 @@ const schema = new mongoose.Schema({
 schema.index({ createdAt: -1 })
 schema.index({ updatedAt: -1 })
 schema.index({ 'likes.createdAt': -1 })
-schema.index({ 'comments.createdAt': -1 })
+schema.index({ 'comments.createdAt': 1 })
+schema.index({ 'comments.updatedAt': 1 })
 
 schema.statics.createPost = function (userId, name, title, description, aspectRatio, url, cb) {
     return this.create({
@@ -314,6 +315,7 @@ schema.statics.getComments = function (postId, skip, limit, cb) {
         {
             'comments': { $slice: [skip, limit] }
         })
+        .sort('updatedAt')
         .populate('comments.user', 'name')
         .exec(function (err, post) {
 

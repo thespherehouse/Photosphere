@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_post"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLight"
+            app:actualImageScaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.suhel.photosphere.custom.view.SimpleTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:maxLines="3"
+                android:text="Beautiful"
+                android:textColor="@color/colorDark"
+                android:textSize="32dp"
+                app:fontType="bold" />
+
+            <com.suhel.photosphere.custom.view.SimpleTextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:text="5 hours ago"
+                android:textAllCaps="true"
+                android:textColor="@color/colorMedium"
+                android:textSize="10dp" />
+
+            <com.suhel.photosphere.custom.view.SimpleTextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:maxLines="5"
+                android:textColor="@color/colorDark"
+                android:textSize="14dp"
+                app:fontType="regular" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorLight" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.suhel.photosphere.custom.view.SimpleTextView
+                    android:id="@+id/btnOwner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_post_sub_item"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|start"
+                    android:maxLines="1"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
+                    android:text="Suhel Chakraborty"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="12dp"
+                    app:fontType="medium" />
+
+                <com.suhel.photosphere.custom.view.SimpleTextView
+                    android:id="@+id/tvCommentsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_post_sub_item"
+                    android:gravity="center"
+                    android:paddingEnd="2dp"
+                    android:paddingStart="8dp"
+                    android:text="24"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorDark"
+                    android:textSize="12dp"
+                    app:fontType="bold" />
+
+                <com.suhel.photosphere.custom.view.SimpleTextView
+                    android:id="@+id/btnCommentLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_post_sub_item"
+                    android:gravity="center"
+                    android:paddingEnd="6dp"
+                    android:paddingStart="2dp"
+                    android:text="comments"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorMedium"
+                    android:textSize="12dp"
+                    app:fontType="regular" />
+
+                <com.suhel.photosphere.custom.view.SimpleTextView
+                    android:id="@+id/tvLikesCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_post_sub_item"
+                    android:gravity="center"
+                    android:paddingEnd="2dp"
+                    android:paddingStart="6dp"
+                    android:text="24"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorDark"
+                    android:textSize="12dp"
+                    app:fontType="bold" />
+
+                <com.suhel.photosphere.custom.view.SimpleTextView
+                    android:id="@+id/btnLikeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_post_sub_item"
+                    android:gravity="center"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="2dp"
+                    android:text="likes"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorMedium"
+                    android:textSize="12dp"
+                    app:fontType="regular" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

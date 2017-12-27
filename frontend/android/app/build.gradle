@@ -1,18 +1,13 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.suhel.photosphere"
         minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 14
-        versionName "1.2.2"
-
-        multiDexEnabled true
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
     }
     buildTypes {
         release {
@@ -21,52 +16,87 @@ android {
         }
     }
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/base',
+                            'src/main/res/layouts/login',
+                            'src/main/res/layouts/home',
+                            'src/main/res/layouts/comments',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+    dataBinding {
+        enabled true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
-def support = '26.+'
-def constraint = '1.0.2'
-def play = '11.0.0'
-def facebook = '4.26.0'
-def fresco = '1.5.0'
-def frescoImageViewer = '0.5.0'
-def rebound = '0.3.8'
-def fab = '1.6.4'
+def support_ver = "27.0.2"
+def bouncy_list_ver = "0.1.1"
+def http_client_ver = "3.9.1"
+def rest_client_ver = "2.3.0"
+def dep_inj_ver = "2.13"
+def image_loader_ver = "4.4.0"
+def panning_view_ver = "1.0.7"
+def reactivex_ver = "2.1.7"
+def reactivex_android_ver = "2.0.1"
+def image_picker_ver = "2.0.4"
+def image_management_ver = "1.5.0"
+def facebook_ver = "[4,5)"
+def date_time_utils_ver = "2.9.9.1"
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    // Android Support
+    implementation "com.android.support:appcompat-v7:${support_ver}"
+    implementation "com.android.support:recyclerview-v7:${support_ver}"
+    implementation "com.android.support:cardview-v7:${support_ver}"
+    implementation "com.android.support:design:${support_ver}"
 
-    // Android support
-    compile "com.android.support:design:${support}"
-    compile "com.android.support:appcompat-v7:${support}"
-    compile "com.android.support:recyclerview-v7:${support}"
-    compile "com.android.support:palette-v7:${support}"
-    compile "com.android.support.constraint:constraint-layout:${constraint}"
+    // Bouncy list
+    implementation "com.chauthai.overscroll:overscroll-bouncy:${bouncy_list_ver}"
 
-    // Firebase
-    compile "com.google.firebase:firebase-auth:${play}"
-    compile "com.google.firebase:firebase-core:${play}"
-    compile "com.google.firebase:firebase-storage:${play}"
-    compile "com.google.firebase:firebase-database:${play}"
-    compile "com.google.android.gms:play-services-auth:${play}"
+    // HTTP Client
+    implementation "com.squareup.okhttp3:okhttp:${http_client_ver}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${http_client_ver}"
+
+    // REST Client
+    implementation "com.squareup.retrofit2:retrofit:${rest_client_ver}"
+    implementation "com.squareup.retrofit2:converter-gson:${rest_client_ver}"
+    implementation "com.squareup.retrofit2:converter-scalars:${rest_client_ver}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rest_client_ver}"
+
+    // Dependency Injection
+    implementation "com.google.dagger:dagger:${dep_inj_ver}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${dep_inj_ver}"
+
+    // HTTP Image Loader
+    implementation "com.github.bumptech.glide:glide:${image_loader_ver}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${image_loader_ver}"
+
+    // Panning View
+    implementation "com.flaviofaria:kenburnsview:${panning_view_ver}"
+
+    // ReactiveX
+    implementation "io.reactivex.rxjava2:rxjava:${reactivex_ver}"
+    implementation "io.reactivex.rxjava2:rxandroid:${reactivex_android_ver}"
+
+    // Image Picker
+    implementation "com.github.jkwiecien:EasyImage:${image_picker_ver}"
+
+    // Image Management
+    implementation "com.facebook.fresco:fresco:${image_management_ver}"
 
     // Facebook
-    compile "com.facebook.android:facebook-android-sdk:${facebook}"
+    implementation "com.facebook.android:facebook-android-sdk:${facebook_ver}"
 
-    // Fresco - Image loading
-    compile "com.facebook.fresco:fresco:${fresco}"
-    compile "com.github.stfalcon:frescoimageviewer:${frescoImageViewer}"
-
-    // Rebound - Animation
-    compile "com.facebook.rebound:rebound:${rebound}"
-    compile "com.github.clans:fab:${fab}"
+    // Date Time Utils
+    implementation "net.danlew:android.joda:${date_time_utils_ver}"
 }
-repositories {
-    mavenCentral()
-}
-
-apply plugin: 'com.google.gms.google-services'

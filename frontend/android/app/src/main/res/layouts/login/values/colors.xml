@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorFacebook">@color/colorBlue</color>
+    <color name="colorGoogle">@color/colorRed</color>
+
+    <color name="colorFacebookOverlay">@color/colorOverlayLight</color>
+    <color name="colorGoogleOverlay">@color/colorOverlayLight</color>
+
+</resources>
