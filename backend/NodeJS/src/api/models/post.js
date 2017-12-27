@@ -304,8 +304,9 @@ schema.statics.createComment = function (userId, postId, comment, cb) {
             fields: {
                 'comments': { $slice: 1 }
             }
-        },
-        cb)
+        })
+        .populate('comments.user', 'name')
+        .exec(cb)
 }
 
 schema.statics.getComments = function (postId, skip, limit, cb) {
