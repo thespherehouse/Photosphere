@@ -1,0 +1,481 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		68C928F61FF3723B009BAAFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C928E61FF3723A009BAAFA /* AppDelegate.swift */; };
+		68C928F71FF3723B009BAAFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C928EB1FF3723A009BAAFA /* Assets.xcassets */; };
+		68C928F81FF3723B009BAAFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C928F01FF3723A009BAAFA /* Main.storyboard */; };
+		68C928F91FF3723B009BAAFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C928F21FF3723A009BAAFA /* LaunchScreen.storyboard */; };
+		737ED7E152FDB6DB8CFC04AF /* Pods_Photosphere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D709BAB90E66DB1AB1CD5A35 /* Pods_Photosphere.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		68C928D01FF3710C009BAAFA /* Photosphere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photosphere.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68C928E61FF3723A009BAAFA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		68C928EB1FF3723A009BAAFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		68C928F01FF3723A009BAAFA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		68C928F21FF3723A009BAAFA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		68C928F51FF3723B009BAAFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76690B620A6E438F595CE25B /* Pods-Photosphere.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photosphere.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photosphere/Pods-Photosphere.release.xcconfig"; sourceTree = "<group>"; };
+		9ED5BA58A9FCEFE2FF5FA3A8 /* Pods-Photosphere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photosphere.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Photosphere/Pods-Photosphere.debug.xcconfig"; sourceTree = "<group>"; };
+		D709BAB90E66DB1AB1CD5A35 /* Pods_Photosphere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photosphere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		68C928CD1FF3710C009BAAFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				737ED7E152FDB6DB8CFC04AF /* Pods_Photosphere.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		68C928C71FF3710C009BAAFA = {
+			isa = PBXGroup;
+			children = (
+				68C928D21FF3710C009BAAFA /* Photosphere */,
+				68C928D11FF3710C009BAAFA /* Products */,
+				81076BEA6EAF0D3ABB531169 /* Pods */,
+				D425DE8D5C45ACFEDB8E7FFF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		68C928D11FF3710C009BAAFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68C928D01FF3710C009BAAFA /* Photosphere.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		68C928D21FF3710C009BAAFA /* Photosphere */ = {
+			isa = PBXGroup;
+			children = (
+				68C928E51FF3723A009BAAFA /* AppDelegates */,
+				68C928EC1FF3723A009BAAFA /* Constants */,
+				68C928F31FF3723B009BAAFA /* Controllers */,
+				68C928E71FF3723A009BAAFA /* Models */,
+				68C928E91FF3723A009BAAFA /* Resources */,
+				68C928E81FF3723A009BAAFA /* Services */,
+				68C928F41FF3723B009BAAFA /* SupportingFiles */,
+				68C928ED1FF3723A009BAAFA /* ThirdParty */,
+				68C928EE1FF3723A009BAAFA /* UI */,
+			);
+			path = Photosphere;
+			sourceTree = "<group>";
+		};
+		68C928E51FF3723A009BAAFA /* AppDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				68C928E61FF3723A009BAAFA /* AppDelegate.swift */,
+			);
+			path = AppDelegates;
+			sourceTree = "<group>";
+		};
+		68C928E71FF3723A009BAAFA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		68C928E81FF3723A009BAAFA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		68C928E91FF3723A009BAAFA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				68C928EA1FF3723A009BAAFA /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		68C928EA1FF3723A009BAAFA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				68C928EB1FF3723A009BAAFA /* Assets.xcassets */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		68C928EC1FF3723A009BAAFA /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		68C928ED1FF3723A009BAAFA /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		68C928EE1FF3723A009BAAFA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				68C928EF1FF3723A009BAAFA /* Storyboards */,
+				68C928F11FF3723A009BAAFA /* LaunchScreens */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		68C928EF1FF3723A009BAAFA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				68C928F01FF3723A009BAAFA /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		68C928F11FF3723A009BAAFA /* LaunchScreens */ = {
+			isa = PBXGroup;
+			children = (
+				68C928F21FF3723A009BAAFA /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreens;
+			sourceTree = "<group>";
+		};
+		68C928F31FF3723B009BAAFA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		68C928F41FF3723B009BAAFA /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				68C928F51FF3723B009BAAFA /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		81076BEA6EAF0D3ABB531169 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9ED5BA58A9FCEFE2FF5FA3A8 /* Pods-Photosphere.debug.xcconfig */,
+				76690B620A6E438F595CE25B /* Pods-Photosphere.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D425DE8D5C45ACFEDB8E7FFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D709BAB90E66DB1AB1CD5A35 /* Pods_Photosphere.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		68C928CF1FF3710C009BAAFA /* Photosphere */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68C928E21FF3710C009BAAFA /* Build configuration list for PBXNativeTarget "Photosphere" */;
+			buildPhases = (
+				6092419C694E9D99AEE0C8AB /* [CP] Check Pods Manifest.lock */,
+				68C928CC1FF3710C009BAAFA /* Sources */,
+				68C928CD1FF3710C009BAAFA /* Frameworks */,
+				68C928CE1FF3710C009BAAFA /* Resources */,
+				3A532AF581C9C94C963DFEB0 /* [CP] Embed Pods Frameworks */,
+				A274D31004A28D15F87A120A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Photosphere;
+			productName = Photosphere;
+			productReference = 68C928D01FF3710C009BAAFA /* Photosphere.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		68C928C81FF3710C009BAAFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = TheSphereHouse;
+				TargetAttributes = {
+					68C928CF1FF3710C009BAAFA = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 68C928CB1FF3710C009BAAFA /* Build configuration list for PBXProject "Photosphere" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 68C928C71FF3710C009BAAFA;
+			productRefGroup = 68C928D11FF3710C009BAAFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				68C928CF1FF3710C009BAAFA /* Photosphere */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		68C928CE1FF3710C009BAAFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C928F91FF3723B009BAAFA /* LaunchScreen.storyboard in Resources */,
+				68C928F71FF3723B009BAAFA /* Assets.xcassets in Resources */,
+				68C928F81FF3723B009BAAFA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A532AF581C9C94C963DFEB0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Photosphere/Pods-Photosphere-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Photosphere/Pods-Photosphere-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6092419C694E9D99AEE0C8AB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Photosphere-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A274D31004A28D15F87A120A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Photosphere/Pods-Photosphere-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		68C928CC1FF3710C009BAAFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C928F61FF3723B009BAAFA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		68C928E01FF3710C009BAAFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		68C928E11FF3710C009BAAFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		68C928E31FF3710C009BAAFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9ED5BA58A9FCEFE2FF5FA3A8 /* Pods-Photosphere.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "$(SRCROOT)/Photosphere/SupportingFiles/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spherehouse.Photosphere;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68C928E41FF3710C009BAAFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76690B620A6E438F595CE25B /* Pods-Photosphere.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "$(SRCROOT)/Photosphere/SupportingFiles/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spherehouse.Photosphere;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68C928CB1FF3710C009BAAFA /* Build configuration list for PBXProject "Photosphere" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C928E01FF3710C009BAAFA /* Debug */,
+				68C928E11FF3710C009BAAFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68C928E21FF3710C009BAAFA /* Build configuration list for PBXNativeTarget "Photosphere" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C928E31FF3710C009BAAFA /* Debug */,
+				68C928E41FF3710C009BAAFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 68C928C81FF3710C009BAAFA /* Project object */;
+}
