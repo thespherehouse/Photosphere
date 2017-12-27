@@ -1,0 +1,6 @@
+framework module Pods_Photosphere {
+  umbrella header "Pods-Photosphere-umbrella.h"
+
+  export *
+  module * { export * }
+}
