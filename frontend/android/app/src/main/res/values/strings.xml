@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Photosphere</string>
+
+    <string name="transition_name_photo">photo</string>
+
 </resources>

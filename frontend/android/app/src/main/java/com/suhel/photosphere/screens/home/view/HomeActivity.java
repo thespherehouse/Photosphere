@@ -1,5 +1,6 @@
 package com.suhel.photosphere.screens.home.view;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -51,34 +52,35 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresente
         adapter.setOnClickListener(new PostsAdapter.OnClickListener() {
 
             @Override
-            public void onOwnerClick(int position) {
+            public void onOwnerClick(PostsAdapter.PostViewHolder viewHolder, int position) {
 
             }
 
             @Override
-            public void onLikeClick(int position) {
+            public void onLikeClick(PostsAdapter.PostViewHolder viewHolder, int position) {
                 Post post = adapter.getItem(position);
                 presenter.likePost(post);
                 adapter.setOwnLike(post);
             }
 
             @Override
-            public void onUnlikeClick(int position) {
+            public void onUnlikeClick(PostsAdapter.PostViewHolder viewHolder, int position) {
                 Post post = adapter.getItem(position);
                 presenter.unlikePost(post);
                 adapter.removeOwnLike(post);
             }
 
             @Override
-            public void onCommentClick(int position) {
+            public void onCommentClick(PostsAdapter.PostViewHolder viewHolder, int position) {
                 Post post = adapter.getItem(position);
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this, viewHolder.binding.image, getString(R.string.transition_name_photo));
                 Intent commentActivityIntent = new Intent(HomeActivity.this, CommentsActivity.class);
                 commentActivityIntent.putExtra(Constants.Intent.Post, post);
                 startActivity(commentActivityIntent);
             }
 
             @Override
-            public void onPostClick(int position) {
+            public void onPostClick(PostsAdapter.PostViewHolder viewHolder, int position) {
 
             }
 

@@ -93,15 +93,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
 
     public interface OnClickListener {
 
-        void onOwnerClick(int position);
+        void onOwnerClick(PostViewHolder viewHolder, int position);
 
-        void onLikeClick(int position);
+        void onLikeClick(PostViewHolder viewHolder, int position);
 
-        void onUnlikeClick(int position);
+        void onUnlikeClick(PostViewHolder viewHolder, int position);
 
-        void onCommentClick(int position);
+        void onCommentClick(PostViewHolder viewHolder, int position);
 
-        void onPostClick(int position);
+        void onPostClick(PostViewHolder viewHolder, int position);
 
     }
 
@@ -114,8 +114,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
             this.binding = binding;
             binding.getRoot().setOnClickListener(this);
             binding.btnOwner.setOnClickListener(this);
-            binding.btnLikeLabel.setOnClickListener(this);
-            binding.btnCommentLabel.setOnClickListener(this);
+            binding.btnLike.setOnClickListener(this);
+            binding.btnComment.setOnClickListener(this);
             binding.image.getHierarchy().setProgressBarImage(new SimpleProgressBarDrawable(Color.BLACK, 40, 3));
         }
 
@@ -139,12 +139,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
             binding.btnOwner.setText(post.getOwnerName());
 
             binding.tvCommentsCount.setText(String.valueOf(post.getCommentsCount()));
-            binding.btnCommentLabel.setTextColor(post.isCommentedByMe() ? 0xFF2196F3 : 0xFFBEBEBE);
-            binding.btnCommentLabel.setText(LanguageUtils.plural("comment", post.getCommentsCount()));
+            binding.tvCommentLabel.setText(LanguageUtils.plural("comment", post.getCommentsCount()));
+            binding.icIsCommented.setVisibility(post.isCommentedByMe() ? View.VISIBLE : View.GONE);
 
             binding.tvLikesCount.setText(String.valueOf(post.getLikesCount()));
-            binding.btnLikeLabel.setTextColor(post.isLikedByMe() ? 0xFF2196F3 : 0xFFBEBEBE);
-            binding.btnLikeLabel.setText(LanguageUtils.plural("like", post.getLikesCount()));
+            binding.tvLikeLabel.setText(LanguageUtils.plural("like", post.getLikesCount()));
+            binding.icIsLiked.setVisibility(post.isLikedByMe() ? View.VISIBLE : View.GONE);
         }
 
         @Override
@@ -154,29 +154,29 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
                 case R.id.btnOwner:
 
                     if (onClickListener != null)
-                        onClickListener.onOwnerClick(getAdapterPosition());
+                        onClickListener.onOwnerClick(this, getAdapterPosition());
                     break;
 
-                case R.id.btnLikeLabel:
+                case R.id.btnLike:
 
                     if (onClickListener != null) {
                         if (posts.get(getAdapterPosition()).isLikedByMe())
-                            onClickListener.onUnlikeClick(getAdapterPosition());
+                            onClickListener.onUnlikeClick(this, getAdapterPosition());
                         else
-                            onClickListener.onLikeClick(getAdapterPosition());
+                            onClickListener.onLikeClick(this, getAdapterPosition());
                     }
                     break;
 
-                case R.id.btnCommentLabel:
+                case R.id.btnComment:
 
                     if (onClickListener != null)
-                        onClickListener.onCommentClick(getAdapterPosition());
+                        onClickListener.onCommentClick(this, getAdapterPosition());
                     break;
 
                 default:
 
                     if (onClickListener != null)
-                        onClickListener.onPostClick(getAdapterPosition());
+                        onClickListener.onPostClick(this, getAdapterPosition());
                     break;
 
             }

@@ -2,57 +2,61 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorCommentBackground"
-        android:orientation="vertical">
+        android:layout_margin="4dp"
+        app:cardBackgroundColor="@color/colorCommentBackground"
+        app:cardElevation="2dp"
+        app:contentPadding="16dp">
 
-        <com.suhel.photosphere.custom.view.SimpleTextView
-            android:id="@+id/tvOwnerName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:text="Soham Ray"
-            android:textAllCaps="true"
-            android:textColor="@color/colorDark"
-            android:textSize="12dp"
-            app:fontType="medium" />
+            android:orientation="vertical">
 
-        <com.suhel.photosphere.custom.view.SimpleTextView
-            android:id="@+id/tvComment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Hello everyone"
-            android:textColor="@color/colorDark"
-            android:textSize="12dp" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <com.suhel.photosphere.custom.view.SimpleTextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
-            android:text="A day ago"
-            android:textAllCaps="true"
-            android:textColor="@color/colorMedium"
-            android:textSize="8dp"
-            app:fontType="medium" />
+                <com.suhel.photosphere.custom.view.SimpleTextView
+                    android:id="@+id/tvOwnerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:text="Soham Ray"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="12dp"
+                    app:fontType="medium" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorCommentSeparator" />
+                <com.suhel.photosphere.custom.view.SimpleTextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:text="A day ago"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorMedium"
+                    android:textSize="10dp"
+                    app:fontType="medium" />
 
-    </LinearLayout>
+            </FrameLayout>
+
+            <com.suhel.photosphere.custom.view.SimpleTextView
+                android:id="@+id/tvComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Hello everyone"
+                android:textColor="@color/colorDark"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </layout>

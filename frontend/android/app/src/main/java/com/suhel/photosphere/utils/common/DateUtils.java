@@ -17,37 +17,37 @@ public class DateUtils {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime then = LocalDateTime.fromDateFields(date);
 
-        int difference = Seconds.secondsBetween(then, now).getSeconds();
+        int difference = Math.abs(Seconds.secondsBetween(then, now).getSeconds());
         if (difference < 10)
             return "Just now";
         if (difference < 60)
             return String.format(Locale.getDefault(), "%d seconds ago", difference);
 
-        difference = Minutes.minutesBetween(then, now).getMinutes();
+        difference = Math.abs(Minutes.minutesBetween(then, now).getMinutes());
         if (difference == 1)
             return "A minute ago";
         if (difference < 60)
             return String.format(Locale.getDefault(), "%d minutes ago", difference);
 
-        difference = Hours.hoursBetween(then, now).getHours();
+        difference = Math.abs(Hours.hoursBetween(then, now).getHours());
         if (difference == 1)
             return "An hour ago";
         if (difference < 24)
             return String.format(Locale.getDefault(), "%d hours ago", difference);
 
-        difference = Days.daysBetween(then, now).getDays();
+        difference = Math.abs(Days.daysBetween(then, now).getDays());
         if (difference == 1)
             return "A day ago";
         if (difference < 30)
             return String.format(Locale.getDefault(), "%d days ago", difference);
 
-        difference = Months.monthsBetween(then, now).getMonths();
+        difference = Math.abs(Months.monthsBetween(then, now).getMonths());
         if (difference == 1)
             return "A month ago";
         if (difference < 12)
             return String.format(Locale.getDefault(), "%d months ago", difference);
 
-        difference = Years.yearsBetween(then, now).getYears();
+        difference = Math.abs(Years.yearsBetween(then, now).getYears());
         if (difference == 1)
             return "A year ago";
         return String.format(Locale.getDefault(), "%d years ago", difference);

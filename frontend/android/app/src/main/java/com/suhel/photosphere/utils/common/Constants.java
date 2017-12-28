@@ -9,7 +9,7 @@ public interface Constants {
 
     interface Network {
 
-        String REST_URL = "http://ec2-34-213-102-251.us-west-2.compute.amazonaws.com/photosphere/";
+        String REST_URL = "http://www.thespherehouse.xyz/photosphere/";
         String STORAGE_URL = "https://s3-us-west-2.amazonaws.com";
 
     }
