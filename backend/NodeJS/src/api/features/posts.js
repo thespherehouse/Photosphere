@@ -36,7 +36,7 @@ export const Validator = {
         }
     },
 
-    getAllPosts() {
+    sorter() {
         return (req, res, next) => {
             let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
 
@@ -64,111 +64,21 @@ export const Validator = {
                 sortOrder = tempSortOrder
             }
 
-            req.query.skip = skip
-            req.query.limit = limit
             req.query.orderBy = orderBy
             req.query.sortOrder = sortOrder
             next()
         }
     },
 
-    getAllPostsByUser() {
+    paginator(def, max) {
         return (req, res, next) => {
-            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
+            let skip = 0, limit = def
 
             if (req.query.skip)
                 skip = Math.max(0, req.query.skip)
 
             if (req.query.limit)
-                limit = Math.min(Math.max(1, req.query.limit), 10)
-
-            let tempOrderBy = req.query.orderBy
-            let tempSortOrder = req.query.sortOrder
-
-            if (tempSortOrder === 'asc')
-                tempSortOrder = 1
-            else
-                tempSortOrder = -1
-
-            if (tempOrderBy === 'createdAt' || tempOrderBy === 'updateAt') {
-                // Custom created or updated date ordering. Only descending allowed as it is indexed so
-                orderBy = tempOrderBy
-                sortOrder = -1
-            } else if (tempOrderBy === 'likesCount' || tempOrderBy === 'commentsCount') {
-                // Custom, supports ascending and descending ordering
-                orderBy = tempOrderBy
-                sortOrder = tempSortOrder
-            }
-
-            req.query.skip = skip
-            req.query.limit = limit
-            req.query.orderBy = orderBy
-            req.query.sortOrder = sortOrder
-            next()
-        }
-    },
-
-    getMyPosts() {
-        return (req, res, next) => {
-            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
-
-            if (req.query.skip)
-                skip = Math.max(0, req.query.skip)
-
-            if (req.query.limit)
-                limit = Math.min(Math.max(1, req.query.limit), 10)
-
-            let tempOrderBy = req.query.orderBy
-            let tempSortOrder = req.query.sortOrder
-
-            if (tempSortOrder === 'asc')
-                tempSortOrder = 1
-            else
-                tempSortOrder = -1
-
-            if (tempOrderBy === 'createdAt' || tempOrderBy === 'updateAt') {
-                // Custom created or updated date ordering. Only descending allowed as it is indexed so
-                orderBy = tempOrderBy
-                sortOrder = -1
-            } else if (tempOrderBy === 'likesCount' || tempOrderBy === 'commentsCount') {
-                // Custom, supports ascending and descending ordering
-                orderBy = tempOrderBy
-                sortOrder = tempSortOrder
-            }
-
-            req.query.skip = skip
-            req.query.limit = limit
-            req.query.orderBy = orderBy
-            req.query.sortOrder = sortOrder
-            next()
-        }
-    },
-
-    getLikes() {
-        return (req, res, next) => {
-            let skip = 0, limit = 30
-
-            if (req.query.skip)
-                skip = Math.max(0, req.query.skip)
-
-            if (req.query.limit)
-                limit = Math.min(Math.max(1, req.query.limit), 30)
-
-            req.query.skip = skip
-            req.query.limit = limit
-            next()
-        }
-    },
-
-    getComments() {
-        return (req, res, next) => {
-            let skip = 0, limit = 30
-
-            if (req.query.skip)
-                skip = Math.max(0, req.query.skip)
-
-            if (req.query.limit)
-                limit = Math.min(Math.max(1, req.query.limit), 30)
+                limit = Math.min(Math.max(1, req.query.limit), max)
 
             req.query.skip = skip
             req.query.limit = limit
@@ -326,7 +236,7 @@ export const Endpoint = {
 
     getLikes() {
         return (req, res) => {
-            Post.getLikes(req.user._id, req.params.skip, req.params.limit, (err, likes) => {
+            Post.getLikes(req.params.postId, req.query.skip, req.query.limit, (err, likes) => {
 
                 if (err) {
                     console.log(err.message)

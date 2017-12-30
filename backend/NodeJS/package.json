@@ -2,7 +2,7 @@
   "name": "photosphere",
   "version": "0.0.1",
   "private": true,
-  "description": "An Infinite Photo Timeline",
+  "description": "An infinite timeline of beautiful photography",
   "repository": {
     "type": "git",
     "url": "https://github.com/thespherehouse/Photosphere"
@@ -44,5 +44,9 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1"
+  },
+  "apidoc": {
+    "name": "Photosphere",
+    "description": "An infinite timeline of beautiful photography"
   }
 }
