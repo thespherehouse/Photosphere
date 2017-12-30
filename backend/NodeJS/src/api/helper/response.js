@@ -38,7 +38,7 @@ export function sendError(res, errorCode) {
     res.status(200)
         .send({
             error: errorCode,
-            data: {}
+            data: null
         });
 
 };
