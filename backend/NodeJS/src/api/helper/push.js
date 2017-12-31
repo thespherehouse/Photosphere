@@ -1,9 +1,9 @@
 import * as admin from 'firebase-admin'
 
-const serviceAccount = require('../../photosphere.json')
+const serviceAccount = require('../../photosphere')
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount.CONFIG)
 })
 
 const send = (deviceToken, data) => {
