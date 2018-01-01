@@ -1,6 +1,5 @@
 package com.suhel.photosphere.screens.home.view;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -42,6 +41,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresente
     @Override
     protected void onPreCreate() {
         presenter.checkLoginStatus();
+        presenter.updateFirebaseToken();
     }
 
     @Override

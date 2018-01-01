@@ -18,6 +18,6 @@ public abstract class HomePresenter implements HomeContract.Presenter {
         this.store = store;
     }
 
-    protected abstract void updateFirebaseToken();
+    public abstract void updateFirebaseToken();
 
 }

@@ -29,7 +29,7 @@ public class HomePresenterImpl extends HomePresenter {
 
             @Override
             public void onSuccess(Void data) {
-                updateFirebaseToken();
+                getAllPosts();
             }
 
             @Override
@@ -41,20 +41,10 @@ public class HomePresenterImpl extends HomePresenter {
     }
 
     @Override
-    protected void updateFirebaseToken() {
+    public void updateFirebaseToken() {
         String fcmToken = FirebaseInstanceId.getInstance().getToken();
-        if (fcmToken == null) {
-            getAllPosts();
-        } else {
-            restService.fcm(fcmToken, new ApiSubscriber.Callback<Void>() {
-
-                @Override
-                public void onEnd() {
-                    super.onEnd();
-                    getAllPosts();
-                }
-
-            });
+        if (fcmToken != null) {
+            restService.fcm(fcmToken, new ApiSubscriber.Callback<Void>() {});
         }
     }
 
