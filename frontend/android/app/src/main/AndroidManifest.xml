@@ -28,7 +28,8 @@
 
         <activity
             android:name=".screens.home.view.HomeActivity"
-            android:configChanges="screenSize|orientation">
+            android:configChanges="screenSize|orientation"
+            android:theme="@style/AppTheme.TransparentStatus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +39,8 @@
 
         <activity
             android:name=".screens.comments.view.CommentsActivity"
-            android:configChanges="screenSize|orientation" />
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_comments" />
 
     </application>
 

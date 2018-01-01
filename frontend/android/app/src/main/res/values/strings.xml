@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Photosphere</string>
 
+    <string name="title_comments">Comments</string>
     <string name="transition_name_photo">photo</string>
 
 </resources>

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/colorWhite</color>
-    <color name="colorPrimaryDark">@color/colorTransparent</color>
+    <color name="colorPrimaryDark">@color/colorMedium</color>
     <color name="colorAccent">@color/colorBlue</color>
 
     <!--Colors-->
     <color name="colorRed">#FF5A29</color>
     <color name="colorGreen">#64cc9a</color>
     <color name="colorBlue">#2196F3</color>
+    <color name="colorDarkBlue">#1976D2</color>
 
     <!--Grayscale-->
     <color name="colorWhite">#FFFFFF</color>

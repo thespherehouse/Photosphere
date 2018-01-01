@@ -2,61 +2,62 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="@color/colorCommentBackground"
-        app:cardElevation="2dp"
-        app:contentPadding="16dp">
+        android:background="@color/colorCardBackground"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.suhel.photosphere.custom.view.SimpleTextView
-                    android:id="@+id/tvOwnerName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_weight="1"
-                    android:text="Soham Ray"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorGreen"
-                    android:textSize="12dp"
-                    app:fontType="medium" />
-
-                <com.suhel.photosphere.custom.view.SimpleTextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="4dp"
-                    android:layout_weight="1"
-                    android:text="A day ago"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorMedium"
-                    android:textSize="10dp"
-                    app:fontType="medium" />
-
-            </FrameLayout>
+            android:orientation="horizontal"
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp"
+            android:paddingTop="10dp">
 
             <com.suhel.photosphere.custom.view.SimpleTextView
-                android:id="@+id/tvComment"
-                android:layout_width="match_parent"
+                android:id="@+id/tvOwnerName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Hello everyone"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                android:text="Soham Ray"
                 android:textColor="@color/colorDark"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                app:fontType="bold" />
+
+            <com.suhel.photosphere.custom.view.SimpleTextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="A day ago"
+                android:textColor="@color/colorMedium"
+                android:textSize="10dp"
+                app:fontType="regular" />
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+        <com.suhel.photosphere.custom.view.SimpleTextView
+            android:id="@+id/tvComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="12dp"
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp"
+            android:text="Hello everyone"
+            android:textColor="@color/colorBlack"
+            android:textSize="12dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLight" />
+
+    </LinearLayout>
 
 </layout>

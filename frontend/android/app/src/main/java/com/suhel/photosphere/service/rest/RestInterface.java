@@ -38,6 +38,12 @@ public interface RestInterface {
 
     @GET("posts")
     Single<ApiResponse<List<Post>>> getAllPosts(@Query("skip") int skip, @Query("limit") int limit);
+
+    @GET("posts/by/me")
+    Single<ApiResponse<List<Post>>> getMyPosts(@Query("skip") int skip, @Query("limit") int limit);
+
+    @GET("posts/by/{userId}")
+    Single<ApiResponse<List<Post>>> getUsersPosts(@Path("userId") String userId, @Query("skip") int skip, @Query("limit") int limit);
     //endregion
 
     //region Comments
@@ -46,6 +52,12 @@ public interface RestInterface {
 
     @GET("posts/{postId}/comments")
     Single<ApiResponse<List<Comment>>> getAllComments(@Path("postId") String postId, @Query("skip") int skip, @Query("limit") int limit);
+
+    @PUT("posts/{postId}/comments/{commentId}")
+    Single<ApiResponse<Void>> editComment(@Path("postId") String postId, @Path("commentId") String commentId, @Query("skip") int skip, @Query("limit") int limit);
+
+    @DELETE("posts/{postId}/comments/{commentId}")
+    Single<ApiResponse<Void>> deleteComment(@Path("postId") String postId, @Path("commentId") String commentId);
     //endregion
 
     //region Likes
