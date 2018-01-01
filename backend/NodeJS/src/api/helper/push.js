@@ -16,6 +16,14 @@ const send = (deviceToken, data) => {
 
 export const sendForLike = (deviceToken, postId, userName) => {
 
+    if (typeof postId === 'object')
+        postId = postId.toString()
+
+    if (typeof userName === 'object')
+        userName = userName.toString()
+
+    console.log(postId, userName)
+
     send(deviceToken, {
         postId,
         userName
@@ -24,6 +32,14 @@ export const sendForLike = (deviceToken, postId, userName) => {
 }
 
 export const sendForComment = (deviceToken, postId, userName) => {
+
+    if (typeof postId === 'object')
+        postId = postId.toString()
+
+    if (typeof userName === 'object')
+        userName = userName.toString()
+
+    console.log(postId, userName)
 
     send(deviceToken, {
         postId,
