@@ -55,10 +55,9 @@ export const Validator = {
 
     fcm() {
         return (req, res, next) => {
-            if (!req.body.fcm) {
-                Response.sendError(Errors.NoFCM)
-                next()
-            }
+            if (!req.body.fcm)
+                return Response.sendError(Errors.NoFCM)
+            next()
         }
     }
 
