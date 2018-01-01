@@ -2,6 +2,7 @@ package com.suhel.photosphere.screens.home.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.suhel.photosphere.base.model.ApiError;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.screens.home.contract.HomeContract;
@@ -28,7 +29,7 @@ public class HomePresenterImpl extends HomePresenter {
 
             @Override
             public void onSuccess(Void data) {
-                getAllPosts();
+                updateFirebaseToken();
             }
 
             @Override
@@ -37,6 +38,24 @@ public class HomePresenterImpl extends HomePresenter {
             }
 
         });
+    }
+
+    @Override
+    protected void updateFirebaseToken() {
+        String fcmToken = FirebaseInstanceId.getInstance().getToken();
+        if (fcmToken == null) {
+            getAllPosts();
+        } else {
+            restService.fcm(fcmToken, new ApiSubscriber.Callback<Void>() {
+
+                @Override
+                public void onEnd() {
+                    super.onEnd();
+                    getAllPosts();
+                }
+
+            });
+        }
     }
 
     @Override

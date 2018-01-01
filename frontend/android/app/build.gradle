@@ -47,9 +47,10 @@ def panning_view_ver = "1.0.7"
 def reactivex_ver = "2.1.7"
 def reactivex_android_ver = "2.0.1"
 def image_picker_ver = "2.0.4"
-def image_management_ver = "1.5.0"
+def image_management_ver = "1.7.1"
 def facebook_ver = "[4,5)"
 def date_time_utils_ver = "2.9.9.1"
+def push_notif_ver = "11.8.0"
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -99,4 +100,10 @@ dependencies {
 
     // Date Time Utils
     implementation "net.danlew:android.joda:${date_time_utils_ver}"
+
+    // Push notifications
+    implementation "com.google.firebase:firebase-messaging:${push_notif_ver}"
+
 }
+
+apply plugin: 'com.google.gms.google-services'

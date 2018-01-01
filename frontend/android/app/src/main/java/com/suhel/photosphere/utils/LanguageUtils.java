@@ -1,4 +1,4 @@
-package com.suhel.photosphere.utils.common;
+package com.suhel.photosphere.utils;
 
 public class LanguageUtils {
 

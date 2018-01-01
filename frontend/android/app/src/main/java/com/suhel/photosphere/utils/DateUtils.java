@@ -1,5 +1,6 @@
-package com.suhel.photosphere.utils.common;
+package com.suhel.photosphere.utils;
 
+import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.LocalDateTime;
@@ -10,11 +11,12 @@ import org.joda.time.Years;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class DateUtils {
 
     public static String formatSimple(Date date) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now().plusHours(5).plusMinutes(30);
         LocalDateTime then = LocalDateTime.fromDateFields(date);
 
         int difference = Math.abs(Seconds.secondsBetween(then, now).getSeconds());

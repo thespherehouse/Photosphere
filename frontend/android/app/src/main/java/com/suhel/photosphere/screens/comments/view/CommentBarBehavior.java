@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.suhel.photosphere.utils.common.DimensUtils;
+import com.suhel.photosphere.utils.DimensUtils;
 
 public class CommentBarBehavior extends CoordinatorLayout.Behavior<LinearLayout> {
 

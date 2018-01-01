@@ -16,7 +16,7 @@ import com.suhel.photosphere.screens.home.di.HomeComponent;
 import com.suhel.photosphere.screens.home.di.HomeModule;
 import com.suhel.photosphere.screens.home.presenter.HomePresenter;
 import com.suhel.photosphere.screens.login.view.LoginActivity;
-import com.suhel.photosphere.utils.common.Constants;
+import com.suhel.photosphere.utils.Constants;
 
 import java.util.List;
 

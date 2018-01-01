@@ -7,172 +7,172 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/bg_post"
+        android:background="@color/colorCardBackground"
+        android:elevation="1dp"
         android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/image"
+            android:id="@+id/photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorLight"
-            android:transitionName="@string/transition_name_photo"
-            app:actualImageScaleType="centerCrop" />
+            android:background="@color/colorWhite"
+            app:viewAspectRatio="1.5" />
 
-        <com.suhel.photosphere.custom.view.SimpleTextView
+        <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:maxLines="3"
-            android:text="Beautiful"
-            android:textColor="@color/colorDark"
-            android:textSize="32sp"
-            app:fontType="bold" />
+            android:fontFamily="@font/medium"
+            android:text="Some bigass title"
+            android:textColor="@color/colorBlack"
+            android:textSize="24sp" />
 
-        <com.suhel.photosphere.custom.view.SimpleTextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:text="5 hours ago"
-            android:textColor="@color/colorMedium"
-            android:textSize="12sp" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
 
-        <com.suhel.photosphere.custom.view.SimpleTextView
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/regular"
+                    android:text="by"
+                    android:textColor="@color/colorMedium"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvOwnerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/bold"
+                    android:text="Suhel Chakraborty"
+                    android:textColor="@color/colorDark"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:fontFamily="@font/regular"
+                android:text="2 days ago"
+                android:textColor="@color/colorMedium"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+        <TextView
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:maxLines="5"
-            android:textColor="@color/colorDark"
-            android:textSize="14sp"
-            app:fontType="regular" />
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/regular"
+            android:lineSpacingMultiplier="1.15"
+            android:text="@string/lipsum"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp" />
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorLight" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="12dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <com.suhel.photosphere.custom.view.SimpleTextView
-                android:id="@+id/btnOwner"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_post_sub_item"
-                android:ellipsize="end"
-                android:gravity="center_vertical|start"
-                android:maxLines="1"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
-                android:text="Suhel Chakraborty"
-                android:textColor="@color/colorGreen"
-                android:textSize="12sp"
-                app:fontType="bold" />
+                android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/btnComment"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingEnd="8dp">
-
-                <com.suhel.photosphere.custom.view.SimpleTextView
-                    android:id="@+id/tvCommentsCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_post_sub_item"
-                    android:gravity="center"
-                    android:text="24"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorDark"
-                    android:textSize="12sp"
-                    app:fontType="bold" />
-
-                <com.suhel.photosphere.custom.view.SimpleTextView
-                    android:id="@+id/tvCommentLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:background="@drawable/bg_post_sub_item"
-                    android:gravity="center"
-                    android:text="comments"
-                    android:textColor="@color/colorMedium"
-                    android:textSize="12sp"
-                    app:fontType="regular" />
-
-                <ImageView
-                    android:id="@+id/icIsCommented"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_marginStart="4dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_comment_filled"
-                    android:tint="@color/colorBlue" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btnLike"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingEnd="8dp">
-
-                <com.suhel.photosphere.custom.view.SimpleTextView
+                <TextView
                     android:id="@+id/tvLikesCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_post_sub_item"
-                    android:gravity="center"
-                    android:text="123"
-                    android:textAllCaps="true"
+                    android:fontFamily="@font/bold"
+                    android:text="360"
                     android:textColor="@color/colorDark"
-                    android:textSize="12sp"
-                    app:fontType="bold" />
+                    android:textSize="12sp" />
 
-                <com.suhel.photosphere.custom.view.SimpleTextView
-                    android:id="@+id/tvLikeLabel"
+                <TextView
+                    android:id="@+id/tvLikesLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:background="@drawable/bg_post_sub_item"
-                    android:gravity="center"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/regular"
                     android:text="likes"
                     android:textColor="@color/colorMedium"
-                    android:textSize="12sp"
-                    app:fontType="regular" />
+                    android:textSize="12sp" />
 
-                <ImageView
-                    android:id="@+id/icIsLiked"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_marginStart="4dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_like_filled"
-                    android:tint="@color/colorRed" />
+                <TextView
+                    android:id="@+id/tvCommentsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/bold"
+                    android:text="24"
+                    android:textColor="@color/colorDark"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvCommentsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/regular"
+                    android:text="comments"
+                    android:textColor="@color/colorMedium"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:orientation="horizontal">
+
+                <com.suhel.photosphere.custom.view.TintableImageButton
+                    android:id="@+id/btnComment"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:padding="6dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_comment_filled" />
+
+                <com.suhel.photosphere.custom.view.TintableImageButton
+                    android:id="@+id/btnLike"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="12dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:padding="6dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_like_filled" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
 

@@ -4,6 +4,7 @@ import com.suhel.photosphere.base.model.ApiResponse;
 import com.suhel.photosphere.base.model.ProgressRequestBody;
 import com.suhel.photosphere.model.request.CreateComment;
 import com.suhel.photosphere.model.request.CreatePost;
+import com.suhel.photosphere.model.request.FCM;
 import com.suhel.photosphere.model.request.RegisterSocial;
 import com.suhel.photosphere.model.response.Comment;
 import com.suhel.photosphere.model.response.Post;
@@ -29,6 +30,9 @@ public interface RestInterface {
 
     @PUT("auth/silentLogin")
     Single<ApiResponse<Void>> silentLogin();
+
+    @PUT("auth/fcm")
+    Single<ApiResponse<Void>> fcm(@Body FCM fcm);
     //endregion
 
     //region Posts

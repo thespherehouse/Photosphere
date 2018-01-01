@@ -6,7 +6,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 
 import com.suhel.photosphere.R;
-import com.suhel.photosphere.utils.common.Fonts;
+import com.suhel.photosphere.utils.Fonts;
 
 public class SimpleButton extends AppCompatButton {
 

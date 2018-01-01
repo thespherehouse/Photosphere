@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import com.suhel.photosphere.databinding.ItemCommentBinding;
 import com.suhel.photosphere.model.response.Comment;
-import com.suhel.photosphere.utils.common.DateUtils;
+import com.suhel.photosphere.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;

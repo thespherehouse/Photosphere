@@ -10,10 +10,10 @@ import com.suhel.photosphere.R;
 import com.suhel.photosphere.custom.view.SimpleProgressBarDrawable;
 import com.suhel.photosphere.databinding.ItemPostBinding;
 import com.suhel.photosphere.model.response.Post;
-import com.suhel.photosphere.utils.common.Constants;
-import com.suhel.photosphere.utils.common.DateUtils;
-import com.suhel.photosphere.utils.common.LanguageUtils;
-import com.suhel.photosphere.utils.common.S3Utils;
+import com.suhel.photosphere.utils.Constants;
+import com.suhel.photosphere.utils.DateUtils;
+import com.suhel.photosphere.utils.LanguageUtils;
+import com.suhel.photosphere.utils.S3Utils;
 
 import java.util.List;
 
@@ -113,14 +113,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
             super(binding.getRoot());
             this.binding = binding;
             binding.getRoot().setOnClickListener(this);
-            binding.btnOwner.setOnClickListener(this);
+            binding.tvOwnerName.setOnClickListener(this);
             binding.btnLike.setOnClickListener(this);
             binding.btnComment.setOnClickListener(this);
-            binding.image.getHierarchy().setProgressBarImage(new SimpleProgressBarDrawable(Color.BLACK, 40, 3));
+            binding.photo.getHierarchy().setProgressBarImage(new SimpleProgressBarDrawable(Color.BLACK, 40, 3));
         }
 
         void bind(Post post) {
-            binding.image.setImageURI(S3Utils.getImageUrl(post.getUrl(), S3Utils.ImageType.Thumbnail));
+            binding.photo.setImageURI(S3Utils.getImageUrl(post.getUrl(), S3Utils.ImageType.Thumbnail));
             float aspectRatio = post.getAspectRatio();
             if (aspectRatio > Constants.UI.maximumAspectRatio) {
                 // Too wide
@@ -132,26 +132,26 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
                 aspectRatio = Constants.UI.minimumAspectRatio;
             }
 
-            binding.image.setAspectRatio(aspectRatio);
+            binding.photo.setAspectRatio(aspectRatio);
             binding.tvTitle.setText(post.getTitle());
-            binding.tvTime.setText(DateUtils.formatSimple(post.getCreatedAt()));
+            binding.tvDateTime.setText(DateUtils.formatSimple(post.getCreatedAt()));
             binding.tvDescription.setText(post.getDescription());
-            binding.btnOwner.setText(post.getOwnerName());
+            binding.tvOwnerName.setText(post.getOwnerName());
 
             binding.tvCommentsCount.setText(String.valueOf(post.getCommentsCount()));
-            binding.tvCommentLabel.setText(LanguageUtils.plural("comment", post.getCommentsCount()));
-            binding.icIsCommented.setVisibility(post.isCommentedByMe() ? View.VISIBLE : View.GONE);
+            binding.tvCommentsLabel.setText(LanguageUtils.plural("comment", post.getCommentsCount()));
+            binding.btnComment.setColorFilterResource(post.isCommentedByMe() ? R.color.colorBlue : R.color.colorMedium);
 
             binding.tvLikesCount.setText(String.valueOf(post.getLikesCount()));
-            binding.tvLikeLabel.setText(LanguageUtils.plural("like", post.getLikesCount()));
-            binding.icIsLiked.setVisibility(post.isLikedByMe() ? View.VISIBLE : View.GONE);
+            binding.tvLikesLabel.setText(LanguageUtils.plural("like", post.getLikesCount()));
+            binding.btnLike.setColorFilterResource(post.isLikedByMe() ? R.color.colorRed : R.color.colorMedium);
         }
 
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
 
-                case R.id.btnOwner:
+                case R.id.tvOwnerName:
 
                     if (onClickListener != null)
                         onClickListener.onOwnerClick(this, getAdapterPosition());

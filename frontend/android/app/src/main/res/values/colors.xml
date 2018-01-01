@@ -13,7 +13,8 @@
     <!--Grayscale-->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorLight">#EFEFEF</color>
-    <color name="colorMedium">#BEBEBE</color>
+    <color name="colorMedium">#CCC</color>
+    <color name="colorGrey">#999</color>
     <color name="colorDark">#333333</color>
     <color name="colorBlack">#000000</color>
 

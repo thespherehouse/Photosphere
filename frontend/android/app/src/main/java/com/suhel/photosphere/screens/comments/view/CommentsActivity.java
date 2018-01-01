@@ -17,7 +17,7 @@ import com.suhel.photosphere.screens.comments.contract.CommentsContract;
 import com.suhel.photosphere.screens.comments.di.CommentsComponent;
 import com.suhel.photosphere.screens.comments.di.CommentsModule;
 import com.suhel.photosphere.screens.comments.presenter.CommentsPresenter;
-import com.suhel.photosphere.utils.common.Constants;
+import com.suhel.photosphere.utils.Constants;
 
 import java.util.List;
 

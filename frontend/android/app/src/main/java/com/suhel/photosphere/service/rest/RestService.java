@@ -5,11 +5,12 @@ import android.content.Context;
 import com.suhel.photosphere.base.model.ProgressRequestBody;
 import com.suhel.photosphere.model.request.CreateComment;
 import com.suhel.photosphere.model.request.CreatePost;
+import com.suhel.photosphere.model.request.FCM;
 import com.suhel.photosphere.model.request.RegisterSocial;
 import com.suhel.photosphere.model.response.Comment;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.service.rx.RxHelper;
-import com.suhel.photosphere.utils.common.Constants;
+import com.suhel.photosphere.utils.Constants;
 
 import java.io.File;
 import java.util.List;
@@ -58,6 +59,12 @@ public class RestService {
 
     public void silentLogin(ApiSubscriber.Callback<Void> callback) {
         restInterface.silentLogin()
+                .compose(RxHelper.applySchedulers())
+                .subscribeWith(new ApiSubscriber<>(callback));
+    }
+
+    public void fcm(String fcm, ApiSubscriber.Callback<Void> callback) {
+        restInterface.fcm(new FCM(fcm))
                 .compose(RxHelper.applySchedulers())
                 .subscribeWith(new ApiSubscriber<>(callback));
     }
