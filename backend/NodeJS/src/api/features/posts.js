@@ -149,7 +149,7 @@ export const Endpoint = {
                 Response.send(res, post.comments[0])
 
                 if (req.user.fcm)
-                    Push.sendForComment(req.user.fcm, post._id, req.user.name)
+                    Push.sendForComment(req.user.fcm, post.toObject()._id, req.user.name)
 
             })
         }
@@ -170,7 +170,7 @@ export const Endpoint = {
                 Response.send(res)
 
                 if (req.user.fcm)
-                    Push.sendForLike(req.user.fcm, post._id, req.user.name)
+                    Push.sendForLike(req.user.fcm, post.toObject()._id, req.user.name)
 
             })
         }
