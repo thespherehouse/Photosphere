@@ -313,7 +313,7 @@ export const Endpoint = {
 
     fcm() {
         return (req, res) => {
-            User.updateFCM(req.user._id, req.body.fcm, (err, user) => {
+            User.editFCM(req.user._id, req.body.fcm, (err, user) => {
                 if (err || !user) {
                     if (err)
                         console.log(err.message)
