@@ -84,9 +84,10 @@ export function deleteObjectsS3(key, cb) {
 }
 
 export const checkSessionByToken = (token, cb) => {
-    Session.getSessionByToken(query.token, (err, session) => {
-        if (err || !session)
+    Session.getSessionByToken(token, (err, session) => {
+        if (err || !session) {
             return cb(false)
+        }
 
         cb(true, session.toObject())
     })

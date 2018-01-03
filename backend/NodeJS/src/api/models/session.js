@@ -37,6 +37,7 @@ schema.statics.createSession = function (userId, deviceId, cb) {
 }
 
 schema.statics.getSession = function (deviceId, token, cb) {
+    console.log('From session', token)
     return this.findOne(
         {
             deviceId,
@@ -47,6 +48,7 @@ schema.statics.getSession = function (deviceId, token, cb) {
 }
 
 schema.statics.getSessionByToken = function (token, cb) {
+    console.log('From session token', token)
     return this.findOne(
         {
             token

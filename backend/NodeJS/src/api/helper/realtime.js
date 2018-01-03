@@ -45,13 +45,16 @@ const emit = (domain, event, data, isVolatile, targetUserId) => {
 }
 
 const generateId = (req, cb) => {
+    console.log('What is going on?')
     const query = URL.parse(req.url, true).query
+    console.log('query is ' + query)
     if (!query || !query.token)
         return cb(new Error('Token Not Found'))
-
+    console.log('No error')
     Utils.checkSessionByToken(query.token, (isValid, session) => {
         if (isValid)
             return cb(new Error('User Not Found'))
+        console.log('Session found')
         cb(null, session.user._id)
     })
 }
@@ -62,12 +65,16 @@ const allowRequest = (req, cb) => {
         return cb('Thou shall not pass', false)
 
     Utils.checkSessionByToken(query.token, (isValid, session) => {
-        cb('Thou shall not pass', isValid)
+        if (isValid) {
+            cb(null, true)
+        } else {
+            cb('Thou shall not pass', false)
+        }
     })
 }
 
-export const init = server => {
-    io = Server(server, {
+export const init = (server) => {
+    io = new Server(server, {
         path: '/realtime',
         serveClient: false,
         pingInterval: 10000,
@@ -75,6 +82,9 @@ export const init = server => {
         cookie: false,
         allowRequest: allowRequest
     })
+    io.on('connection', function (socket) {
+        console.log('Someone just connected');
+    });
     io.engine.generateId = generateId
 }
 
