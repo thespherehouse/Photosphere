@@ -44,18 +44,19 @@ const emit = (domain, event, data, isVolatile, targetUserId) => {
     IO.emit(event, data)
 }
 
-const generateId = (req, cb) => {
-    console.log('What is going on?')
+const generateId = (req) => {
     const query = URL.parse(req.url, true).query
-    console.log('query is ' + query)
     if (!query || !query.token)
         return cb(new Error('Token Not Found'))
-    console.log('No error')
+    console.log('The query is is is is')
     Utils.checkSessionByToken(query.token, (isValid, session) => {
-        if (isValid)
-            return cb(new Error('User Not Found'))
-        console.log('Session found')
-        cb(null, session.user._id)
+        if (isValid) {
+            console.log('Valid')
+            return session.user._id.toString()
+        } else {
+            console.log('Invalid')
+            return 'Lol'
+        }
     })
 }
 
