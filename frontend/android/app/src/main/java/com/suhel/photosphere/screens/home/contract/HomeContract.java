@@ -20,9 +20,13 @@ public interface HomeContract {
 
     interface Presenter {
 
+        void connectToSocket();
+
         void checkLoginStatus();
 
         void getAllPosts();
+
+        void updateFirebaseToken();
 
         void likePost(Post post);
 

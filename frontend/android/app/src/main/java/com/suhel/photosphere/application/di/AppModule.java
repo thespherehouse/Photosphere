@@ -3,8 +3,9 @@ package com.suhel.photosphere.application.di;
 import android.content.Context;
 
 import com.suhel.photosphere.base.di.BaseModule;
-import com.suhel.photosphere.service.storage.Store;
+import com.suhel.photosphere.service.realtime.SocketIO;
 import com.suhel.photosphere.service.rest.RestService;
+import com.suhel.photosphere.service.storage.Store;
 
 import dagger.Module;
 import dagger.Provides;
@@ -31,6 +32,11 @@ public class AppModule extends BaseModule {
     @Provides
     Store providesStore(Context context) {
         return new Store(context);
+    }
+
+    @Provides
+    SocketIO providesSocketIO(Store store) {
+        return new SocketIO(store);
     }
 
 }

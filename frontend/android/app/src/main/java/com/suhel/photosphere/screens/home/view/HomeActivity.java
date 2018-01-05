@@ -42,6 +42,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresente
     protected void onPreCreate() {
         presenter.checkLoginStatus();
         presenter.updateFirebaseToken();
+        presenter.connectToSocket();
     }
 
     @Override
@@ -73,7 +74,6 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresente
             @Override
             public void onCommentClick(PostsAdapter.PostViewHolder viewHolder, int position) {
                 Post post = adapter.getItem(position);
-//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this, viewHolder.binding.image, getString(R.string.transition_name_photo));
                 Intent commentActivityIntent = new Intent(HomeActivity.this, CommentsActivity.class);
                 commentActivityIntent.putExtra(Constants.Intent.Post, post);
                 startActivity(commentActivityIntent);

@@ -13,13 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".application.instance.SimpleFirebaseInstanceIdService">
+        <service
+            android:name=".application.instance.SimpleFirebaseInstanceIdService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".application.instance.SimpleFirebaseMessagingService">
+        <service
+            android:name=".application.instance.SimpleFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

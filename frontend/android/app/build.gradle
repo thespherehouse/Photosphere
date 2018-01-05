@@ -38,7 +38,6 @@ android {
 }
 
 def support_ver = "27.0.2"
-def bouncy_list_ver = "0.1.1"
 def http_client_ver = "3.9.1"
 def rest_client_ver = "2.3.0"
 def dep_inj_ver = "2.13"
@@ -51,58 +50,62 @@ def image_management_ver = "1.7.1"
 def facebook_ver = "[4,5)"
 def date_time_utils_ver = "2.9.9.1"
 def push_notif_ver = "11.8.0"
+def socket_client_ver = "1.0.0"
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Android Support
-    implementation "com.android.support:appcompat-v7:${support_ver}"
-    implementation "com.android.support:recyclerview-v7:${support_ver}"
-    implementation "com.android.support:cardview-v7:${support_ver}"
-    implementation "com.android.support:design:${support_ver}"
-
-    // Bouncy list
-    implementation "com.chauthai.overscroll:overscroll-bouncy:${bouncy_list_ver}"
+    implementation "com.android.support:appcompat-v7:$support_ver"
+    implementation "com.android.support:recyclerview-v7:$support_ver"
+    implementation "com.android.support:cardview-v7:$support_ver"
+    implementation "com.android.support:design:$support_ver"
 
     // HTTP Client
-    implementation "com.squareup.okhttp3:okhttp:${http_client_ver}"
-    implementation "com.squareup.okhttp3:logging-interceptor:${http_client_ver}"
+    implementation "com.squareup.okhttp3:okhttp:$http_client_ver"
+    implementation "com.squareup.okhttp3:logging-interceptor:$http_client_ver"
 
     // REST Client
-    implementation "com.squareup.retrofit2:retrofit:${rest_client_ver}"
-    implementation "com.squareup.retrofit2:converter-gson:${rest_client_ver}"
-    implementation "com.squareup.retrofit2:converter-scalars:${rest_client_ver}"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:${rest_client_ver}"
+    implementation "com.squareup.retrofit2:retrofit:$rest_client_ver"
+    implementation "com.squareup.retrofit2:converter-gson:$rest_client_ver"
+    implementation "com.squareup.retrofit2:converter-scalars:$rest_client_ver"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rest_client_ver"
 
     // Dependency Injection
-    implementation "com.google.dagger:dagger:${dep_inj_ver}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${dep_inj_ver}"
+    implementation "com.google.dagger:dagger:$dep_inj_ver"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dep_inj_ver"
 
     // HTTP Image Loader
-    implementation "com.github.bumptech.glide:glide:${image_loader_ver}"
-    annotationProcessor "com.github.bumptech.glide:compiler:${image_loader_ver}"
+    implementation "com.github.bumptech.glide:glide:$image_loader_ver"
+    annotationProcessor "com.github.bumptech.glide:compiler:$image_loader_ver"
 
     // Panning View
-    implementation "com.flaviofaria:kenburnsview:${panning_view_ver}"
+    implementation "com.flaviofaria:kenburnsview:$panning_view_ver"
 
     // ReactiveX
-    implementation "io.reactivex.rxjava2:rxjava:${reactivex_ver}"
-    implementation "io.reactivex.rxjava2:rxandroid:${reactivex_android_ver}"
+    implementation "io.reactivex.rxjava2:rxjava:$reactivex_ver"
+    implementation "io.reactivex.rxjava2:rxandroid:$reactivex_android_ver"
 
     // Image Picker
-    implementation "com.github.jkwiecien:EasyImage:${image_picker_ver}"
+    implementation "com.github.jkwiecien:EasyImage:$image_picker_ver"
 
     // Image Management
-    implementation "com.facebook.fresco:fresco:${image_management_ver}"
+    implementation "com.facebook.fresco:fresco:$image_management_ver"
 
     // Facebook
-    implementation "com.facebook.android:facebook-android-sdk:${facebook_ver}"
+    implementation "com.facebook.android:facebook-android-sdk:$facebook_ver"
 
     // Date Time Utils
-    implementation "net.danlew:android.joda:${date_time_utils_ver}"
+    implementation "net.danlew:android.joda:$date_time_utils_ver"
 
     // Push notifications
-    implementation "com.google.firebase:firebase-messaging:${push_notif_ver}"
+    implementation "com.google.firebase:firebase-messaging:$push_notif_ver"
+
+    // Socket client
+    implementation ("io.socket:socket.io-client:$socket_client_ver") {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
 
 }
 

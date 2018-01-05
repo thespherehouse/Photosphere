@@ -11,10 +11,17 @@ import com.suhel.photosphere.custom.app.LifecycleManager;
 import com.suhel.photosphere.screens.comments.di.CommentsComponent;
 import com.suhel.photosphere.screens.home.di.HomeComponent;
 import com.suhel.photosphere.screens.login.di.LoginComponent;
+import com.suhel.photosphere.service.realtime.SocketIO;
 import com.suhel.photosphere.service.rest.RestService;
+
+import javax.inject.Inject;
 
 public class App extends Application implements AppContract {
 
+    @Inject
+    protected RestService restService;
+    @Inject
+    protected SocketIO socketIO;
     private AppComponent appComponent;
     private LifecycleManager lifecycleManager = new LifecycleManager();
 
@@ -25,12 +32,14 @@ public class App extends Application implements AppContract {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
+        appComponent.inject(this);
+        socketIO.connect();
         registerActivityLifecycleCallbacks(lifecycleManager);
     }
 
     @Override
     public RestService getRestService() {
-        return appComponent.getRestService();
+        return restService;
     }
 
     @Override
@@ -52,6 +61,5 @@ public class App extends Application implements AppContract {
     public CommentsComponent.Builder getCommentsComponent() {
         return appComponent.getCommentsComponent();
     }
-
 
 }
