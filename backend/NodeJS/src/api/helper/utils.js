@@ -80,7 +80,6 @@ export function deleteObjectsS3(key, cb) {
             }]
         }
     }, cb)
-
 }
 
 export const checkSessionByToken = (token, cb) => {

@@ -9,7 +9,6 @@ admin.initializeApp({
 const send = (deviceToken, data) => {
 
     admin.messaging().sendToDevice(deviceToken, { data })
-        .then(response => console.log(response))
         .catch(err => console.log(err))
 
 }
@@ -21,8 +20,6 @@ export const sendForLike = (deviceToken, postId, userName) => {
 
     if (typeof userName === 'object')
         userName = userName.toString()
-
-    console.log(postId, userName)
 
     send(deviceToken, {
         postId,
@@ -38,8 +35,6 @@ export const sendForComment = (deviceToken, postId, userName) => {
 
     if (typeof userName === 'object')
         userName = userName.toString()
-
-    console.log(postId, userName)
 
     send(deviceToken, {
         postId,

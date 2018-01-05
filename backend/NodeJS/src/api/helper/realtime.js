@@ -5,7 +5,7 @@ import * as Utils from './utils'
 let io = null
 
 export const Domains = {
-    Default: '',
+    Post: 'post',
     Like: 'like',
     Comment: 'comment',
     Message: 'message'
@@ -25,39 +25,35 @@ const emit = (domain, event, data, isVolatile, targetUserId) => {
     if (!domain || !event || !data)
         return
 
-    if (!isVolatile || typeof isVolatile === 'boolean')
+    if (!isVolatile || typeof isVolatile !== 'boolean')
         isVolatile = false
 
-    if (targetUserId && typeof targetUserId !== 'string')
+    if (!targetUserId || typeof targetUserId !== 'string')
         targetUserId = null
 
     let IO = io
 
-    if (isVolatile)
+    if (isVolatile) {
+        console.log('Volatile event')
         IO = IO.volatile
+    }
 
-    IO = IO.of(`/${domain}`)
-
-    if (targetUserId)
+    if (targetUserId) {
+        console.log('To specific user')
         IO = IO.to(targetUserId)
+    }
 
-    IO.emit(event, data)
+    console.log('Emitted')
+
+    IO.emit(event, {
+        domain,
+        data
+    })
 }
 
 const generateId = (req) => {
-    const query = URL.parse(req.url, true).query
-    if (!query || !query.token)
-        return cb(new Error('Token Not Found'))
-    console.log('The query is is is is')
-    Utils.checkSessionByToken(query.token, (isValid, session) => {
-        if (isValid) {
-            console.log('Valid')
-            return session.user._id.toString()
-        } else {
-            console.log('Invalid')
-            return 'Lol'
-        }
-    })
+    console.log(`${req.session.user.name} just connected`)
+    return req.session.user._id
 }
 
 const allowRequest = (req, cb) => {
@@ -67,6 +63,7 @@ const allowRequest = (req, cb) => {
 
     Utils.checkSessionByToken(query.token, (isValid, session) => {
         if (isValid) {
+            req.session = session
             cb(null, true)
         } else {
             cb('Thou shall not pass', false)
@@ -75,7 +72,7 @@ const allowRequest = (req, cb) => {
 }
 
 export const init = (server) => {
-    io = new Server(server, {
+    io = Server(server, {
         path: '/realtime',
         serveClient: false,
         pingInterval: 10000,
@@ -83,29 +80,30 @@ export const init = (server) => {
         cookie: false,
         allowRequest: allowRequest
     })
-    io.on('connection', function (socket) {
-        console.log('Someone just connected');
-    });
     io.engine.generateId = generateId
 }
 
-export const emitLike = (postId, userId) => {
-    emit(Domains.Like, Events.Create, { postId, userId }, true)
+export const emitNewPost = (postId, userId, userName) => {
+    emit(Domains.Post, Events.Create, { postId, userId, userName })
 }
 
-export const emitUnlike = (postId, userId) => {
-    emit(Domains.Like, Events.Delete, { postId, userId }, true)
+export const emitLike = (postId, userId, userName) => {
+    emit(Domains.Like, Events.Create, { postId, userId, userName })
 }
 
-export const emitCreateComment = (postId, userId, commentId, comment) => {
-    emit(Domains.Comment, Events.Create, { postId, userId, commentId, comment }, true)
+export const emitUnlike = (postId, userId, userName) => {
+    emit(Domains.Like, Events.Delete, { postId, userId, userName })
 }
 
-export const emitEditComment = (postId, userId, comment) => {
-    emit(Domains.Comment, Events.Update, { postId, userId, comment }, true)
+export const emitCreateComment = (postId, userId, commentId, userName, comment) => {
+    emit(Domains.Comment, Events.Create, { postId, userId, commentId, userName, comment })
 }
 
-export const emitDeleteComment = (postId, userId, commentId) => {
-    emit(Domains.Comment, Events.Delete, { postId, userId }, true)
+export const emitEditComment = (postId, userId, comment, userName) => {
+    emit(Domains.Comment, Events.Update, { postId, userId, comment, userName })
+}
+
+export const emitDeleteComment = (postId, userId, commentId, userName) => {
+    emit(Domains.Comment, Events.Delete, { postId, userId, userName })
 }
 

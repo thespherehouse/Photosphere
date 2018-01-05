@@ -1,5 +1,5 @@
 import uuid from 'uuid/v1'
-import { Response, Errors, Utils, Push } from '../helper'
+import { Response, Realtime, Errors, Utils, Push } from '../helper'
 import { Post } from '../models'
 
 export const Validator = {
@@ -130,6 +130,7 @@ export const Endpoint = {
                 }
 
                 Response.send(res, post)
+                Realtime.emitNewPost(post.toObject()._id, req.user._id, req.user.name)
             })
         }
     },
@@ -168,9 +169,10 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.NotFound)
 
                 Response.send(res)
+                Realtime.emitLike(post._id, req.user._id, req.user.name)
 
                 if (req.user.fcm)
-                    Push.sendForLike(req.user.fcm, post.toObject()._id, req.user.name)
+                    Push.sendForLike(req.user.fcm, post._id, req.user.name)
 
             })
         }
@@ -320,6 +322,7 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.NotFound)
 
                 Response.send(res)
+                Realtime.emitEditComment(post._id, req.user._id, req.body.comment, req.user.name)
             })
         }
     },
@@ -375,6 +378,7 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.NotFound)
 
                 Response.send(res)
+                Realtime.emitUnlike(post._id, req.user._id, req.user.name)
             })
         }
     },
@@ -394,6 +398,7 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.NotFound)
 
                 Response.send(res)
+                Realtime.emitDeleteComment(post._id, req.user._id, req.params.commentId, req.user.name)
 
             })
 
