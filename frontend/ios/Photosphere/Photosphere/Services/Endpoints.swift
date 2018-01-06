@@ -9,8 +9,13 @@
 import Foundation
 import Alamofire
 
+public protocol Endpoint {
+    var path: String {get}
+    var method: HTTPMethod {get}
+    var url: String{get}
+}
 
-enum AuthenticationServices {
+enum AuthenticationServices: Endpoint {
     case login
     case registration
 }
@@ -34,4 +39,7 @@ extension AuthenticationServices {
         }
     }
     
+    var url : String {
+        return ServerConfig.baseURL + path
+    }
 }
