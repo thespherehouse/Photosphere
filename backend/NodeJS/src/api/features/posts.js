@@ -322,7 +322,7 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.NotFound)
 
                 Response.send(res)
-                Realtime.emitEditComment(post._id, req.user._id, req.body.comment, req.user.name)
+                Realtime.emitEditComment(post._id, req.user._id, req.params.commentId, req.body.comment, req.user.name)
             })
         }
     },
