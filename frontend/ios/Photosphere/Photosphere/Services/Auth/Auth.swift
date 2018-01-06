@@ -9,12 +9,12 @@
 import Foundation
 import Alamofire
 
+
 class Auth {
     static let shared = Auth()
     init() {}
     
     func register(withName name: String, email: String, andPassword password: String) {
-        
     }
     
     func login(withName name: String, andPassword password: String) {

@@ -7,5 +7,6 @@ target 'Photosphere' do
 
   # Pods for Photosphere
   pod 'Alamofire', '~> 4.5'
-
+  pod 'KeychainSwift', '~> 10.0'
+  pod 'ObjectMapper', '~> 3.1'
 end
