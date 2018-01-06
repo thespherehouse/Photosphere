@@ -39,8 +39,8 @@ const processNewConnection = (ws, req) => {
     }
 
     Utils.checkSessionByToken(token, (isValid, session) => {
-        const userId = session.user._id
         if (isValid) {
+            const userId = session.user._id
             console.log(session.user.name + ' connected')
             clients[userId] = ws
             ws.on('close', () => {
