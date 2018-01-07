@@ -79,22 +79,22 @@ export const emitNewPost = (post) => {
     emit(Domains.Post, Events.Create, post)
 }
 
-export const emitLike = (like) => {
-    emit(Domains.Like, Events.Create, like)
+export const emitLike = (postId, like) => {
+    emit(Domains.Like, Events.Create, { postId, like })
 }
 
-export const emitUnlike = (like) => {
-    emit(Domains.Like, Events.Delete, like)
+export const emitUnlike = (postId, like) => {
+    emit(Domains.Like, Events.Delete, { postId, like })
 }
 
-export const emitCreateComment = (comment) => {
-    emit(Domains.Comment, Events.Create, comment)
+export const emitCreateComment = (postId, comment) => {
+    emit(Domains.Comment, Events.Create, { postId, comment })
 }
 
-export const emitEditComment = (comment) => {
-    emit(Domains.Comment, Events.Update, comment)
+export const emitEditComment = (postId, comment) => {
+    emit(Domains.Comment, Events.Update, { postId, comment })
 }
 
-export const emitDeleteComment = (comment) => {
-    emit(Domains.Comment, Events.Delete, { comment })
+export const emitDeleteComment = (postId, comment) => {
+    emit(Domains.Comment, Events.Delete, { postId, comment })
 }

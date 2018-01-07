@@ -150,7 +150,7 @@ export const Endpoint = {
                 let comment = post.toObject().comments[0]
 
                 Response.send(res, comment)
-                Realtime.emitCreateComment(comment)
+                Realtime.emitCreateComment(post._id, comment)
 
                 if (req.user.fcm)
                     Push.sendForComment(req.user.fcm, post.toObject()._id, req.user.name)
@@ -174,7 +174,7 @@ export const Endpoint = {
                 let like = post.toObject().likes[0]
 
                 Response.send(res)
-                Realtime.emitLike(like)
+                Realtime.emitLike(post._id, like)
 
                 if (req.user.fcm)
                     Push.sendForLike(req.user.fcm, post._id, req.user.name)
@@ -330,7 +330,7 @@ export const Endpoint = {
 
                 delete comment.user
                 Response.send(res)
-                Realtime.emitEditComment(comment)
+                Realtime.emitEditComment(post._id, comment)
             })
         }
     },
@@ -389,7 +389,7 @@ export const Endpoint = {
                 delete like.user
 
                 Response.send(res)
-                Realtime.emitUnlike(like)
+                Realtime.emitUnlike(post._id, like)
             })
         }
     },
@@ -412,7 +412,7 @@ export const Endpoint = {
 
                 delete comment.user
                 Response.send(res)
-                Realtime.emitDeleteComment(comment)
+                Realtime.emitDeleteComment(post._id, comment)
 
             })
 
