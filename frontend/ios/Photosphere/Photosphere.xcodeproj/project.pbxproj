@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68C6273C2001DA15005CDF78 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C6273B2001DA15005CDF78 /* EmptyResponse.swift */; };
 		68C928F61FF3723B009BAAFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C928E61FF3723A009BAAFA /* AppDelegate.swift */; };
 		68C928F71FF3723B009BAAFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C928EB1FF3723A009BAAFA /* Assets.xcassets */; };
 		68C928F81FF3723B009BAAFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C928F01FF3723A009BAAFA /* Main.storyboard */; };
 		68C928F91FF3723B009BAAFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C928F21FF3723A009BAAFA /* LaunchScreen.storyboard */; };
 		68F2B3A3200008D800DD48BB /* GenericResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2B3A2200008D800DD48BB /* GenericResponseModel.swift */; };
-		68F47D511FF570580056767E /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F47D501FF570580056767E /* Auth.swift */; };
+		68F47D511FF570580056767E /* AuthenticationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F47D501FF570580056767E /* AuthenticationServices.swift */; };
 		68F731F21FFD5AC30071CB35 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F731F11FFD5AC30071CB35 /* Endpoints.swift */; };
 		68F731F51FFD5C100071CB35 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F731F41FFD5C100071CB35 /* CustomError.swift */; };
 		68F9F9F81FF89F69008154EF /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9F9F71FF89F69008154EF /* ServerConfig.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68C6273B2001DA15005CDF78 /* EmptyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
 		68C928D01FF3710C009BAAFA /* Photosphere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photosphere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C928E61FF3723A009BAAFA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68C928EB1FF3723A009BAAFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -29,7 +31,7 @@
 		68C928F21FF3723A009BAAFA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68C928F51FF3723B009BAAFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68F2B3A2200008D800DD48BB /* GenericResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponseModel.swift; sourceTree = "<group>"; };
-		68F47D501FF570580056767E /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		68F47D501FF570580056767E /* AuthenticationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServices.swift; sourceTree = "<group>"; };
 		68F731F11FFD5AC30071CB35 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		68F731F41FFD5C100071CB35 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		68F9F9F71FF89F69008154EF /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				68F2B3A2200008D800DD48BB /* GenericResponseModel.swift */,
+				68C6273B2001DA15005CDF78 /* EmptyResponse.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -196,7 +199,7 @@
 		68F47D4F1FF570470056767E /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				68F47D501FF570580056767E /* Auth.swift */,
+				68F47D501FF570580056767E /* AuthenticationServices.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -370,8 +373,9 @@
 				68F731F51FFD5C100071CB35 /* CustomError.swift in Sources */,
 				68C928F61FF3723B009BAAFA /* AppDelegate.swift in Sources */,
 				68F2B3A3200008D800DD48BB /* GenericResponseModel.swift in Sources */,
+				68C6273C2001DA15005CDF78 /* EmptyResponse.swift in Sources */,
 				68F9F9F81FF89F69008154EF /* ServerConfig.swift in Sources */,
-				68F47D511FF570580056767E /* Auth.swift in Sources */,
+				68F47D511FF570580056767E /* AuthenticationServices.swift in Sources */,
 				68F9F9FD1FF8A3B1008154EF /* KeychainManager.swift in Sources */,
 				68F731F21FFD5AC30071CB35 /* Endpoints.swift in Sources */,
 				68F9F9FF1FF8A460008154EF /* AppConstants.swift in Sources */,

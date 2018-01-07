@@ -15,12 +15,12 @@ public protocol Endpoint {
     var url: String{get}
 }
 
-enum AuthenticationServices: Endpoint {
+enum AuthenticationEndpoints: Endpoint {
     case login
     case registration
 }
 
-extension AuthenticationServices {
+extension AuthenticationEndpoints {
     var path: String {
         switch self{
         case .login:

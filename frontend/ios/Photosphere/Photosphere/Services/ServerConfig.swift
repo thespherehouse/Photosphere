@@ -39,4 +39,8 @@ struct CommonHeader {
             return UUID().uuidString
         }
     }
+    
+    var header : [String : String] {
+        return ["device-id" : deviceToken]
+    }
 }

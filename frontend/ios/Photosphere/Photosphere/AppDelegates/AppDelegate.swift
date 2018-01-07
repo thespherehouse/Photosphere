@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let _ = ServerConfig(config: .DEV)
+        AuthenticationServices.shared.login(withEmail: "abcd@gmail.com", andPassword: "password123",completion: {(status,error) in
+        })
         return true
     }
 

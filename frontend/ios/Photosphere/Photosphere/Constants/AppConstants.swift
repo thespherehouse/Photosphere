@@ -11,4 +11,5 @@ import Foundation
 
 struct KeychainConstants {
     static let deviceToken = "Token"
+    static let loginToken = "LoginToken"
 }

@@ -25,4 +25,4 @@ struct CustomError : Mappable {
         self.code <- map["code"]
         self.message <- map["message"]
     }
-}
+} 
