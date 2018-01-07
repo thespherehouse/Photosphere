@@ -3,9 +3,11 @@ package com.suhel.photosphere.application.di;
 import android.content.Context;
 
 import com.suhel.photosphere.base.di.BaseModule;
-import com.suhel.photosphere.service.realtime.SocketIO;
+import com.suhel.photosphere.service.realtime.WS;
 import com.suhel.photosphere.service.rest.RestService;
 import com.suhel.photosphere.service.storage.Store;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,19 +26,22 @@ public class AppModule extends BaseModule {
         return context;
     }
 
+    @Singleton
     @Provides
     RestService providesRestService(Context context) {
         return new RestService(context);
     }
 
+    @Singleton
     @Provides
     Store providesStore(Context context) {
         return new Store(context);
     }
 
+    @Singleton
     @Provides
-    SocketIO providesSocketIO(Store store) {
-        return new SocketIO(store);
+    WS providesWS(Store store) {
+        return new WS(store);
     }
 
 }

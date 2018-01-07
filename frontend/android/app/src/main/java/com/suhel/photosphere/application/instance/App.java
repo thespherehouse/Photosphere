@@ -11,19 +11,35 @@ import com.suhel.photosphere.custom.app.LifecycleManager;
 import com.suhel.photosphere.screens.comments.di.CommentsComponent;
 import com.suhel.photosphere.screens.home.di.HomeComponent;
 import com.suhel.photosphere.screens.login.di.LoginComponent;
-import com.suhel.photosphere.service.realtime.SocketIO;
+import com.suhel.photosphere.service.realtime.WS;
 import com.suhel.photosphere.service.rest.RestService;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 public class App extends Application implements AppContract {
 
     @Inject
     protected RestService restService;
+
     @Inject
-    protected SocketIO socketIO;
+    protected WS ws;
+
     private AppComponent appComponent;
-    private LifecycleManager lifecycleManager = new LifecycleManager();
+    private LifecycleManager lifecycleManager = new LifecycleManager() {
+
+        @Override
+        public void onBackground() {
+            ws.disconnect();
+        }
+
+        @Override
+        public void onForeground() {
+            ws.connect();
+        }
+
+    };
 
     @Override
     public void onCreate() {
@@ -33,8 +49,8 @@ public class App extends Application implements AppContract {
                 .appModule(new AppModule(this))
                 .build();
         appComponent.inject(this);
-        socketIO.connect();
         registerActivityLifecycleCallbacks(lifecycleManager);
+        Timber.plant(new Timber.DebugTree());
     }
 
     @Override

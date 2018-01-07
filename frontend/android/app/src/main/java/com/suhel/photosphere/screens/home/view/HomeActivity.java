@@ -8,6 +8,10 @@ import com.suhel.photosphere.R;
 import com.suhel.photosphere.application.contract.AppContract;
 import com.suhel.photosphere.base.view.BaseActivity;
 import com.suhel.photosphere.databinding.ActivityHomeBinding;
+import com.suhel.photosphere.model.realtime.RealtimeComment;
+import com.suhel.photosphere.model.realtime.RealtimeLike;
+import com.suhel.photosphere.model.response.Comment;
+import com.suhel.photosphere.model.response.Like;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.screens.comments.view.CommentsActivity;
 import com.suhel.photosphere.screens.home.contract.HomeContract;
@@ -42,7 +46,6 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresente
     protected void onPreCreate() {
         presenter.checkLoginStatus();
         presenter.updateFirebaseToken();
-        presenter.connectToSocket();
     }
 
     @Override
@@ -88,6 +91,18 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresente
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.addSocketListeners();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.removeSocketListeners();
+    }
+
+    @Override
     public void redirectToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -107,6 +122,26 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresente
     @Override
     public void onFailUnlikePost(Post post) {
         adapter.setOwnLike(post);
+    }
+
+    @Override
+    public void onRealtimeLike(RealtimeLike like) {
+        adapter.addLike(like);
+    }
+
+    @Override
+    public void onRealtimeUnlike(RealtimeLike like) {
+        adapter.removeLike(like);
+    }
+
+    @Override
+    public void onRealtimeAddComment(RealtimeComment comment) {
+        adapter.addComment(comment);
+    }
+
+    @Override
+    public void onRealtimeDeleteComment(RealtimeComment comment) {
+        adapter.removeComment(comment);
     }
 
 }

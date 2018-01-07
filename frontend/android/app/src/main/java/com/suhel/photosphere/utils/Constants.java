@@ -15,7 +15,7 @@ public interface Constants {
         String CURRENT_BASE = PROD_BASE;
 
         String REST_URL = CURRENT_BASE + "/photosphere/api/v1/";
-        String SOCKET_IO_URL = CURRENT_BASE;
+        String SOCKET_IO_URL = CURRENT_BASE + "/realtime";
 
         String STORAGE_URL = "https://s3-us-west-2.amazonaws.com";
 

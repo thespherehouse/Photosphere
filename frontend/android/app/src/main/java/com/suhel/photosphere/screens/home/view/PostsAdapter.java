@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.suhel.photosphere.R;
 import com.suhel.photosphere.custom.view.SimpleProgressBarDrawable;
 import com.suhel.photosphere.databinding.ItemPostBinding;
+import com.suhel.photosphere.model.realtime.RealtimeComment;
+import com.suhel.photosphere.model.realtime.RealtimeLike;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.utils.Constants;
 import com.suhel.photosphere.utils.DateUtils;
@@ -50,11 +52,59 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         this.onClickListener = onClickListener;
     }
 
+    public void addLike(RealtimeLike like) {
+        int position = -1;
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i).getId().equals(like.getPostId()))
+                position = i;
+        }
+        if (position != -1) {
+            posts.get(position).setLikesCount(posts.get(position).getLikesCount() + 1);
+            notifyItemChanged(position);
+        }
+    }
+
+    public void removeLike(RealtimeLike like) {
+        int position = -1;
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i).getId().equals(like.getPostId()))
+                position = i;
+        }
+        if (position != -1) {
+            posts.get(position).setLikesCount(posts.get(position).getLikesCount() - 1);
+            notifyItemChanged(position);
+        }
+    }
+
+    public void addComment(RealtimeComment comment) {
+        int position = -1;
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i).getId().equals(comment.getPostId()))
+                position = i;
+        }
+        if (position != -1) {
+            posts.get(position).setCommentsCount(posts.get(position).getCommentsCount() + 1);
+            notifyItemChanged(position);
+        }
+    }
+
+    public void removeComment(RealtimeComment comment) {
+        int position = -1;
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i).getId().equals(comment.getPostId()))
+                position = i;
+        }
+        if (position != -1) {
+            posts.get(position).setCommentsCount(posts.get(position).getCommentsCount() - 1);
+            notifyItemChanged(position);
+        }
+    }
+
     public void setOwnLike(Post post) {
         int index = posts.indexOf(post);
         if (index != -1 && !posts.get(index).isLikedByMe()) {
             posts.get(index).setLikedByMe(true);
-            posts.get(index).setLikesCount(posts.get(index).getLikesCount() + 1);
+//            posts.get(index).setLikesCount(posts.get(index).getLikesCount() + 1);
             notifyItemChanged(index);
         }
     }
@@ -63,7 +113,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         int index = posts.indexOf(post);
         if (index != -1 && posts.get(index).isLikedByMe()) {
             posts.get(index).setLikedByMe(false);
-            posts.get(index).setLikesCount(posts.get(index).getLikesCount() - 1);
+//            posts.get(index).setLikesCount(posts.get(index).getLikesCount() - 1);
             notifyItemChanged(index);
         }
     }

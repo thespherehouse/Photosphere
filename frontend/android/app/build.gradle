@@ -8,6 +8,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -50,7 +51,8 @@ def image_management_ver = "1.7.1"
 def facebook_ver = "[4,5)"
 def date_time_utils_ver = "2.9.9.1"
 def push_notif_ver = "11.8.0"
-def socket_client_ver = "1.0.0"
+def socket_client_ver = "2.3"
+def logger_ver = "4.6.0"
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -102,10 +104,10 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:$push_notif_ver"
 
     // Socket client
-    implementation ("io.socket:socket.io-client:$socket_client_ver") {
-        // excluding org.json which is provided by Android
-        exclude group: 'org.json', module: 'json'
-    }
+    implementation "com.neovisionaries:nv-websocket-client:${socket_client_ver}"
+
+    // Logger
+    implementation "com.jakewharton.timber:timber:${logger_ver}"
 
 }
 

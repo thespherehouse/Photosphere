@@ -1,12 +1,12 @@
 package com.suhel.photosphere.screens.home.di;
 
 import com.suhel.photosphere.base.di.BaseModule;
-import com.suhel.photosphere.service.realtime.SocketIO;
-import com.suhel.photosphere.service.storage.Store;
 import com.suhel.photosphere.screens.home.contract.HomeContract;
 import com.suhel.photosphere.screens.home.presenter.HomePresenter;
 import com.suhel.photosphere.screens.home.presenter.HomePresenterImpl;
+import com.suhel.photosphere.service.realtime.WS;
 import com.suhel.photosphere.service.rest.RestService;
+import com.suhel.photosphere.service.storage.Store;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,8 +21,8 @@ public class HomeModule extends BaseModule {
     }
 
     @Provides
-    HomePresenter providesPresenter(RestService restService, Store store, SocketIO socketIO) {
-        return new HomePresenterImpl(view, restService, store, socketIO);
+    HomePresenter providesPresenter(RestService restService, Store store, WS ws) {
+        return new HomePresenterImpl(view, restService, store, ws);
     }
 
 }

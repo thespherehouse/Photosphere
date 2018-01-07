@@ -1,56 +1,71 @@
 package com.suhel.photosphere.screens.home.presenter;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.suhel.photosphere.base.model.ApiError;
+import com.suhel.photosphere.model.realtime.RealtimeComment;
+import com.suhel.photosphere.model.realtime.RealtimeLike;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.screens.home.contract.HomeContract;
-import com.suhel.photosphere.service.realtime.SocketIO;
-import com.suhel.photosphere.service.realtime.SocketIOClient;
+import com.suhel.photosphere.service.realtime.WS;
+import com.suhel.photosphere.service.realtime.WSCommentsListener;
+import com.suhel.photosphere.service.realtime.WSLikesListener;
 import com.suhel.photosphere.service.rest.ApiSubscriber;
 import com.suhel.photosphere.service.rest.RestService;
 import com.suhel.photosphere.service.storage.Store;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
 public class HomePresenterImpl extends HomePresenter {
 
-    public HomePresenterImpl(@NonNull HomeContract.View view, RestService restService, Store store, SocketIO socketIO) {
-        super(view, restService, store, socketIO);
+    private WSLikesListener likesListener = new WSLikesListener() {
+
+        @Override
+        public void onLike(RealtimeLike data) {
+            view.onRealtimeLike(data);
+        }
+
+        @Override
+        public void onUnlike(RealtimeLike data) {
+            view.onRealtimeUnlike(data);
+        }
+
+    };
+
+    private WSCommentsListener commentsListener = new WSCommentsListener() {
+
+        @Override
+        public void onCreateComment(RealtimeComment data) {
+            view.onRealtimeAddComment(data);
+        }
+
+        @Override
+        public void onEditComment(RealtimeComment data) {
+
+        }
+
+        @Override
+        public void onDeleteComment(RealtimeComment data) {
+            view.onRealtimeDeleteComment(data);
+        }
+
+    };
+
+    public HomePresenterImpl(@NonNull HomeContract.View view, RestService restService, Store store, WS ws) {
+        super(view, restService, store, ws);
     }
 
     @Override
-    public void connectToSocket() {
-        socketIO.connect();
-        socketIO.add(new SocketIOClient() {
+    public void addSocketListeners() {
+        ws.addListener(likesListener);
+        ws.addListener(commentsListener);
+    }
 
-            @Override
-            public void onConnect() {
-                Log.e("Likes", "Likes connected");
-            }
-
-            @Override
-            public void onDisconnect() {
-
-            }
-
-            @Override
-            public void onReceive(Domain domain, Event event, JSONObject data) {
-                Log.e("Socket.IO Domain", domain.toString());
-                Log.e("Socket.IO Event", event.toString());
-                try {
-                    Log.e("Socket.IO Data", data.toString(2));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        });
+    @Override
+    public void removeSocketListeners() {
+        ws.removeListener(likesListener);
+        ws.removeListener(commentsListener);
     }
 
     @Override

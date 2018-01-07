@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-public final class LifecycleManager implements Application.ActivityLifecycleCallbacks {
+public abstract class LifecycleManager implements Application.ActivityLifecycleCallbacks {
 
     private int createdCount = 0, startedCount = 0, resumedCount = 0;
 
@@ -21,6 +21,8 @@ public final class LifecycleManager implements Application.ActivityLifecycleCall
     @Override
     public final void onActivityResumed(Activity activity) {
         resumedCount++;
+        if (resumedCount == 1)
+            onForeground();
     }
 
     @Override
@@ -31,6 +33,8 @@ public final class LifecycleManager implements Application.ActivityLifecycleCall
     @Override
     public final void onActivityStopped(Activity activity) {
         startedCount--;
+        if (startedCount == 0)
+            onBackground();
     }
 
     @Override
@@ -53,5 +57,9 @@ public final class LifecycleManager implements Application.ActivityLifecycleCall
     public int getResumedCount() {
         return resumedCount;
     }
+
+    public abstract void onBackground();
+
+    public abstract void onForeground();
 
 }
