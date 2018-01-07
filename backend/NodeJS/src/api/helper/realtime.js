@@ -75,26 +75,26 @@ const emit = (domain, event, data, targetUserId) => {
     }
 }
 
-export const emitNewPost = (postId, userId, userName) => {
-    emit(Domains.Post, Events.Create, { postId, userId, userName })
+export const emitNewPost = (post) => {
+    emit(Domains.Post, Events.Create, { post })
 }
 
-export const emitLike = (postId, userId, userName) => {
-    emit(Domains.Like, Events.Create, { postId, userId, userName })
+export const emitLike = (like) => {
+    emit(Domains.Like, Events.Create, { like })
 }
 
-export const emitUnlike = (postId, userId, userName) => {
-    emit(Domains.Like, Events.Delete, { postId, userId, userName })
+export const emitUnlike = (like) => {
+    emit(Domains.Like, Events.Delete, { like })
 }
 
-export const emitCreateComment = (postId, userId, commentId, comment, userName) => {
-    emit(Domains.Comment, Events.Create, { postId, userId, commentId, userName, comment })
+export const emitCreateComment = (comment) => {
+    emit(Domains.Comment, Events.Create, { comment })
 }
 
-export const emitEditComment = (postId, userId, commentId, comment, userName) => {
-    emit(Domains.Comment, Events.Update, { postId, userId, commentId, comment, userName })
+export const emitEditComment = (comment) => {
+    emit(Domains.Comment, Events.Update, { comment })
 }
 
-export const emitDeleteComment = (postId, userId, commentId, userName) => {
-    emit(Domains.Comment, Events.Delete, { postId, userId, commentId, userName })
+export const emitDeleteComment = (comment) => {
+    emit(Domains.Comment, Events.Delete, { comment })
 }

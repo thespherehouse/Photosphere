@@ -130,7 +130,7 @@ export const Endpoint = {
                 }
 
                 Response.send(res, post)
-                Realtime.emitNewPost(post.toObject()._id, req.user._id, req.user.name)
+                Realtime.emitNewPost(post)
             })
         }
     },
@@ -147,7 +147,10 @@ export const Endpoint = {
                 if (!post)
                     return Response.sendError(res, Errors.NotFound)
 
-                Response.send(res, post.comments[0])
+                let comment = post.toObject().comments[0]
+
+                Response.send(res, comment)
+                Realtime.emitCreateComment(comment)
 
                 if (req.user.fcm)
                     Push.sendForComment(req.user.fcm, post.toObject()._id, req.user.name)
@@ -165,11 +168,13 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.Internal)
                 }
 
-                if (!post)
+                if (!post || post.likes.length === 0)
                     return Response.sendError(res, Errors.NotFound)
 
+                let like = post.toObject().likes[0]
+
                 Response.send(res)
-                Realtime.emitLike(post._id, req.user._id, req.user.name)
+                Realtime.emitLike(like)
 
                 if (req.user.fcm)
                     Push.sendForLike(req.user.fcm, post._id, req.user.name)
@@ -321,8 +326,11 @@ export const Endpoint = {
                 if (!post)
                     return Response.sendError(res, Errors.NotFound)
 
+                let comment = post.toObject().comments[0]
+
+                delete comment.user
                 Response.send(res)
-                Realtime.emitEditComment(post._id, req.user._id, req.params.commentId, req.body.comment, req.user.name)
+                Realtime.emitEditComment(comment)
             })
         }
     },
@@ -374,11 +382,14 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.Internal)
                 }
 
-                if (!post)
+                if (!post || post.likes.length === 0)
                     return Response.sendError(res, Errors.NotFound)
 
+                let like = post.toObject().likes[0]
+                delete like.user
+
                 Response.send(res)
-                Realtime.emitUnlike(post._id, req.user._id, req.user.name)
+                Realtime.emitUnlike(like)
             })
         }
     },
@@ -397,8 +408,11 @@ export const Endpoint = {
                 if (!post)
                     return Response.sendError(res, Errors.NotFound)
 
+                let comment = post.toObject().comments[0]
+
+                delete comment.user
                 Response.send(res)
-                Realtime.emitDeleteComment(post._id, req.user._id, req.params.commentId, req.user.name)
+                Realtime.emitDeleteComment(comment)
 
             })
 

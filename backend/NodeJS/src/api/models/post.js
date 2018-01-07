@@ -264,11 +264,22 @@ schema.statics.like = function (userId, postId, cb) {
             'likes.user': { '$ne': userId }
         },
         {
-            '$push': { likes: { user: userId } },
+            '$push': {
+                likes: {
+                    $each: [{ user: userId }],
+                    $position: 0
+                }
+            },
             '$inc': { likesCount: 1 }
         },
-        { 'new': true },
-        cb)
+        {
+            'new': true,
+            fields: {
+                'likes': { $slice: 1 }
+            }
+        })
+        .populate('likes.user', 'name')
+        .exec(cb)
 }
 
 schema.statics.unlike = function (userId, postId, cb) {
@@ -281,7 +292,6 @@ schema.statics.unlike = function (userId, postId, cb) {
             '$pull': { likes: { user: userId } },
             '$inc': { likesCount: -1 }
         },
-        { 'new': true },
         cb)
 }
 
@@ -330,7 +340,7 @@ schema.statics.editComment = function (userId, postId, commentId, comment, cb) {
     return this.findOneAndUpdate(
         {
             _id: postId,
-            'comments.owner': { $eq: userId },
+            'comments.user': { $eq: userId },
             'comments._id': { $eq: commentId }
         },
         {
@@ -347,14 +357,11 @@ schema.statics.deleteComment = function (userId, postId, commentId, cb) {
     return this.findOneAndUpdate(
         {
             _id: postId,
-            'comments.owner': { $eq: userId }
+            'comments.user': { $eq: userId }
         },
         {
             $pull: { comments: { _id: commentId } },
             $inc: { commentsCount: -1 }
-        },
-        {
-            new: true
         },
         cb)
 }
