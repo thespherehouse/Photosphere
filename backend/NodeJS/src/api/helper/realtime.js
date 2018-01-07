@@ -76,23 +76,23 @@ const emit = (domain, event, data, targetUserId) => {
 }
 
 export const emitNewPost = (post) => {
-    emit(Domains.Post, Events.Create, { post })
+    emit(Domains.Post, Events.Create, post)
 }
 
 export const emitLike = (like) => {
-    emit(Domains.Like, Events.Create, { like })
+    emit(Domains.Like, Events.Create, like)
 }
 
 export const emitUnlike = (like) => {
-    emit(Domains.Like, Events.Delete, { like })
+    emit(Domains.Like, Events.Delete, like)
 }
 
 export const emitCreateComment = (comment) => {
-    emit(Domains.Comment, Events.Create, { comment })
+    emit(Domains.Comment, Events.Create, comment)
 }
 
 export const emitEditComment = (comment) => {
-    emit(Domains.Comment, Events.Update, { comment })
+    emit(Domains.Comment, Events.Update, comment)
 }
 
 export const emitDeleteComment = (comment) => {
