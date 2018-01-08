@@ -7,8 +7,11 @@ import com.suhel.photosphere.model.request.CreateComment;
 import com.suhel.photosphere.model.request.CreatePost;
 import com.suhel.photosphere.model.request.FCM;
 import com.suhel.photosphere.model.request.RegisterSocial;
+import com.suhel.photosphere.model.request.SendChatMessage;
 import com.suhel.photosphere.model.response.Comment;
+import com.suhel.photosphere.model.response.Message;
 import com.suhel.photosphere.model.response.Post;
+import com.suhel.photosphere.model.response.User;
 import com.suhel.photosphere.service.rx.RxHelper;
 import com.suhel.photosphere.utils.Constants;
 
@@ -51,7 +54,7 @@ public class RestService {
 
     //region Auth
     public void registerSocial(String name, String email, String socialId, int loginType,
-                               ApiSubscriber.Callback<Void> callback) {
+                               ApiSubscriber.Callback<User> callback) {
         restInterface.socialLogin(new RegisterSocial(name, email, socialId, loginType))
                 .compose(RxHelper.applySchedulers())
                 .subscribeWith(new ApiSubscriber<>(callback));
@@ -113,5 +116,18 @@ public class RestService {
     }
     //endregion
 
+    //region Chat
+    public void sendGlobalChatMessage(String message, ApiSubscriber.Callback<Void> callback) {
+        restInterface.sendGlobalChatMessage(new SendChatMessage(message))
+                .compose(RxHelper.applySchedulers())
+                .subscribeWith(new ApiSubscriber<>(callback));
+    }
+
+    public void getGlobalChatMessages(ApiSubscriber.Callback<List<Message>> callback) {
+        restInterface.getGlobalChatMessages()
+                .compose(RxHelper.applySchedulers())
+                .subscribeWith(new ApiSubscriber<>(callback));
+    }
+    //endregion
 
 }

@@ -32,7 +32,7 @@ public interface Constants {
 
     }
 
-    interface Intent {
+    interface IntentKey {
 
         String Post = "Post";
 

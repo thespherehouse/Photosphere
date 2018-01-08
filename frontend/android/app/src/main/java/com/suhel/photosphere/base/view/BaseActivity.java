@@ -20,10 +20,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, P, C extends BaseS
     @Inject
     protected P presenter;
 
+    private C component;
+
     @Override
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        inject(getComponent((AppContract) getApplication()));
+        component = createComponent((AppContract) getApplication());
+        inject(component);
         onPreCreate();
         binding = DataBindingUtil.setContentView(this, getLayoutRes());
         onActivityCreated();
@@ -32,9 +35,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, P, C extends BaseS
     @LayoutRes
     protected abstract int getLayoutRes();
 
-    protected abstract C getComponent(AppContract contract);
+    protected abstract C createComponent(AppContract contract);
 
     protected abstract void inject(C component);
+
+    public C getComponent() {
+        return component;
+    }
 
     protected void onPreCreate() {
 

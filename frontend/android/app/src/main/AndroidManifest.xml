@@ -40,7 +40,8 @@
 
         <activity
             android:name=".screens.login.view.LoginActivity"
-            android:configChanges="screenSize|orientation" />
+            android:configChanges="screenSize|orientation"
+            android:theme="@style/AppTheme.TransparentStatus" />
 
         <activity
             android:name=".screens.home.view.HomeActivity"

@@ -4,7 +4,6 @@ import com.suhel.photosphere.base.di.BaseModule;
 import com.suhel.photosphere.screens.home.contract.HomeContract;
 import com.suhel.photosphere.screens.home.presenter.HomePresenter;
 import com.suhel.photosphere.screens.home.presenter.HomePresenterImpl;
-import com.suhel.photosphere.service.realtime.WS;
 import com.suhel.photosphere.service.rest.RestService;
 import com.suhel.photosphere.service.storage.Store;
 
@@ -21,8 +20,8 @@ public class HomeModule extends BaseModule {
     }
 
     @Provides
-    HomePresenter providesPresenter(RestService restService, Store store, WS ws) {
-        return new HomePresenterImpl(view, restService, store, ws);
+    HomePresenter providesPresenter(RestService restService, Store store) {
+        return new HomePresenterImpl(view, restService, store);
     }
 
 }

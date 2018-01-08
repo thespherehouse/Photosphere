@@ -28,7 +28,7 @@ public class ApiSubscriber<T> implements SingleObserver<ApiResponse<T>> {
         if (response.getApiError() != null && response.getApiError().getCode() == 0)
             callback.onSuccess(response.getData());
         else
-            callback.onError(response.getApiError());
+            callback.onApiError(response.getApiError());
         callback.onEnd();
     }
 
@@ -38,7 +38,7 @@ public class ApiSubscriber<T> implements SingleObserver<ApiResponse<T>> {
         if (callback == null)
             return;
 
-        callback.onError(new ApiError(1, "Internal error"));
+        callback.onError(t);
         callback.onEnd();
     }
 
@@ -50,7 +50,11 @@ public class ApiSubscriber<T> implements SingleObserver<ApiResponse<T>> {
         public void onSuccess(U data) {
         }
 
-        public void onError(ApiError apiError) {
+        public void onApiError(ApiError apiError) {
+
+        }
+
+        public void onError(Throwable t) {
         }
 
         public void onEnd() {

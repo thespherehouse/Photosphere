@@ -11,6 +11,7 @@ import com.suhel.photosphere.R;
 import com.suhel.photosphere.application.contract.AppContract;
 import com.suhel.photosphere.base.view.BaseActivity;
 import com.suhel.photosphere.databinding.ActivityCommentsBinding;
+import com.suhel.photosphere.model.realtime.RealtimeComment;
 import com.suhel.photosphere.model.response.Comment;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.screens.comments.contract.CommentsContract;
@@ -32,7 +33,7 @@ public class CommentsActivity extends BaseActivity<ActivityCommentsBinding, Comm
     }
 
     @Override
-    protected CommentsComponent getComponent(AppContract contract) {
+    protected CommentsComponent createComponent(AppContract contract) {
         return contract.getCommentsComponent().addModule(new CommentsModule(this)).build();
     }
 
@@ -43,8 +44,8 @@ public class CommentsActivity extends BaseActivity<ActivityCommentsBinding, Comm
 
     @Override
     protected void onActivityCreated() {
-        if (getIntent() != null && getIntent().hasExtra(Constants.Intent.Post))
-            post = (Post) getIntent().getSerializableExtra(Constants.Intent.Post);
+        if (getIntent() != null && getIntent().hasExtra(Constants.IntentKey.Post))
+            post = (Post) getIntent().getSerializableExtra(Constants.IntentKey.Post);
         else
             finish();
 
@@ -78,6 +79,18 @@ public class CommentsActivity extends BaseActivity<ActivityCommentsBinding, Comm
         presenter.getAllComments(post.getId());
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.addSocketListeners();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.removeSocketListeners();
+    }
+
     private void updateButton() {
         if (binding.txtComment.getText().toString().trim().isEmpty()) {
             binding.btnSend.setEnabled(false);
@@ -98,12 +111,13 @@ public class CommentsActivity extends BaseActivity<ActivityCommentsBinding, Comm
     public void onShowComments(List<Comment> data) {
         binding.placeholder.setVisibility(View.GONE);
         adapter.setComments(data);
+        binding.lstComments.smoothScrollToPosition(adapter.getItemCount() - 1);
     }
 
     @Override
     public void onCreateCommentSuccess(Comment comment) {
         binding.txtComment.setText("");
-        adapter.addComment(comment);
+//        adapter.addComment(comment);
         updateButton();
     }
 
@@ -123,6 +137,26 @@ public class CommentsActivity extends BaseActivity<ActivityCommentsBinding, Comm
             binding.spinner.setVisibility(View.GONE);
             binding.txtComment.setEnabled(true);
         }
+    }
+
+    @Override
+    public void onRealtimeAddComment(RealtimeComment realtimeComment) {
+        if (realtimeComment.getPostId().equals(post.getId())) {
+            adapter.addRealtimeComment(realtimeComment);
+            binding.lstComments.smoothScrollToPosition(adapter.getItemCount() - 1);
+        }
+    }
+
+    @Override
+    public void onRealtimeEditComment(RealtimeComment realtimeComment) {
+        if (realtimeComment.getPostId().equals(post.getId()))
+            adapter.editRealtimeComment(realtimeComment);
+    }
+
+    @Override
+    public void onRealtimeDeleteComment(RealtimeComment realtimeComment) {
+        if (realtimeComment.getPostId().equals(post.getId()))
+            adapter.deleteRealtimeComment(realtimeComment);
     }
 
 }

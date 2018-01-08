@@ -4,71 +4,68 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorLight"
         android:fitsSystemWindows="true">
 
-        <include
-            android:id="@+id/timeline"
-            layout="@layout/layout_timeline" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="48dp"
+            android:layout_marginTop="-24dp"
+            android:background="@color/colorLight"
+            android:overScrollMode="never" />
 
         <com.suhel.photosphere.screens.home.view.LinearMenuBar
+            android:id="@+id/menu"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorWhite"
-            android:elevation="8dp"
             android:orientation="horizontal">
 
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_menu_item"
-                android:padding="14dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_timeline"
-                android:tint="@color/colorMenuUnselected" />
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/bg_menu_item"
-                android:padding="14dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_chat"
-                android:tint="@color/colorMenuUnselected" />
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/bg_menu_item"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="12dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_add"
-                android:tint="@color/colorDark" />
+                android:src="@drawable/ic_timeline" />
 
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_menu_item"
-                android:padding="14dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_competition"
-                android:tint="@color/colorMenuUnselected" />
+                android:src="@drawable/ic_competition" />
 
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_menu_item"
-                android:padding="14dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_profile"
-                android:tint="@color/colorMenuUnselected" />
+                android:src="@drawable/ic_add" />
 
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_chat" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_profile" />
 
         </com.suhel.photosphere.screens.home.view.LinearMenuBar>
 

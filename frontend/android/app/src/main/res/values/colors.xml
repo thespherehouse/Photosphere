@@ -23,6 +23,8 @@
     <color name="colorOverlayLight">#55FFFFFF</color>
     <color name="colorOverlayDark">#33000000</color>
     <color name="colorShadow">#33000000</color>
+    <color name="colorSecondaryTextLight">#88FFFFFF</color>
+    <color name="colorSecondaryTextDark">#88FFFFFF</color>
 
     <!--UI Elements-->
     <color name="colorTitle">@color/colorDark</color>

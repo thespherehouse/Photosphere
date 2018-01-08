@@ -1,6 +1,7 @@
-package com.suhel.photosphere.screens.home.view;
+package com.suhel.photosphere.screens.home.view.timeline;
 
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,21 +18,22 @@ import com.suhel.photosphere.utils.DateUtils;
 import com.suhel.photosphere.utils.LanguageUtils;
 import com.suhel.photosphere.utils.S3Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHolder> {
+public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder> {
 
     private List<Post> posts;
     private OnClickListener onClickListener;
 
     @Override
-    public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PostViewHolder(ItemPostBinding.inflate(LayoutInflater.from(parent.getContext()),
+    public TimelineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new TimelineViewHolder(ItemPostBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false));
     }
 
     @Override
-    public void onBindViewHolder(PostViewHolder holder, int position) {
+    public void onBindViewHolder(TimelineViewHolder holder, int position) {
         holder.bind(getItem(position));
     }
 
@@ -44,6 +46,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         notifyDataSetChanged();
     }
 
+    public void addPosts(@NonNull List<Post> posts) {
+        if (this.posts == null)
+            this.posts = new ArrayList<>();
+        int initialSize = this.posts.size();
+        this.posts.addAll(posts);
+        notifyItemRangeInserted(initialSize, posts.size());
+    }
+
     public OnClickListener getOnClickListener() {
         return onClickListener;
     }
@@ -52,7 +62,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         this.onClickListener = onClickListener;
     }
 
-    public void addLike(RealtimeLike like) {
+    public void addRealtimeLike(RealtimeLike like) {
         int position = -1;
         for (int i = 0; i < posts.size(); i++) {
             if (posts.get(i).getId().equals(like.getPostId()))
@@ -64,7 +74,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         }
     }
 
-    public void removeLike(RealtimeLike like) {
+    public void removeRealtimeLike(RealtimeLike like) {
         int position = -1;
         for (int i = 0; i < posts.size(); i++) {
             if (posts.get(i).getId().equals(like.getPostId()))
@@ -76,7 +86,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         }
     }
 
-    public void addComment(RealtimeComment comment) {
+    public void addRealtimeComment(RealtimeComment comment) {
         int position = -1;
         for (int i = 0; i < posts.size(); i++) {
             if (posts.get(i).getId().equals(comment.getPostId()))
@@ -88,7 +98,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         }
     }
 
-    public void removeComment(RealtimeComment comment) {
+    public void removeRealtimeComment(RealtimeComment comment) {
         int position = -1;
         for (int i = 0; i < posts.size(); i++) {
             if (posts.get(i).getId().equals(comment.getPostId()))
@@ -143,23 +153,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
 
     public interface OnClickListener {
 
-        void onOwnerClick(PostViewHolder viewHolder, int position);
+        void onOwnerClick(TimelineViewHolder viewHolder, int position);
 
-        void onLikeClick(PostViewHolder viewHolder, int position);
+        void onLikeClick(TimelineViewHolder viewHolder, int position);
 
-        void onUnlikeClick(PostViewHolder viewHolder, int position);
+        void onUnlikeClick(TimelineViewHolder viewHolder, int position);
 
-        void onCommentClick(PostViewHolder viewHolder, int position);
+        void onCommentClick(TimelineViewHolder viewHolder, int position);
 
-        void onPostClick(PostViewHolder viewHolder, int position);
+        void onPostClick(TimelineViewHolder viewHolder, int position);
 
     }
 
-    class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class TimelineViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ItemPostBinding binding;
 
-        PostViewHolder(ItemPostBinding binding) {
+        TimelineViewHolder(ItemPostBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             binding.getRoot().setOnClickListener(this);

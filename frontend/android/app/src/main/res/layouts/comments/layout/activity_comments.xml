@@ -16,8 +16,7 @@
                 style="@style/AppTheme.Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways" />
+                android:background="?attr/colorPrimary" />
 
         </android.support.design.widget.AppBarLayout>
 
@@ -38,6 +37,7 @@
             android:id="@+id/lstComments"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="48dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <LinearLayout
@@ -46,8 +46,7 @@
             android:layout_gravity="bottom"
             android:background="@color/colorWhite"
             android:elevation="8dp"
-            android:orientation="horizontal"
-            app:layout_behavior="@string/comment_bar_behavior">
+            android:orientation="horizontal">
 
             <com.suhel.photosphere.custom.view.SimpleEditText
                 android:id="@+id/txtComment"

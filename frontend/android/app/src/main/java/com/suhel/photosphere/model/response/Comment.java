@@ -50,4 +50,21 @@ public class Comment implements Serializable {
         return updatedAt;
     }
 
+    public void copyFrom(Comment comment) {
+        if(comment.id != null)
+            this.id = comment.id;
+
+        if(comment.comment != null)
+            this.comment = comment.comment;
+
+        if(comment.user != null)
+            this.user = comment.user;
+
+        if(comment.createdAt != null)
+            this.createdAt = comment.createdAt;
+
+        if(comment.updatedAt != null)
+            this.updatedAt = comment.updatedAt;
+    }
+
 }

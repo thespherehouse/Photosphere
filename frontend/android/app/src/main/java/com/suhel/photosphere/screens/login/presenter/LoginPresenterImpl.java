@@ -8,9 +8,11 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.suhel.photosphere.base.model.ApiError;
-import com.suhel.photosphere.service.rest.ApiSubscriber;
+import com.suhel.photosphere.model.response.User;
 import com.suhel.photosphere.screens.login.contract.LoginContract;
+import com.suhel.photosphere.service.rest.ApiSubscriber;
 import com.suhel.photosphere.service.rest.RestService;
+import com.suhel.photosphere.utils.UserStore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,8 +59,8 @@ public class LoginPresenterImpl extends LoginPresenter {
 
     };
 
-    public LoginPresenterImpl(LoginContract.View view, RestService restService) {
-        super(view, restService);
+    public LoginPresenterImpl(LoginContract.View view, RestService restService, UserStore userStore) {
+        super(view, restService, userStore);
     }
 
     @Override
@@ -68,19 +70,20 @@ public class LoginPresenterImpl extends LoginPresenter {
     }
 
     private void registerSocialFacebook(String name, String email, String socialId) {
-        restService.registerSocial(name, email, socialId, 1, new ApiSubscriber.Callback<Void>() {
+        restService.registerSocial(name, email, socialId, 1, new ApiSubscriber.Callback<User>() {
 
             @Override
             public void onStart() {
             }
 
             @Override
-            public void onSuccess(Void data) {
+            public void onSuccess(User data) {
+                userStore.save(data);
                 view.onLoginSuccess();
             }
 
             @Override
-            public void onError(ApiError apiError) {
+            public void onApiError(ApiError apiError) {
                 view.onLoginFailed();
             }
 

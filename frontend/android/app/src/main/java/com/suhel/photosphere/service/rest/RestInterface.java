@@ -6,8 +6,11 @@ import com.suhel.photosphere.model.request.CreateComment;
 import com.suhel.photosphere.model.request.CreatePost;
 import com.suhel.photosphere.model.request.FCM;
 import com.suhel.photosphere.model.request.RegisterSocial;
+import com.suhel.photosphere.model.request.SendChatMessage;
 import com.suhel.photosphere.model.response.Comment;
+import com.suhel.photosphere.model.response.Message;
 import com.suhel.photosphere.model.response.Post;
+import com.suhel.photosphere.model.response.User;
 
 import java.util.List;
 
@@ -26,7 +29,7 @@ public interface RestInterface {
 
     //region Auth
     @PUT("auth/socialLogin")
-    Single<ApiResponse<Void>> socialLogin(@Body RegisterSocial registerSocial);
+    Single<ApiResponse<User>> socialLogin(@Body RegisterSocial registerSocial);
 
     @PUT("auth/silentLogin")
     Single<ApiResponse<Void>> silentLogin();
@@ -70,6 +73,14 @@ public interface RestInterface {
 
     @DELETE("posts/{postId}/unlike")
     Single<ApiResponse<Void>> unlikePost(@Path("postId") String postId);
+    //endregion
+
+    //region Chat
+    @POST("chat")
+    Single<ApiResponse<Void>> sendGlobalChatMessage(@Body SendChatMessage message);
+
+    @GET("chat")
+    Single<ApiResponse<List<Message>>> getGlobalChatMessages();
     //endregion
 
 }

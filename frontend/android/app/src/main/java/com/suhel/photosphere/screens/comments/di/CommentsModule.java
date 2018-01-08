@@ -4,6 +4,7 @@ import com.suhel.photosphere.base.di.BaseModule;
 import com.suhel.photosphere.screens.comments.contract.CommentsContract;
 import com.suhel.photosphere.screens.comments.presenter.CommentsPresenter;
 import com.suhel.photosphere.screens.comments.presenter.CommentsPresenterImpl;
+import com.suhel.photosphere.service.realtime.WS;
 import com.suhel.photosphere.service.rest.RestService;
 import com.suhel.photosphere.service.storage.Store;
 
@@ -20,8 +21,8 @@ public class CommentsModule extends BaseModule {
     }
 
     @Provides
-    CommentsPresenter providesPresenter(RestService restService, Store store) {
-        return new CommentsPresenterImpl(view, restService, store);
+    CommentsPresenter providesPresenter(RestService restService, Store store, WS ws) {
+        return new CommentsPresenterImpl(view, restService, store, ws);
     }
 
 }

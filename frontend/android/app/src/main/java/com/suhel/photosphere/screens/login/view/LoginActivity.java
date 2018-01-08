@@ -32,7 +32,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginPrese
     }
 
     @Override
-    protected LoginComponent getComponent(AppContract contract) {
+    protected LoginComponent createComponent(AppContract contract) {
         return contract.getLoginComponent().addModule(new LoginModule(this)).build();
     }
 

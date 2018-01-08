@@ -5,6 +5,7 @@ import com.suhel.photosphere.screens.login.contract.LoginContract;
 import com.suhel.photosphere.screens.login.presenter.LoginPresenter;
 import com.suhel.photosphere.screens.login.presenter.LoginPresenterImpl;
 import com.suhel.photosphere.service.rest.RestService;
+import com.suhel.photosphere.utils.UserStore;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,8 +20,8 @@ public class LoginModule extends BaseModule {
     }
 
     @Provides
-    LoginPresenter providesPresenter(RestService restService) {
-        return new LoginPresenterImpl(view, restService);
+    LoginPresenter providesPresenter(RestService restService, UserStore userStore) {
+        return new LoginPresenterImpl(view, restService, userStore);
     }
 
 }

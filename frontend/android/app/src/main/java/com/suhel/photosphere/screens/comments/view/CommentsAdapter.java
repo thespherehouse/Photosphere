@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.suhel.photosphere.databinding.ItemCommentBinding;
+import com.suhel.photosphere.model.realtime.RealtimeComment;
 import com.suhel.photosphere.model.response.Comment;
 import com.suhel.photosphere.utils.DateUtils;
 
@@ -20,11 +21,63 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         notifyDataSetChanged();
     }
 
-    public void addComment(Comment comment) {
+    void addComment(Comment comment) {
         if (this.comments == null)
             this.comments = new ArrayList<>();
         this.comments.add(0, comment);
         notifyItemInserted(this.comments.size() - 1);
+    }
+
+    void addRealtimeComment(RealtimeComment realtimeComment) {
+        if (this.comments == null) {
+            this.comments = new ArrayList<>();
+            this.comments.add(0, realtimeComment.getComment());
+            notifyItemInserted(this.comments.size() - 1);
+            return;
+        }
+
+        int position = -1;
+
+        for (int i = 0; i < this.comments.size(); i++)
+            if (this.comments.get(i).getId().equals(realtimeComment.getComment().getId()))
+                position = i;
+
+        if (position == -1) {
+            this.comments.add(0, realtimeComment.getComment());
+            notifyItemInserted(this.comments.size() - 1);
+        }
+    }
+
+    void editRealtimeComment(RealtimeComment realtimeComment) {
+        if (this.comments == null)
+            return;
+
+        int position = -1;
+
+        for (int i = 0; i < this.comments.size(); i++)
+            if (this.comments.get(i).getId().equals(realtimeComment.getComment().getId()))
+                position = i;
+
+        if (position != -1) {
+            this.comments.get(position).copyFrom(realtimeComment.getComment());
+            notifyItemChanged(position);
+        }
+    }
+
+    void deleteRealtimeComment(RealtimeComment realtimeComment) {
+        if (this.comments == null)
+            return;
+
+        int position = -1;
+
+        for (int i = 0; i < this.comments.size(); i++)
+            if (this.comments.get(i).getId().equals(realtimeComment.getComment().getId()))
+                position = i;
+
+        if (position != -1) {
+            this.comments.remove(position);
+            notifyItemRemoved(position);
+        }
     }
 
     @Override
@@ -50,7 +103,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
         ItemCommentBinding binding;
 
-        public CommentsViewHolder(ItemCommentBinding binding) {
+        CommentsViewHolder(ItemCommentBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

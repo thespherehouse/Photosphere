@@ -2,8 +2,11 @@ package com.suhel.photosphere.screens.comments.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.suhel.photosphere.model.realtime.RealtimeComment;
 import com.suhel.photosphere.model.response.Comment;
 import com.suhel.photosphere.screens.comments.contract.CommentsContract;
+import com.suhel.photosphere.service.realtime.WS;
+import com.suhel.photosphere.service.realtime.WSCommentsListener;
 import com.suhel.photosphere.service.rest.ApiSubscriber;
 import com.suhel.photosphere.service.rest.RestService;
 import com.suhel.photosphere.service.storage.Store;
@@ -12,8 +15,37 @@ import java.util.List;
 
 public class CommentsPresenterImpl extends CommentsPresenter {
 
-    public CommentsPresenterImpl(@NonNull CommentsContract.View view, RestService restService, Store store) {
-        super(view, restService, store);
+    private WSCommentsListener commentsListener = new WSCommentsListener() {
+
+        @Override
+        public void onCreateComment(RealtimeComment data) {
+            view.onRealtimeAddComment(data);
+        }
+
+        @Override
+        public void onEditComment(RealtimeComment data) {
+            view.onRealtimeEditComment(data);
+        }
+
+        @Override
+        public void onDeleteComment(RealtimeComment data) {
+            view.onRealtimeDeleteComment(data);
+        }
+
+    };
+
+    public CommentsPresenterImpl(@NonNull CommentsContract.View view, RestService restService, Store store, WS ws) {
+        super(view, restService, store, ws);
+    }
+
+    @Override
+    public void addSocketListeners() {
+        ws.addListener(commentsListener);
+    }
+
+    @Override
+    public void removeSocketListeners() {
+        ws.removeListener(commentsListener);
     }
 
     @Override

@@ -46,9 +46,6 @@ public class LinearMenuBar extends LinearLayout {
     public void setSelection(int selection) {
         handleSelection(selection);
         this.selection = selection;
-        if (listener != null) {
-            listener.onMenuItemSelected(selection);
-        }
     }
 
     public OnSelectionListener getListener() {
@@ -57,6 +54,14 @@ public class LinearMenuBar extends LinearLayout {
 
     public void setListener(OnSelectionListener listener) {
         this.listener = listener;
+    }
+
+    private void _setSelection(int selection) {
+        handleSelection(selection);
+        this.selection = selection;
+        if (listener != null) {
+            listener.onMenuItemSelected(selection);
+        }
     }
 
     private void handleSelection(int selection) {
@@ -82,11 +87,12 @@ public class LinearMenuBar extends LinearLayout {
 
                 @Override
                 public void onClick(ImageView view, int index) {
-                    if (index != EXCEPTION)
-                        setSelection(index);
+//                    if (index != EXCEPTION)
+                    _setSelection(index);
                 }
 
             });
+            menuItems[i].setColorFilter(colorUnselected);
         }
         handleSelection(0);
     }

@@ -6,6 +6,7 @@ import com.suhel.photosphere.base.di.BaseModule;
 import com.suhel.photosphere.service.realtime.WS;
 import com.suhel.photosphere.service.rest.RestService;
 import com.suhel.photosphere.service.storage.Store;
+import com.suhel.photosphere.utils.UserStore;
 
 import javax.inject.Singleton;
 
@@ -42,6 +43,12 @@ public class AppModule extends BaseModule {
     @Provides
     WS providesWS(Store store) {
         return new WS(store);
+    }
+
+    @Singleton
+    @Provides
+    UserStore providesUserStore(Context context) {
+        return new UserStore(context);
     }
 
 }
