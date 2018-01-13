@@ -19,7 +19,7 @@ public class ChatListModule extends BaseModule {
     }
 
     @Provides
-    ChatListPresenter providesGlobalChatPresenter(RestService restService) {
+    ChatListPresenter providesChatListPresenter(RestService restService) {
         return new ChatListPresenterImpl(view, restService);
     }
 

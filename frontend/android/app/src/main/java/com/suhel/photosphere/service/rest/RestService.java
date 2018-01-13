@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.suhel.photosphere.base.model.ProgressRequestBody;
 import com.suhel.photosphere.model.request.CreateComment;
-import com.suhel.photosphere.model.request.CreatePost;
 import com.suhel.photosphere.model.request.FCM;
 import com.suhel.photosphere.model.request.RegisterSocial;
 import com.suhel.photosphere.model.request.SendChatMessage;
@@ -19,7 +18,10 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -76,9 +78,10 @@ public class RestService {
     //region Posts
     public void createPost(String title, String description, File photo,
                            ProgressRequestBody.OnProgressUpdateListener progressUpdateListener,
-                           ApiSubscriber.Callback<Void> callback) {
-        restInterface.createPost(new ProgressRequestBody(photo, progressUpdateListener),
-                new CreatePost(title, description))
+                           ApiSubscriber.Callback<Post> callback) {
+        restInterface.createPost(MultipartBody.Part.createFormData("photo", "photo", new ProgressRequestBody(photo, progressUpdateListener)),
+                RequestBody.create(MediaType.parse("text/plain"), title),
+                RequestBody.create(MediaType.parse("text/plain"), description))
                 .compose(RxHelper.applySchedulers())
                 .subscribeWith(new ApiSubscriber<>(callback));
     }

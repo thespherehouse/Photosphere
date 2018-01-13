@@ -9,10 +9,10 @@ public interface Constants {
 
     interface Network {
 
-        String DEBUG_BASE = "http://192.168.0.3:3000";
+        String DEBUG_BASE = "http://192.168.0.7:3000";
         String PROD_BASE = "http://www.thespherehouse.xyz";
 
-        String CURRENT_BASE = PROD_BASE;
+        String CURRENT_BASE = DEBUG_BASE;
 
         String REST_URL = CURRENT_BASE + "/photosphere/api/v1/";
         String SOCKET_IO_URL = CURRENT_BASE + "/realtime";
@@ -26,7 +26,7 @@ public interface Constants {
         String DEBUG_BUCKET = "mightycandy";
         String PROD_BUCKET = "thespherehouse";
 
-        String CURRENT_BUCKET = PROD_BUCKET;
+        String CURRENT_BUCKET = DEBUG_BUCKET;
 
         String S3BUCKET = CURRENT_BUCKET;
 

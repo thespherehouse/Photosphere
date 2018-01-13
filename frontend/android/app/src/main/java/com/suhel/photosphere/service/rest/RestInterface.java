@@ -3,7 +3,6 @@ package com.suhel.photosphere.service.rest;
 import com.suhel.photosphere.base.model.ApiResponse;
 import com.suhel.photosphere.base.model.ProgressRequestBody;
 import com.suhel.photosphere.model.request.CreateComment;
-import com.suhel.photosphere.model.request.CreatePost;
 import com.suhel.photosphere.model.request.FCM;
 import com.suhel.photosphere.model.request.RegisterSocial;
 import com.suhel.photosphere.model.request.SendChatMessage;
@@ -15,6 +14,8 @@ import com.suhel.photosphere.model.response.User;
 import java.util.List;
 
 import io.reactivex.Single;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -41,7 +42,7 @@ public interface RestInterface {
     //region Posts
     @Multipart
     @POST("posts")
-    Single<ApiResponse<Void>> createPost(@Part("photo") ProgressRequestBody photo, @Body CreatePost createPost);
+    Single<ApiResponse<Post>> createPost(@Part MultipartBody.Part photo, @Part("title") RequestBody title, @Part("description") RequestBody description);
 
     @GET("posts")
     Single<ApiResponse<List<Post>>> getAllPosts(@Query("skip") int skip, @Query("limit") int limit);

@@ -9,6 +9,7 @@ import com.suhel.photosphere.application.di.AppModule;
 import com.suhel.photosphere.application.di.DaggerAppComponent;
 import com.suhel.photosphere.custom.app.LifecycleManager;
 import com.suhel.photosphere.screens.comments.di.CommentsComponent;
+import com.suhel.photosphere.screens.createPost.di.CreatePostComponent;
 import com.suhel.photosphere.screens.home.di.HomeComponent;
 import com.suhel.photosphere.screens.login.di.LoginComponent;
 import com.suhel.photosphere.service.realtime.WS;
@@ -76,6 +77,11 @@ public class App extends Application implements AppContract {
     @Override
     public CommentsComponent.Builder getCommentsComponent() {
         return appComponent.getCommentsComponent();
+    }
+
+    @Override
+    public CreatePostComponent.Builder getCreatePostComponent() {
+        return appComponent.getCreatePostComponent();
     }
 
 }

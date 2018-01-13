@@ -3,6 +3,9 @@
     package="com.suhel.photosphere">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.instance.App"
@@ -58,6 +61,11 @@
             android:name=".screens.comments.view.CommentsActivity"
             android:configChanges="screenSize|orientation"
             android:label="@string/title_comments" />
+
+        <activity
+            android:name=".screens.createPost.view.CreatePostActivity"
+            android:configChanges="screenSize|orientation"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 

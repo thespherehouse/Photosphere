@@ -3,6 +3,7 @@ package com.suhel.photosphere.application.di;
 import com.suhel.photosphere.application.instance.App;
 import com.suhel.photosphere.base.di.BaseComponent;
 import com.suhel.photosphere.screens.comments.di.CommentsComponent;
+import com.suhel.photosphere.screens.createPost.di.CreatePostComponent;
 import com.suhel.photosphere.screens.home.di.HomeComponent;
 import com.suhel.photosphere.screens.login.di.LoginComponent;
 
@@ -21,5 +22,7 @@ public interface AppComponent extends BaseComponent {
     HomeComponent.Builder getTimelineComponent();
 
     CommentsComponent.Builder getCommentsComponent();
+
+    CreatePostComponent.Builder getCreatePostComponent();
 
 }

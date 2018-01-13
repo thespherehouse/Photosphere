@@ -6,11 +6,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.suhel.photosphere.screens.home.view.chatList.ChatListFragment;
 import com.suhel.photosphere.screens.home.view.timeline.TimelineFragment;
+import com.suhel.photosphere.screens.home.view.upload.UploadFragment;
 
 public class HomePagesAdapter extends FragmentPagerAdapter {
 
     private TimelineFragment timelineFragment = new TimelineFragment();
-//    private ChatListFragment chatListFragment = new ChatListFragment();
+    private UploadFragment uploadFragment = new UploadFragment();
 
     public HomePagesAdapter(FragmentManager fm) {
         super(fm);
@@ -23,6 +24,10 @@ public class HomePagesAdapter extends FragmentPagerAdapter {
             case 0:
 
                 return timelineFragment;
+
+            case 2:
+
+                return uploadFragment;
 
             default:
 
