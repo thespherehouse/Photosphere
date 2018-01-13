@@ -36,6 +36,10 @@ function processNewConnection(ws, req) {
     console.log(`${req.user.name} connected`)
     ws.on('message', createNewMessageHandler(req.user))
     ws.on('close', createConnectionCloseHandler(req.user))
+    ws.on('error', (err) => {
+        console.log('Socket error')
+        console.log(err.message)
+    })
 }
 
 function createNewMessageHandler(user) {
@@ -130,6 +134,10 @@ export const init = (server) => {
         }
     })
     wss.on('connection', processNewConnection)
+    wss.on('error', (err) => {
+        console.log('Socket server error')
+        console.log(err.message)
+    })
 }
 
 export const emitNewPost = (post) => {

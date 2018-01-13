@@ -38,7 +38,7 @@ schema.statics.getMessages = function (groupId, userId, skip, limit, cb) {
     return this.aggregate([
         {
             $match: {
-                group: groupId
+                group: mongoose.Schema.ObjectId(groupId)
             }
         },
         {
@@ -63,9 +63,14 @@ schema.statics.getMessages = function (groupId, userId, skip, limit, cb) {
                 }
             }
         }
-    ])
-        .populate('user', 'name')
-        .exec(cb)
+    ], cb)
+}
+
+schema.statics.deleteMessagesByGroup = function (groupId, cb) {
+    return this.remove(
+        {
+            group: groupId
+        }, cb)
 }
 
 export default mongoose.model('Message', schema)  

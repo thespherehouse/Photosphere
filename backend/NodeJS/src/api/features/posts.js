@@ -65,18 +65,10 @@ export const Validator = {
         }
     },
 
-    editPostTitle() {
+    editPost() {
         return (req, res, next) => {
-            if (!req.body.title)
-                return Response.sendError(res, Errors.NoTitle)
-            next()
-        }
-    },
-
-    editPostDescription() {
-        return (req, res, next) => {
-            if (!req.body.description)
-                return Response.sendError(res, Errors.NoDescription)
+            if (!req.body.title || !req.body.description)
+                return Response.sendError(res, Errors.Incomplete)
             next()
         }
     },
@@ -260,26 +252,9 @@ export const Endpoint = {
         }
     },
 
-    editPostTitle() {
+    editPost() {
         return (req, res) => {
-            Post.editPostTitle(req.user._id, req.params.postId, req.body.title, (err, post) => {
-
-                if (err) {
-                    console.log(err.message)
-                    return Response.sendError(res, Errors.Internal)
-                }
-
-                if (!post)
-                    return Response.sendError(res, Errors.NotFound)
-
-                Response.send(res)
-            })
-        }
-    },
-
-    editPostDescription() {
-        return (req, res) => {
-            Post.editPostDescription(req.user._id, req.params.postId, req.body.description, (err, post) => {
+            Post.editPost(req.user._id, req.params.postId, req.body.title, req.body.description, (err, post) => {
 
                 if (err) {
                     console.log(err.message)
@@ -335,15 +310,19 @@ export const Endpoint = {
 
             }).then((key) => {
 
-                Utils.deleteObjectsS3(key, (err, data) => {
+                return new Promise((resolve, reject) => {
 
-                    if (err) {
-                        console.log(err.message)
-                        return reject(Errors.Internal)
-                    }
+                    Utils.deleteObjectsS3(key, (err, data) => {
 
-                    Response.send(res)
-                    resolve()
+                        if (err) {
+                            console.log(err.message)
+                            return reject(Errors.Internal)
+                        }
+
+                        Response.send(res)
+                        resolve()
+                    })
+
                 })
 
             }).catch((errorCode) => {

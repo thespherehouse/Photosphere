@@ -1,13 +1,27 @@
-import { Message } from '../models'
+import { Message, Group } from '../models'
 import { Response, Errors, Utils } from '../helper'
 import * as Realtime from './realtime'
+import { isPrimitive } from 'util';
 
 export const Validator = {
 
+    createGroup() {
+        return (req, res, next) => {
+            if (!req.body.name)
+                return Response.sendError(res, Errors.Incomplete)
+            if (!req.body.isPrivate)
+                req.body.isPrivate = false
+
+            req.body.isPrivate = (req.body.isPrivate === 'true')
+
+            next()
+        }
+    },
+
     createMessage() {
         return (req, res, next) => {
-            if (!req.body.groupId || !req.body.message)
-                return Response.sendError(Errors.Incomplete)
+            if (!req.body.message)
+                return Response.sendError(res, Errors.Incomplete)
             next()
         }
     }
@@ -16,9 +30,41 @@ export const Validator = {
 
 export const Endpoint = {
 
+    createGroup() {
+        return (req, res) => {
+            if (req.body.isPrivate) {
+                Group.createPrivateGroup(req.user._id, req.body.name, (err, group) => {
+
+                    if (err) {
+                        console.log(err.message)
+                        return Response.sendError(res, Errors.Internal)
+                    }
+
+                    if (!group)
+                        return Response.sendError(res, Errors.AlreadyPresent)
+
+                    Response.send(res, group.toObject())
+                })
+            } else {
+                Group.createPublicGroup(req.user._id, req.body.name, (err, group) => {
+
+                    if (err) {
+                        console.log(err.message)
+                        return Response.sendError(res, Errors.Internal)
+                    }
+
+                    if (!group)
+                        return Response.sendError(res, Errors.AlreadyPresent)
+
+                    Response.send(res, group.toObject())
+                })
+            }
+        }
+    },
+
     createMessage() {
         return (req, res) => {
-            Message.createMessage(req.body.groupId, req.user._id, req.user.name, req.body.message, (err, message) => {
+            Message.createMessage(req.params.groupId, req.user._id, req.user.name, req.body.message, (err, message) => {
                 if (err || !message) {
                     if (err)
                         console.log(err.message)
@@ -32,9 +78,26 @@ export const Endpoint = {
         }
     },
 
+    getGroups() {
+        return (req, res) => {
+            Group.getGroups(req.user._id, req.query.skip, req.query.limit, (err, groups) => {
+
+                if (err) {
+                    console.log(err.message)
+                    Response.sendError(res, Errors.Internal)
+                }
+
+                if (!groups)
+                    return Response.sendError(res, Errros.NotFound)
+
+                Response.send(res, groups)
+            })
+        }
+    },
+
     getMessages() {
         return (req, res) => {
-            Message.getMessages(req.user._id, req.query.skip, req.query.limit, (err, messages) => {
+            Message.getMessages(req.params.groupId, req.user._id, req.query.skip, req.query.limit, (err, messages) => {
 
                 if (err) {
                     console.log(err.message)
@@ -46,6 +109,45 @@ export const Endpoint = {
 
                 Response.send(res, messages)
 
+            })
+        }
+    },
+
+    deleteGroup() {
+        return (req, res) => {
+            new Promise((resolve, reject) => {
+
+                Group.deleteGroup(req.params.groupId, req.user._id, (err, group) => {
+
+                    if (err) {
+                        console.log(err.message)
+                        return reject(Errors.Internal)
+                    }
+
+                    resolve()
+                })
+
+            }).then(() => {
+
+                return new Promise((resolve, reject) => {
+
+                    Message.deleteMessagesByGroup(req.params.groupId, (err, messages) => {
+
+                        if (err) {
+                            console.log(err.message)
+                            return reject(Errors.Internal)
+                        }
+
+                        Response.send(res)
+                        resolve()
+
+                    })
+
+                })
+
+            }).catch((errorCode) => {
+                console.log(errorCode)
+                Response.sendError(res, errorCode)
             })
         }
     }

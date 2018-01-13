@@ -4,9 +4,10 @@ import { Utils } from '../helper'
 const schema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     active: { type: Boolean, default: true },
+    isPrivate: { type: Boolean, required: true },
     createdAt: { type: Date, default: Date.now },
     admins: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }],
-    members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }]
+    members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 },
     {
         toObject: {
@@ -25,9 +26,18 @@ const schema = new mongoose.Schema({
 schema.index({ 'owner': 1 })
 schema.index({ 'createdAt': -1 })
 
-schema.statics.createGroup = function (userId, name, cb) {
+schema.statics.createPublicGroup = function (userId, name, cb) {
     return this.create({
         name,
+        isPrivate: false,
+        admins: [userId]
+    }, cb)
+}
+
+schema.statics.createPrivateGroup = function (userId, name, cb) {
+    return this.create({
+        name,
+        isPrivate: true,
         admins: [userId],
         members: [userId]
     }, cb)
@@ -38,10 +48,10 @@ schema.statics.addMember = function (groupId, userId, memberId, cb) {
         {
             _id: groupId,
             admins: userId,
-            members: { $ne: memberId }
+            isPrivate: true
         },
         {
-            $push: { members: memberId }
+            $addToSet: { members: memberId }
         },
         {
             new: true
@@ -69,8 +79,22 @@ schema.statics.getGroups = function (userId, skip, limit, cb) {
     return this.aggregate([
         {
             $match: {
-                members: userId,
-                active: true
+                $and: [
+                    {
+                        $or: [
+                            {
+                                isPrivate: true,
+                                members: userId
+                            },
+                            {
+                                isPrivate: false
+                            }
+                        ]
+                    },
+                    {
+                        active: true
+                    }
+                ]
             }
         },
         {
@@ -88,17 +112,17 @@ schema.statics.getGroups = function (userId, skip, limit, cb) {
             $project: {
                 name: 1,
                 createdAt: 1,
+                isPrivate: 1,
                 owner: 1,
                 ownerName: 1,
                 members: 1,
+                admins: 1,
                 amIAdmin: {
                     $eq: ['$admins', userId]
                 }
             }
         }
-    ]).populate('members', 'name')
-        .populate('admins', 'name')
-        .exec(cb)
+    ], cb)
 }
 
 schema.statics.editGroupName = function (groupId, userId, name, cb) {
@@ -131,6 +155,15 @@ schema.statics.removeMember = function (groupId, userId, memberId, cb) {
         {
             new: true
         }, cb)
+}
+
+schema.statics.deleteGroup = function (groupId, userId, cb) {
+    return this.findOneAndRemove(
+        {
+            _id: groupId,
+            admins: userId
+        },
+        cb)
 }
 
 export default mongoose.model('Group', schema)  

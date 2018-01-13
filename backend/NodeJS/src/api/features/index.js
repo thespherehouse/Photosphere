@@ -31,8 +31,7 @@ router.get('/posts/:postId', Middleware.secure(), Posts.Endpoint.getPost())
 router.get('/posts/:postId/likes', Middleware.secure(), Middleware.paginator(10, 50), Posts.Endpoint.getLikes())
 router.get('/posts/:postId/comments', Middleware.secure(), Middleware.paginator(10, 50), Posts.Endpoint.getComments())
 
-router.put('/posts/:postId/title', Middleware.secure(), Posts.Validator.editPostTitle(), Posts.Endpoint.editPostTitle())
-router.put('/posts/:postId/description', Middleware.secure(), Posts.Validator.editPostDescription(), Posts.Endpoint.editPostDescription())
+router.put('/posts/:postId', Middleware.secure(), Posts.Validator.editPost(), Posts.Endpoint.editPost())
 router.put('/posts/:postId/comments/:commentId', Middleware.secure(), Posts.Validator.editComment(), Posts.Endpoint.editComment())
 
 router.delete('/posts/:postId', Middleware.secure(), Posts.Endpoint.deletePost())
@@ -40,9 +39,13 @@ router.delete('/posts/:postId/unlike', Middleware.secure(), Posts.Endpoint.unlik
 router.delete('/posts/:postId/comments/:commentId', Middleware.secure(), Posts.Endpoint.deleteComment())
 
 // Chat
-router.post('/chat', Middleware.secure(), Chat.Validator.createMessage(), Chat.Endpoint.createMessage())
+router.post('/chat/', Middleware.secure(), Chat.Validator.createGroup(), Chat.Endpoint.createGroup())
+router.post('/chat/:groupId', Middleware.secure(), Chat.Validator.createMessage(), Chat.Endpoint.createMessage())
 
-router.get('/chat', Middleware.secure(), Middleware.paginator(10, 30), Chat.Endpoint.getMessages())
+router.get('/chat', Middleware.secure(), Middleware.paginator(10, 30), Chat.Endpoint.getGroups())
+router.get('/chat/:groupId', Middleware.secure(), Middleware.paginator(10, 30), Chat.Endpoint.getMessages())
+
+router.delete('/chat/:groupId', Middleware.secure(), Chat.Endpoint.deleteGroup())
 
 export function route() {
     return router

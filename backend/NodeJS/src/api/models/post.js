@@ -79,6 +79,9 @@ schema.statics.getAllPosts = function (userId, skip, limit, orderBy, sortOrder, 
                 commentsCount: 1,
                 createdAt: 1,
                 updatedAt: 1,
+                isMyPost: {
+                    $eq: ['$owner', userId]
+                },
                 isLikedByMe: {
                     $in: [userId, '$likes.user']
                 },
@@ -120,6 +123,9 @@ schema.statics.getAllPostsByCategory = function (userId, categoryId, skip, limit
                 commentsCount: 1,
                 createdAt: 1,
                 updatedAt: 1,
+                isMyPost: {
+                    $eq: ['$owner', userId]
+                },
                 isLikedByMe: {
                     $in: [userId, '$likes.user']
                 },
@@ -205,7 +211,7 @@ schema.statics.getPost = function (userId, postId, cb) {
     ], cb)
 }
 
-schema.statics.editPostTitle = function (userId, postId, title, cb) {
+schema.statics.editPost = function (userId, postId, title, description, cb) {
     return this.findOneAndUpdate(
         {
             _id: postId,
@@ -213,21 +219,6 @@ schema.statics.editPostTitle = function (userId, postId, title, cb) {
         },
         {
             title,
-            updatedAt: new Date()
-        },
-        {
-            new: true
-        },
-        cb)
-}
-
-schema.statics.editPostDescription = function (userId, postId, description, cb) {
-    return this.findOneAndUpdate(
-        {
-            _id: postId,
-            owner: userId
-        },
-        {
             description,
             updatedAt: new Date()
         },
