@@ -65,6 +65,13 @@
         <activity
             android:name=".screens.createPost.view.CreatePostActivity"
             android:configChanges="screenSize|orientation"
+            android:label="Create New Post"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".screens.editPost.view.EditPostActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="Edit Post"
             android:windowSoftInputMode="adjustResize" />
 
     </application>

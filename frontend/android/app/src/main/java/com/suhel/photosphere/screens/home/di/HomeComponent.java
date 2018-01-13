@@ -2,7 +2,7 @@ package com.suhel.photosphere.screens.home.di;
 
 
 import com.suhel.photosphere.base.di.BaseSubcomponent;
-import com.suhel.photosphere.screens.home.di.chatList.ChatListComponent;
+import com.suhel.photosphere.screens.home.di.groups.ChatListComponent;
 import com.suhel.photosphere.screens.home.di.timeline.TimelineComponent;
 import com.suhel.photosphere.screens.home.di.upload.UploadComponent;
 import com.suhel.photosphere.screens.home.view.HomeActivity;

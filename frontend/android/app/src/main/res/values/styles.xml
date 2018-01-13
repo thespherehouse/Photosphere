@@ -2,15 +2,19 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorTransparent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/colorTransparent</item>
         <item name="android:toolbarStyle">@style/AppTheme.Toolbar</item>
 
     </style>
 
     <style name="AppTheme.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <item name="android:textColorPrimary">@color/colorDark</item>
+    </style>
+
+    <style name="AppTheme.TransparentStatus" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/colorTransparent</item>
+        <item name="android:statusBarColor">@color/colorTransparent</item>
     </style>
 
 </resources>

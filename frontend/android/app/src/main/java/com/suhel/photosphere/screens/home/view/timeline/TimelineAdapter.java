@@ -2,8 +2,11 @@ package com.suhel.photosphere.screens.home.view.timeline;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -151,7 +154,21 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
         return (posts != null ? posts.size() : 0);
     }
 
+    public void remove(Post post) {
+        int index = posts.indexOf(post);
+        if (index != -1) {
+            posts.remove(index);
+            notifyItemRemoved(index);
+        }
+    }
+
     public interface OnClickListener {
+
+        void onEditClick(TimelineViewHolder viewHolder, int position);
+
+        void onShareClick(TimelineViewHolder viewHolder, int position);
+
+        void onDeleteClick(TimelineViewHolder viewHolder, int position);
 
         void onOwnerClick(TimelineViewHolder viewHolder, int position);
 
@@ -162,6 +179,43 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
         void onCommentClick(TimelineViewHolder viewHolder, int position);
 
         void onPostClick(TimelineViewHolder viewHolder, int position);
+
+    }
+
+    class MenuClickListener implements PopupMenu.OnMenuItemClickListener {
+
+        private TimelineViewHolder viewHolder;
+        private int position;
+
+        public MenuClickListener(TimelineViewHolder viewHolder, int position) {
+            this.viewHolder = viewHolder;
+            this.position = position;
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (onClickListener == null)
+                return false;
+            switch (item.getItemId()) {
+
+                case R.id.btnEdit:
+
+                    onClickListener.onEditClick(viewHolder, position);
+                    break;
+
+                case R.id.btnShare:
+
+                    onClickListener.onShareClick(viewHolder, position);
+                    break;
+
+                case R.id.btnDelete:
+
+                    onClickListener.onDeleteClick(viewHolder, position);
+                    break;
+
+            }
+            return true;
+        }
 
     }
 
@@ -176,6 +230,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
             binding.tvOwnerName.setOnClickListener(this);
             binding.btnLike.setOnClickListener(this);
             binding.btnComment.setOnClickListener(this);
+            binding.btnMenu.setOnClickListener(this);
             binding.photo.getHierarchy().setProgressBarImage(new SimpleProgressBarDrawable(Color.BLACK, 40, 3));
         }
 
@@ -231,6 +286,14 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
                     if (onClickListener != null)
                         onClickListener.onCommentClick(this, getAdapterPosition());
+                    break;
+
+                case R.id.btnMenu:
+
+                    PopupMenu menu = new PopupMenu(binding.getRoot().getContext(), binding.btnMenu, Gravity.START);
+                    menu.inflate(getItem(getAdapterPosition()).isMyPost() ? R.menu.menu_item_post_owner : R.menu.menu_item_post);
+                    menu.setOnMenuItemClickListener(new MenuClickListener(this, getAdapterPosition()));
+                    menu.show();
                     break;
 
                 default:

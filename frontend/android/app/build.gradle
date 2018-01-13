@@ -25,7 +25,7 @@ android {
                             'src/main/res/layouts/home',
                             'src/main/res/layouts/comments',
                             'src/main/res/layouts/createPost',
-                            'src/main/res/layouts/createCompetition',
+                            'src/main/res/layouts/editPost',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]

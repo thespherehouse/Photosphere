@@ -126,4 +126,41 @@ public class TimelinePresenterImpl extends TimelinePresenter {
         });
     }
 
+    @Override
+    public void delete(@NonNull Post post) {
+        final Post strongPost = post;
+        restService.deletePost(post.getId(), new ApiSubscriber.Callback<Void>() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                view.onShowBusy();
+            }
+
+            @Override
+            public void onSuccess(Void data) {
+                super.onSuccess(data);
+                view.onDeleteSuccess(strongPost);
+            }
+
+            @Override
+            public void onApiError(ApiError apiError) {
+                super.onApiError(apiError);
+                view.onDeleteFailure(strongPost);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                super.onError(t);
+                view.onDeleteFailure(strongPost);
+            }
+
+            @Override
+            public void onEnd() {
+                super.onEnd();
+                view.onHideBusy();
+            }
+
+        });
+    }
 }

@@ -1,4 +1,4 @@
-package com.suhel.photosphere.screens.home.di.chatList;
+package com.suhel.photosphere.screens.home.di.groups;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

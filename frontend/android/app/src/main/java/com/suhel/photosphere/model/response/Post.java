@@ -54,6 +54,10 @@ public class Post implements Serializable {
     @Expose
     private Date createdAt;
 
+    @SerializedName("isMyPost")
+    @Expose
+    private boolean isMyPost;
+
     @SerializedName("isLikedByMe")
     @Expose
     private boolean isLikedByMe;
@@ -148,6 +152,14 @@ public class Post implements Serializable {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public boolean isMyPost() {
+        return isMyPost;
+    }
+
+    public void setMyPost(boolean myPost) {
+        isMyPost = myPost;
     }
 
     public boolean isLikedByMe() {

@@ -20,6 +20,10 @@ public interface TimelineContract {
 
         void onUnlikeFailure(@NonNull Post post);
 
+        void onDeleteSuccess(@NonNull Post post);
+
+        void onDeleteFailure(@NonNull Post post);
+
         void onRealtimeLike(RealtimeLike realtimeLike);
 
         void onRealtimeUnlike(RealtimeLike realtimeLike);
@@ -29,6 +33,10 @@ public interface TimelineContract {
         void onRealtimeEditComment(RealtimeComment realtimeComment);
 
         void onRealtimeDeleteComment(RealtimeComment realtimeComment);
+
+        void onShowBusy();
+
+        void onHideBusy();
 
     }
 
@@ -45,6 +53,8 @@ public interface TimelineContract {
         void like(@NonNull Post post);
 
         void unlike(@NonNull Post post);
+
+        void delete(@NonNull Post post);
 
     }
 

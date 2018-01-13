@@ -4,11 +4,11 @@ import android.content.Context;
 
 import com.suhel.photosphere.base.model.ProgressRequestBody;
 import com.suhel.photosphere.model.request.CreateComment;
+import com.suhel.photosphere.model.request.EditPost;
 import com.suhel.photosphere.model.request.FCM;
 import com.suhel.photosphere.model.request.RegisterSocial;
-import com.suhel.photosphere.model.request.SendChatMessage;
 import com.suhel.photosphere.model.response.Comment;
-import com.suhel.photosphere.model.response.Message;
+import com.suhel.photosphere.model.response.Group;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.model.response.User;
 import com.suhel.photosphere.service.rx.RxHelper;
@@ -103,6 +103,18 @@ public class RestService {
                 .compose(RxHelper.applySchedulers())
                 .subscribeWith(new ApiSubscriber<>(callback));
     }
+
+    public void editPost(String postId, String title, String description, ApiSubscriber.Callback<Post> callback) {
+        restInterface.editPost(postId, new EditPost(title, description))
+                .compose(RxHelper.applySchedulers())
+                .subscribeWith(new ApiSubscriber<>(callback));
+    }
+
+    public void deletePost(String postId, ApiSubscriber.Callback<Void> callback) {
+        restInterface.deletePost(postId)
+                .compose(RxHelper.applySchedulers())
+                .subscribeWith(new ApiSubscriber<>(callback));
+    }
     //endregion
 
     //region Comments
@@ -120,14 +132,20 @@ public class RestService {
     //endregion
 
     //region Chat
-    public void sendGlobalChatMessage(String message, ApiSubscriber.Callback<Void> callback) {
-        restInterface.sendGlobalChatMessage(new SendChatMessage(message))
-                .compose(RxHelper.applySchedulers())
-                .subscribeWith(new ApiSubscriber<>(callback));
-    }
+//    public void sendGlobalChatMessage(String message, ApiSubscriber.Callback<Void> callback) {
+//        restInterface.sendChatMessage(new SendChatMessage(message))
+//                .compose(RxHelper.applySchedulers())
+//                .subscribeWith(new ApiSubscriber<>(callback));
+//    }
+//
+//    public void getGlobalChatMessages(ApiSubscriber.Callback<List<Message>> callback) {
+//        restInterface.getGlobalChatMessages()
+//                .compose(RxHelper.applySchedulers())
+//                .subscribeWith(new ApiSubscriber<>(callback));
+//    }
 
-    public void getGlobalChatMessages(ApiSubscriber.Callback<List<Message>> callback) {
-        restInterface.getGlobalChatMessages()
+    public void getGroups(int skip, int limit, ApiSubscriber.Callback<List<Group>> callback) {
+        restInterface.getGroups(skip, limit)
                 .compose(RxHelper.applySchedulers())
                 .subscribeWith(new ApiSubscriber<>(callback));
     }

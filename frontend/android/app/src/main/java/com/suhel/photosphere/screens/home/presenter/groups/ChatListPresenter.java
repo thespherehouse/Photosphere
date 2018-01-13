@@ -1,8 +1,7 @@
-package com.suhel.photosphere.screens.home.presenter.chatList;
+package com.suhel.photosphere.screens.home.presenter.groups;
 
 import com.suhel.photosphere.screens.home.contract.ChatListContract;
 import com.suhel.photosphere.service.rest.RestService;
-import com.suhel.photosphere.utils.UserStore;
 
 public abstract class ChatListPresenter implements ChatListContract.Presenter {
 

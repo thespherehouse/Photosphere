@@ -2,6 +2,7 @@ package com.suhel.photosphere.screens.home.view;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
 import com.suhel.photosphere.R;
 import com.suhel.photosphere.application.contract.AppContract;
@@ -15,6 +16,7 @@ import com.suhel.photosphere.screens.login.view.LoginActivity;
 
 public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresenter, HomeComponent> implements HomeContract.View {
 
+    private long lastBackPress = 0;
     private HomePagesAdapter pagesAdapter;
 
     @Override
@@ -70,4 +72,17 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomePresente
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (binding.menu.getSelection() != 0) {
+            binding.menu.setSelection(0);
+            binding.pager.setCurrentItem(0);
+        } else {
+            if (System.currentTimeMillis() - lastBackPress > 2000) {
+                lastBackPress = System.currentTimeMillis();
+                Toast.makeText(this, "Press back once more to exit", Toast.LENGTH_SHORT).show();
+            } else
+                super.onBackPressed();
+        }
+    }
 }

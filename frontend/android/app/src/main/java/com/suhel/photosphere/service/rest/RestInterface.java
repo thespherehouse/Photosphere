@@ -1,12 +1,13 @@
 package com.suhel.photosphere.service.rest;
 
 import com.suhel.photosphere.base.model.ApiResponse;
-import com.suhel.photosphere.base.model.ProgressRequestBody;
 import com.suhel.photosphere.model.request.CreateComment;
+import com.suhel.photosphere.model.request.EditPost;
 import com.suhel.photosphere.model.request.FCM;
 import com.suhel.photosphere.model.request.RegisterSocial;
 import com.suhel.photosphere.model.request.SendChatMessage;
 import com.suhel.photosphere.model.response.Comment;
+import com.suhel.photosphere.model.response.Group;
 import com.suhel.photosphere.model.response.Message;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.model.response.User;
@@ -52,6 +53,12 @@ public interface RestInterface {
 
     @GET("posts/by/{userId}")
     Single<ApiResponse<List<Post>>> getUsersPosts(@Path("userId") String userId, @Query("skip") int skip, @Query("limit") int limit);
+
+    @PUT("posts/{postId}")
+    Single<ApiResponse<Post>> editPost(@Path("postId") String postId, @Body EditPost body);
+
+    @DELETE("posts/{postId}")
+    Single<ApiResponse<Void>> deletePost(@Path("postId") String postId);
     //endregion
 
     //region Comments
@@ -77,11 +84,14 @@ public interface RestInterface {
     //endregion
 
     //region Chat
-    @POST("chat")
-    Single<ApiResponse<Void>> sendGlobalChatMessage(@Body SendChatMessage message);
+    @POST("chat/{groupId}")
+    Single<ApiResponse<Void>> sendChatMessage(@Path("groupId") String groupId, @Body SendChatMessage message);
 
     @GET("chat")
-    Single<ApiResponse<List<Message>>> getGlobalChatMessages();
+    Single<ApiResponse<List<Group>>> getGroups(@Query("skip") int skip, @Query("limit") int limit);
+
+    @GET("chat/{groupId}")
+    Single<ApiResponse<List<Message>>> getChatMessages(@Path("groupId") String groupId, @Query("skip") int skip, @Query("limit") int limit);
     //endregion
 
 }

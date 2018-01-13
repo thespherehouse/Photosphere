@@ -3,6 +3,7 @@ package com.suhel.photosphere.application.contract;
 import com.suhel.photosphere.custom.app.LifecycleManager;
 import com.suhel.photosphere.screens.comments.di.CommentsComponent;
 import com.suhel.photosphere.screens.createPost.di.CreatePostComponent;
+import com.suhel.photosphere.screens.editPost.di.EditPostComponent;
 import com.suhel.photosphere.screens.home.di.HomeComponent;
 import com.suhel.photosphere.screens.login.di.LoginComponent;
 import com.suhel.photosphere.service.rest.RestService;
@@ -20,5 +21,7 @@ public interface AppContract {
     CommentsComponent.Builder getCommentsComponent();
 
     CreatePostComponent.Builder getCreatePostComponent();
+
+    EditPostComponent.Builder getEditPostComponent();
 
 }

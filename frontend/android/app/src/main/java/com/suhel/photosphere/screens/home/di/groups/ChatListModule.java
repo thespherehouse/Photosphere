@@ -1,9 +1,9 @@
-package com.suhel.photosphere.screens.home.di.chatList;
+package com.suhel.photosphere.screens.home.di.groups;
 
 import com.suhel.photosphere.base.di.BaseModule;
 import com.suhel.photosphere.screens.home.contract.ChatListContract;
-import com.suhel.photosphere.screens.home.presenter.chatList.ChatListPresenter;
-import com.suhel.photosphere.screens.home.presenter.chatList.ChatListPresenterImpl;
+import com.suhel.photosphere.screens.home.presenter.groups.ChatListPresenter;
+import com.suhel.photosphere.screens.home.presenter.groups.ChatListPresenterImpl;
 import com.suhel.photosphere.service.rest.RestService;
 
 import dagger.Module;

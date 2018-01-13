@@ -12,17 +12,20 @@ import com.suhel.photosphere.model.realtime.RealtimeComment;
 import com.suhel.photosphere.model.realtime.RealtimeLike;
 import com.suhel.photosphere.model.response.Post;
 import com.suhel.photosphere.screens.comments.view.CommentsActivity;
+import com.suhel.photosphere.screens.editPost.view.EditPostActivity;
 import com.suhel.photosphere.screens.home.contract.TimelineContract;
 import com.suhel.photosphere.screens.home.di.timeline.TimelineComponent;
 import com.suhel.photosphere.screens.home.di.timeline.TimelineModule;
 import com.suhel.photosphere.screens.home.presenter.timeline.TimelinePresenter;
 import com.suhel.photosphere.screens.home.view.HomeActivity;
+import com.suhel.photosphere.screens.home.view.upload.DeletePostDialog;
 import com.suhel.photosphere.utils.Constants;
 
 import java.util.List;
 
 public class TimelineFragment extends BaseFragment<HomeActivity, FragmentTimelineBinding, TimelinePresenter, TimelineComponent> implements TimelineContract.View {
 
+    private DeletePostDialog deletePostDialog = new DeletePostDialog();
     private TimelineAdapter timelineAdapter = new TimelineAdapter();
 
     @Override
@@ -47,6 +50,24 @@ public class TimelineFragment extends BaseFragment<HomeActivity, FragmentTimelin
         ((SimpleItemAnimator) binding.list.getItemAnimator()).setSupportsChangeAnimations(false);
         binding.list.setAdapter(timelineAdapter);
         timelineAdapter.setOnClickListener(new TimelineAdapter.OnClickListener() {
+
+            @Override
+            public void onEditClick(TimelineAdapter.TimelineViewHolder viewHolder, int position) {
+                Intent intent = new Intent(getContext(), EditPostActivity.class);
+                intent.putExtra(Constants.IntentKey.Post, timelineAdapter.getItem(viewHolder.getAdapterPosition()));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onShareClick(TimelineAdapter.TimelineViewHolder viewHolder, int position) {
+
+            }
+
+            @Override
+            public void onDeleteClick(TimelineAdapter.TimelineViewHolder viewHolder, int position) {
+                deletePostDialog.setListener(() -> presenter.delete(timelineAdapter.getItem(viewHolder.getAdapterPosition())));
+                deletePostDialog.show(getChildFragmentManager(), "delete");
+            }
 
             @Override
             public void onOwnerClick(TimelineAdapter.TimelineViewHolder viewHolder, int position) {
@@ -112,6 +133,26 @@ public class TimelineFragment extends BaseFragment<HomeActivity, FragmentTimelin
     @Override
     public void onUnlikeFailure(@NonNull Post post) {
         timelineAdapter.setOwnLike(post);
+    }
+
+    @Override
+    public void onDeleteSuccess(@NonNull Post post) {
+        timelineAdapter.remove(post);
+    }
+
+    @Override
+    public void onDeleteFailure(@NonNull Post post) {
+
+    }
+
+    @Override
+    public void onShowBusy() {
+
+    }
+
+    @Override
+    public void onHideBusy() {
+
     }
 
     @Override
