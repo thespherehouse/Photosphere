@@ -16,16 +16,16 @@ export function send(res, data) {
 
 };
 
-export function sendWithToken(res, token) {
+export function sendWithToken(res, user, token) {
 
-    if (!res || !token)
+    if (!res || !user || !token)
         return;
 
     res.setHeader('Token', token);
     res.status(200)
         .send({
             error: Errors.None,
-            data: null
+            data: user
         });
 
 };

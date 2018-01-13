@@ -118,11 +118,11 @@ export const Endpoint = {
                             return reject(Errors.Internal)
                         }
 
-                        resolve(session)
+                        resolve({ user, session })
                     })
                 })
-            }).then((session) => {
-                Response.sendWithToken(res, session.token)
+            }).then((obj) => {
+                Response.sendWithToken(res, obj.user.toObject(), obj.session.token)
             }).catch((errorCode) => {
                 Response.sendError(res, errorCode)
             })
@@ -228,15 +228,15 @@ export const Endpoint = {
 
                         console.log(session)
 
-                        resolve(session)
+                        resolve({ user, session })
                     })
 
                 })
 
-            }).then((session) => {
+            }).then((obj) => {
 
                 return new Promise((resolve, reject) => {
-                    Response.sendWithToken(res, session.token)
+                    Response.sendWithToken(res, obj.user.toObject(), obj.session.token)
                     resolve()
                 })
 
@@ -277,12 +277,12 @@ export const Endpoint = {
                     Session.createSession(user._id, req.deviceId, (err, session) => {
                         if (err || !session)
                             return reject(Errors.Internal)
-                        resolve(session)
+                        resolve({ user, session })
                     })
                 })
 
-            }).then((session) => {
-                Response.sendWithToken(res, session.token)
+            }).then((obj) => {
+                Response.sendWithToken(res, obj.user.toObject(), obj.session.token)
             }).catch((errorCode) => {
                 Response.sendError(res, errorCode)
             })

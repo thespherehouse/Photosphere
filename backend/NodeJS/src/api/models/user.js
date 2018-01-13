@@ -14,12 +14,14 @@ const schema = new mongoose.Schema({
             transform: function (doc, ret) {
                 delete ret.__v
                 delete ret.password
+                delete ret.fcm
             }
         },
         toJSON: {
             transform: function (doc, ret) {
                 delete ret.__v
                 delete ret.password
+                delete ret.fcm
             }
         }
     }

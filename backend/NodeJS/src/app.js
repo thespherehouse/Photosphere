@@ -4,7 +4,6 @@ import mongoose from 'mongoose'
 import bluebird from 'bluebird'
 import * as API from './api'
 import * as Config from './config'
-import { Realtime } from './api/helper'
 import Socket from 'socket.io'
 
 global.Promise = bluebird
@@ -17,8 +16,7 @@ mongoose.connect(Config.MONGO_URI, { useMongoClient: true }, () => {
 const app = express()
 const server = http.createServer(app)
 
-API.init(app, Config.APP_NAME)
-Realtime.init(server)
+API.init(server, app, Config.APP_NAME)
 
 server.listen(Config.PORT, () => {
     console.log('Server started at ' + Config.PORT)

@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import * as Auth from './auth'
 import * as Posts from './posts'
+import * as Chat from './chat'
+import * as Realtime from './realtime'
 import Middleware from '../middleware'
 
 const router = Router()
@@ -22,12 +24,12 @@ router.post('/posts', Middleware.secure(), Middleware.storage('photo'), Posts.Va
 router.post('/posts/:postId/comments', Middleware.secure(), Posts.Validator.createComment(), Posts.Endpoint.createComment())
 router.post('/posts/:postId/like', Middleware.secure(), Posts.Endpoint.likePost())
 
-router.get('/posts', Middleware.secure(), Posts.Validator.paginator(10, 50), Posts.Validator.sorter(), Posts.Endpoint.getAllPosts())
-router.get('/posts/by/me', Middleware.secure(), Posts.Validator.paginator(10, 50), Posts.Validator.sorter(), Posts.Endpoint.getMyPosts())
-router.get('/posts/by/:userId', Middleware.secure(), Posts.Validator.paginator(10, 50), Posts.Validator.sorter(), Posts.Endpoint.getAllPostsByUser())
+router.get('/posts', Middleware.secure(), Middleware.paginator(10, 50), Posts.Validator.sorter(), Posts.Endpoint.getAllPosts())
+router.get('/posts/by/me', Middleware.secure(), Middleware.paginator(10, 50), Posts.Validator.sorter(), Posts.Endpoint.getMyPosts())
+router.get('/posts/by/:userId', Middleware.secure(), Middleware.paginator(10, 50), Posts.Validator.sorter(), Posts.Endpoint.getAllPostsByUser())
 router.get('/posts/:postId', Middleware.secure(), Posts.Endpoint.getPost())
-router.get('/posts/:postId/likes', Middleware.secure(), Posts.Validator.paginator(10, 50), Posts.Endpoint.getLikes())
-router.get('/posts/:postId/comments', Middleware.secure(), Posts.Validator.paginator(10, 50), Posts.Endpoint.getComments())
+router.get('/posts/:postId/likes', Middleware.secure(), Middleware.paginator(10, 50), Posts.Endpoint.getLikes())
+router.get('/posts/:postId/comments', Middleware.secure(), Middleware.paginator(10, 50), Posts.Endpoint.getComments())
 
 router.put('/posts/:postId/title', Middleware.secure(), Posts.Validator.editPostTitle(), Posts.Endpoint.editPostTitle())
 router.put('/posts/:postId/description', Middleware.secure(), Posts.Validator.editPostDescription(), Posts.Endpoint.editPostDescription())
@@ -37,6 +39,15 @@ router.delete('/posts/:postId', Middleware.secure(), Posts.Endpoint.deletePost()
 router.delete('/posts/:postId/unlike', Middleware.secure(), Posts.Endpoint.unlikePost())
 router.delete('/posts/:postId/comments/:commentId', Middleware.secure(), Posts.Endpoint.deleteComment())
 
+// Chat
+router.post('/chat', Middleware.secure(), Chat.Validator.createMessage(), Chat.Endpoint.createMessage())
+
+router.get('/chat', Middleware.secure(), Middleware.paginator(10, 30), Chat.Endpoint.getMessages())
+
 export function route() {
     return router
+}
+
+export function realtime() {
+    return Realtime
 }

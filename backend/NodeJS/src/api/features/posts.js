@@ -1,5 +1,6 @@
 import uuid from 'uuid/v1'
-import { Response, Realtime, Errors, Utils, Push } from '../helper'
+import { Response, Errors, Utils, Push } from '../helper'
+import * as Realtime from './realtime'
 import { Post } from '../models'
 
 export const Validator = {
@@ -38,13 +39,7 @@ export const Validator = {
 
     sorter() {
         return (req, res, next) => {
-            let skip = 0, limit = 10, orderBy = 'updatedAt', sortOrder = -1
-
-            if (req.query.skip)
-                skip = Math.max(0, req.query.skip)
-
-            if (req.query.limit)
-                limit = Math.min(Math.max(1, req.query.limit), 10)
+            let orderBy = 'updatedAt', sortOrder = -1
 
             let tempOrderBy = req.query.orderBy
             let tempSortOrder = req.query.sortOrder
@@ -66,22 +61,6 @@ export const Validator = {
 
             req.query.orderBy = orderBy
             req.query.sortOrder = sortOrder
-            next()
-        }
-    },
-
-    paginator(def, max) {
-        return (req, res, next) => {
-            let skip = 0, limit = def
-
-            if (req.query.skip)
-                skip = Math.max(0, req.query.skip)
-
-            if (req.query.limit)
-                limit = Math.min(Math.max(1, req.query.limit), max)
-
-            req.query.skip = skip
-            req.query.limit = limit
             next()
         }
     },
