@@ -71,9 +71,11 @@ export const Endpoint = {
                     return Response.sendError(res, Errors.Internal)
                 }
 
-                Response.send(res)
-                Realtime.emitChatMessage(message)
+                let messageObject = message.toObject()
+                messageObject.isByMe = true
 
+                Response.send(res, messageObject)
+                Realtime.emitChatMessage(message)
             })
         }
     },
@@ -157,17 +159,15 @@ export const Endpoint = {
 export const WS = {
 
     createMessage(groupId, userId, userName, message) {
-        return (message) => {
-            Message.createMessage(groupId, userId, userName, message, (err, message) => {
-                if (err || !message) {
-                    if (err)
-                        console.log(err.message)
-                    return
-                }
+        Message.createMessage(groupId, userId, userName, message, (err, message) => {
+            if (err || !message) {
+                if (err)
+                    console.log(err.message)
+                return
+            }
 
-                Realtime.emitChatMessage(message)
-            })
-        }
+            Realtime.emitChatMessage(message)
+        })
     }
 
 }

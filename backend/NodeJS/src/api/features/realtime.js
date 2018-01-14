@@ -1,6 +1,7 @@
 import WS from 'ws'
 import * as URL from 'url'
 import * as Utils from '../helper/utils'
+import * as Chat from './chat'
 
 let wss = null
 let clients = {}
@@ -22,13 +23,13 @@ export const Events = {
 function validateDomain(message) {
     if (!message.domain || typeof message.domain !== 'string')
         return false
-    return /(post|like|comment|chat)\b/.test(message.domain)
+    return /post|like|comment|chat\b/.test(message.domain)
 }
 
 function validateEvent(message) {
     if (!message.event || typeof message.event !== 'string')
         return false
-    return /(create|read|update|delete)\b/.test(message.event)
+    return /create|read|update|delete\b/.test(message.event)
 }
 
 function processNewConnection(ws, req) {
@@ -45,6 +46,7 @@ function processNewConnection(ws, req) {
 function createNewMessageHandler(user) {
     return (data) => {
         const message = JSON.parse(data)
+
         if (!validateDomain(message) || !validateEvent(message))
             return
 
@@ -80,7 +82,7 @@ const handlers = {
     chat: {
 
         create(user, message) {
-            if (message.groupId && typeof message.groupId === 'string' && message.message.message && typeof message.message === 'string')
+            if (message.groupId && typeof message.groupId === 'string' && message.message && typeof message.message === 'string')
                 Chat.WS.createMessage(message.groupId, user._id, user.name, message.message)
         }
 
@@ -88,7 +90,7 @@ const handlers = {
 
 }
 
-function emit(domain, event, data, targetUserId) {
+function emit(domain, event, data, extra) {
 
     if (!wss)
         return
@@ -101,14 +103,23 @@ function emit(domain, event, data, targetUserId) {
 
     const message = JSON.stringify({ domain, event, data })
 
-    if (targetUserId && clients[targetUserId]) {
-        clients[targetUserId].ws.send(message)
+    if (extra) {
+
+        if (typeof extra === 'function') {
+            for (const client in clients) {
+                if (extra(clients[client]))
+                    clients[client].ws.send(message)
+            }
+        } else if (typeof extra === 'string') {
+            clients[extra].ws.send(message)
+        }
+
     } else {
         for (const client in clients) {
-            if (client)
-                clients[client].ws.send(message)
+            clients[client].ws.send(message)
         }
     }
+
 }
 
 export const init = (server) => {
@@ -165,5 +176,7 @@ export const emitDeleteComment = (postId, comment) => {
 }
 
 export const emitChatMessage = (message) => {
-    emit(Domains.Message, Events.Create, message)
+    emit(Domains.Chat, Events.Create, message, (client) => {
+        return (client.user._id.toString() !== message.user.toString())
+    })
 }

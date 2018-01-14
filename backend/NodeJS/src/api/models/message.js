@@ -38,7 +38,7 @@ schema.statics.getMessages = function (groupId, userId, skip, limit, cb) {
     return this.aggregate([
         {
             $match: {
-                group: mongoose.Schema.ObjectId(groupId)
+                group: mongoose.Types.ObjectId(groupId)
             }
         },
         {

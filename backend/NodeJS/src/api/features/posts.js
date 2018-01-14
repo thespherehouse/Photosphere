@@ -118,12 +118,12 @@ export const Endpoint = {
                 if (!post)
                     return Response.sendError(res, Errors.NotFound)
 
-                let comment = post.toObject().comments[0]
+                let postObject = post.toObject()
 
-                Response.send(res, comment)
-                Realtime.emitCreateComment(post._id, comment)
+                Response.send(res, postObject.comments[0])
+                Realtime.emitCreateComment(post._id, postObject.comments[0])
 
-                if (req.user.fcm)
+                if (req.user.fcm && req.user._id.toString() !== postObject.owner.toString())
                     Push.sendForComment(req.user.fcm, post.toObject()._id, req.user.name)
 
             })
@@ -142,12 +142,12 @@ export const Endpoint = {
                 if (!post || post.likes.length === 0)
                     return Response.sendError(res, Errors.NotFound)
 
-                let like = post.toObject().likes[0]
+                let postObject = post.toObject()
 
                 Response.send(res)
-                Realtime.emitLike(post._id, like)
+                Realtime.emitLike(post._id, postObject.likes[0])
 
-                if (req.user.fcm)
+                if (req.user.fcm && req.user._id.toString() !== postObject.owner.toString())
                     Push.sendForLike(req.user.fcm, post._id, req.user.name)
 
             })
