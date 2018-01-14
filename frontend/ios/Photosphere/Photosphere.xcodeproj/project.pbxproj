@@ -7,20 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68C6273C2001DA15005CDF78 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C6273B2001DA15005CDF78 /* EmptyResponse.swift */; };
 		68C928F61FF3723B009BAAFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C928E61FF3723A009BAAFA /* AppDelegate.swift */; };
 		68C928F71FF3723B009BAAFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C928EB1FF3723A009BAAFA /* Assets.xcassets */; };
 		68C928F81FF3723B009BAAFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C928F01FF3723A009BAAFA /* Main.storyboard */; };
 		68C928F91FF3723B009BAAFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C928F21FF3723A009BAAFA /* LaunchScreen.storyboard */; };
+		68F2B3A3200008D800DD48BB /* GenericResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2B3A2200008D800DD48BB /* GenericResponseModel.swift */; };
+		68F47D511FF570580056767E /* AuthenticationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F47D501FF570580056767E /* AuthenticationServices.swift */; };
+		68F731F21FFD5AC30071CB35 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F731F11FFD5AC30071CB35 /* Endpoints.swift */; };
+		68F731F51FFD5C100071CB35 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F731F41FFD5C100071CB35 /* CustomError.swift */; };
+		68F9F9F81FF89F69008154EF /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9F9F71FF89F69008154EF /* ServerConfig.swift */; };
+		68F9F9FD1FF8A3B1008154EF /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9F9FC1FF8A3B1008154EF /* KeychainManager.swift */; };
+		68F9F9FF1FF8A460008154EF /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9F9FE1FF8A460008154EF /* AppConstants.swift */; };
 		737ED7E152FDB6DB8CFC04AF /* Pods_Photosphere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D709BAB90E66DB1AB1CD5A35 /* Pods_Photosphere.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68C6273B2001DA15005CDF78 /* EmptyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
 		68C928D01FF3710C009BAAFA /* Photosphere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photosphere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C928E61FF3723A009BAAFA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68C928EB1FF3723A009BAAFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68C928F01FF3723A009BAAFA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		68C928F21FF3723A009BAAFA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68C928F51FF3723B009BAAFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68F2B3A2200008D800DD48BB /* GenericResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponseModel.swift; sourceTree = "<group>"; };
+		68F47D501FF570580056767E /* AuthenticationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServices.swift; sourceTree = "<group>"; };
+		68F731F11FFD5AC30071CB35 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		68F731F41FFD5C100071CB35 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		68F9F9F71FF89F69008154EF /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
+		68F9F9FC1FF8A3B1008154EF /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		68F9F9FE1FF8A460008154EF /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		76690B620A6E438F595CE25B /* Pods-Photosphere.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photosphere.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photosphere/Pods-Photosphere.release.xcconfig"; sourceTree = "<group>"; };
 		9ED5BA58A9FCEFE2FF5FA3A8 /* Pods-Photosphere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photosphere.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Photosphere/Pods-Photosphere.debug.xcconfig"; sourceTree = "<group>"; };
 		D709BAB90E66DB1AB1CD5A35 /* Pods_Photosphere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photosphere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +99,9 @@
 		68C928E71FF3723A009BAAFA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				68F2B3A1200008C700DD48BB /* Generic */,
+				68F731F31FFD5BFD0071CB35 /* Error */,
+				68F9F9FB1FF8A3B1008154EF /* Singletons */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -90,6 +109,9 @@
 		68C928E81FF3723A009BAAFA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				68F47D4F1FF570470056767E /* Auth */,
+				68F9F9F71FF89F69008154EF /* ServerConfig.swift */,
+				68F731F11FFD5AC30071CB35 /* Endpoints.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -113,6 +135,7 @@
 		68C928EC1FF3723A009BAAFA /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				68F9F9FE1FF8A460008154EF /* AppConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -162,6 +185,39 @@
 				68C928F51FF3723B009BAAFA /* Info.plist */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		68F2B3A1200008C700DD48BB /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				68F2B3A2200008D800DD48BB /* GenericResponseModel.swift */,
+				68C6273B2001DA15005CDF78 /* EmptyResponse.swift */,
+			);
+			path = Generic;
+			sourceTree = "<group>";
+		};
+		68F47D4F1FF570470056767E /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				68F47D501FF570580056767E /* AuthenticationServices.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		68F731F31FFD5BFD0071CB35 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				68F731F41FFD5C100071CB35 /* CustomError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		68F9F9FB1FF8A3B1008154EF /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				68F9F9FC1FF8A3B1008154EF /* KeychainManager.swift */,
+			);
+			path = Singletons;
 			sourceTree = "<group>";
 		};
 		81076BEA6EAF0D3ABB531169 /* Pods */ = {
@@ -260,10 +316,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Photosphere/Pods-Photosphere-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -310,7 +370,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F731F51FFD5C100071CB35 /* CustomError.swift in Sources */,
 				68C928F61FF3723B009BAAFA /* AppDelegate.swift in Sources */,
+				68F2B3A3200008D800DD48BB /* GenericResponseModel.swift in Sources */,
+				68C6273C2001DA15005CDF78 /* EmptyResponse.swift in Sources */,
+				68F9F9F81FF89F69008154EF /* ServerConfig.swift in Sources */,
+				68F47D511FF570580056767E /* AuthenticationServices.swift in Sources */,
+				68F9F9FD1FF8A3B1008154EF /* KeychainManager.swift in Sources */,
+				68F731F21FFD5AC30071CB35 /* Endpoints.swift in Sources */,
+				68F9F9FF1FF8A460008154EF /* AppConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
